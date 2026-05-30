@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wiskunde 6AWWI — Examenplan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Serif&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0c10;
+  --bg2: #14141c;
+  --bg3: #1c1c28;
+  --border: #2a2a3a;
+  --text: #e4e2dd;
+  --text2: #a8a5a0;
+  --text3: #6b6860;
+  --red: #e8453c;
+  --orange: #e8943c;
+  --green: #3cb06c;
+  --blue: #3c8ce8;
+  --purple: #9c6ce8;
+  --yellow: #e8c83c;
+  --redBg: #e8453c15;
+  --orangeBg: #e8943c15;
+  --greenBg: #3cb06c15;
+  --blueBg: #3c8ce815;
+  --purpleBg: #9c6ce815;
+  --radius: 10px;
+  --mono: 'DM Mono', monospace;
+  --serif: 'Instrument Serif', serif;
+  --sans: 'DM Sans', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--red); color: #fff; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+.container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+/* Header */
+header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+header h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 400;
+  letter-spacing: -2px;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+header h1 span { color: var(--red); }
+header p { font-size: 0.9rem; color: var(--text3); font-family: var(--mono); font-size: 0.8rem; }
+
+/* Progress */
+.progress-bar {
+  margin: 1.5rem 0;
+  background: var(--bg3);
+  border-radius: 20px;
+  height: 8px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--red), var(--orange));
+  border-radius: 20px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text3);
+  margin-top: 0.4rem;
+}
+
+/* Stats */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.stat {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  text-align: center;
+}
+.stat-number {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 400;
+}
+.stat-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.2rem;
+}
+
+/* Nav */
+nav {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 2rem;
+  background: var(--bg2);
+  border-radius: var(--radius);
+  padding: 4px;
+  border: 1px solid var(--border);
+}
+nav button {
+  flex: 1;
+  padding: 0.6rem 0.5rem;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text3);
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+nav button.active {
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: 0 2px 8px #0005;
+}
+nav button:hover:not(.active) { color: var(--text2); }
+
+/* Sections */
+.section { display: none; }
+.section.active { display: block; }
+
+/* Phase label */
+.phase {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.75rem;
+}
+.phase-1 { background: var(--redBg); color: var(--red); }
+.phase-2 { background: var(--orangeBg); color: var(--orange); }
+.phase-3 { background: var(--blueBg); color: var(--blue); }
+
+/* Chapter card */
+.chapter {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.chapter:hover { border-color: #3a3a4a; }
+.chapter.completed { opacity: 0.5; }
+.chapter-header {
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  user-select: none;
+}
+.chapter-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.chapter-info { flex: 1; min-width: 0; }
+.chapter-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+.chapter-meta {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text3);
+  margin-top: 2px;
+}
+.chapter-toggle {
+  font-size: 0.8rem;
+  color: var(--text3);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+.chapter.open .chapter-toggle { transform: rotate(180deg); }
+
+.chapter-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.chapter.open .chapter-body { max-height: 2000px; }
+.chapter-content {
+  padding: 0 1.25rem 1.25rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+
+/* Criteria */
+.criteria-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  font-size: 0.85rem;
+  color: var(--text2);
+  line-height: 1.5;
+}
+.criteria-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  transition: all 0.2s;
+  background: transparent;
+  color: transparent;
+}
+.criteria-check:hover { border-color: var(--text3); }
+.criteria-check.checked {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+.criteria-text.done { text-decoration: line-through; color: var(--text3); }
+
+.exercises {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg3);
+  border-radius: 7px;
+  font-size: 0.8rem;
+  color: var(--text2);
+  line-height: 1.7;
+}
+.exercises strong { color: var(--text); font-weight: 500; }
+
+.tip {
+  margin-top: 0.75rem;
+  padding: 0.6rem 1rem;
+  border-left: 3px solid var(--orange);
+  background: var(--orangeBg);
+  border-radius: 0 7px 7px 0;
+  font-size: 0.8rem;
+  color: var(--orange);
+  line-height: 1.5;
+}
+
+/* Jarvis prompts */
+.jarvis {
+  margin-top: 0.75rem;
+  padding: 0.6rem 1rem;
+  border-left: 3px solid var(--purple);
+  background: var(--purpleBg);
+  border-radius: 0 7px 7px 0;
+  font-size: 0.8rem;
+  color: var(--purple);
+  line-height: 1.5;
+  cursor: pointer;
+  position: relative;
+}
+.jarvis::after {
+  content: 'kopieer';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  opacity: 0.5;
+}
+.jarvis:hover::after { opacity: 1; }
+.jarvis.copied::after { content: 'gekopieerd ✓'; color: var(--green); }
+
+/* Formules section */
+.formula-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.formula-card h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.formula-card h3 .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.formula-item {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text2);
+  padding: 0.4rem 0;
+  line-height: 1.6;
+  border-bottom: 1px solid var(--border);
+}
+.formula-item:last-child { border: none; }
+.formula-name { color: var(--text); font-family: var(--sans); font-weight: 500; }
+
+/* Planning view */
+.day-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.day-card h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.day-card .day-date {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text3);
+}
+.day-tasks {
+  font-size: 0.85rem;
+  color: var(--text2);
+  line-height: 1.8;
+}
+.day-tasks span.subj {
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+
+/* Reset button */
+.reset-btn {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text3);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  float: right;
+  transition: all 0.2s;
+}
+.reset-btn:hover { border-color: var(--red); color: var(--red); }
+
+/* Exam countdown */
+.countdown {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.countdown-item {
+  min-width: 110px;
+  padding: 0.75rem 1rem;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+  flex-shrink: 0;
+}
+.countdown-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.countdown-days {
+  font-family: var(--serif);
+  font-size: 2rem;
+}
+.countdown-date {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text3);
+}
+
+/* Footer */
+footer {
+  margin-top: 3rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text3);
+}
+
+@media (max-width: 600px) {
+  .container { padding: 1rem; }
+  header h1 { font-size: 2rem; letter-spacing: -1px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  nav button { font-size: 0.7rem; padding: 0.5rem 0.25rem; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Wiskunde<span>.</span></h1>
+  <p>6AWWI · SO-Zenith · Examens 10-11 juni 2026</p>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label">
+    <span id="progressText">0 / 0 succescriteria</span>
+    <span id="progressPct">0%</span>
+  </div>
+</header>
+
+<div class="countdown" id="countdown"></div>
+
+<div class="stats" id="stats"></div>
+
+<nav>
+  <button class="active" onclick="showSection('volgorde')">Leervolgorde</button>
+  <button onclick="showSection('formules')">Formules</button>
+  <button onclick="showSection('planning')">Planning</button>
+</nav>
+
+<div class="section active" id="sec-volgorde"></div>
+<div class="section" id="sec-formules"></div>
+<div class="section" id="sec-planning"></div>
+
+<footer>
+  Gustave · Wiskunde Examenplan 2026<br>
+  Voortgang wordt lokaal opgeslagen
+</footer>
+
+</div>
+
+<script>
+// ========== DATA ==========
+const CHAPTERS = [
+  // FASE 1 — LINEAIRE ALGEBRA (fundament)
+  {
+    id: "lin-stelsels",
+    phase: 1,
+    phaseLabel: "Fase 1 — fundament",
+    number: 1,
+    title: "Lineaire algebra — stelsels",
+    pages: "p.30-39",
+    hours: 2.5,
+    color: "#e8453c",
+    criteria: [
+      "Ik bepaal de oplossingenverzameling van een stelsel met de methode van Gauss-Jordan.",
+      "Ik bepaal de rang van een matrix met de methode van Gauss-Jordan."
+    ],
+    exercises: "Must-do: p.39: 6B · p.61-63: 6D t.e.m. 6K + OVT",
+    tip: "Gauss-Jordan is de basis voor ALLES. Oefen tot het automatisch gaat.",
+    jarvis: "Geef me 3 stelsels van 3 vergelijkingen met 3 onbekenden. Laat me ze oplossen met Gauss-Jordan en controleer mijn antwoorden stap voor stap.",
+    formulas: [
+      { name: "Rijoperatie 1 — verwisselen", formula: "Rᵢⱼ: rij i ↔ rij j" },
+      { name: "Rijoperatie 2 — vermenigvuldigen", formula: "k·Rᵢ: elke entry in rij i × k (k ≠ 0)" },
+      { name: "Rijoperatie 3 — optellen", formula: "Rᵢ + k·Rⱼ: rij i := rij i + k × rij j" },
+      { name: "Rang", formula: "r(A) = aantal niet-nulrijen in rijcanonieke vorm" },
+      { name: "Oplosbaar als", formula: "r(A) = r(Aᵇ)" },
+      { name: "Eén oplossing als", formula: "r(A) = r(Aᵇ) = n" },
+      { name: "Oneindig oplossingen als", formula: "r(A) = r(Aᵇ) < n → (n-r)-voudig onbepaald" },
+    ]
+  },
+  {
+    id: "lin-toepassingen",
+    phase: 1,
+    number: 2,
+    title: "Lineaire algebra — toepassingen van matrices",
+    pages: "p.44-73",
+    hours: 2,
+    color: "#e8453c",
+    criteria: [
+      "Ik modelleer een probleem met overgangsmatrices (Markovketens) en bereken de toestandsvector na k stappen.",
+      "Ik modelleer een populatieprobleem met Lesliematrices en bereken de populatievector na k stappen.",
+      "Ik stel een verbindingsmatrix op van een graaf en bepaal graad, k-stapsverbindingen en diameter."
+    ],
+    exercises: "Must-do: p.47-53 (A's) + p.64-73 (B-G) + OVT",
+    tip: "Bij Markovketens: kolomsommen = 1. Bij Leslie: eerste rij = geboorte, subdiagonaal = overleving.",
+    jarvis: "Leg Markovketens uit met een concreet voorbeeld. Geef me dan een oefening met een overgangsmatrix van 3 toestanden.",
+    formulas: [
+      { name: "Markov na k stappen", formula: "xₖ = Mᵏ · x₀ (M = overgangsmatrix)" },
+      { name: "Leslie na k stappen", formula: "nₖ = Lᵏ · n₀ (L = Lesliematrix)" },
+      { name: "k-stapsverbindingen", formula: "Aᵏ[i,j] = aantal paden van lengte k tussen i en j" },
+    ]
+  },
+  {
+    id: "lin-inverse",
+    phase: 1,
+    number: 3,
+    title: "Lineaire algebra — inverse matrices",
+    pages: "p.80-83",
+    hours: 2,
+    color: "#e8453c",
+    criteria: [
+      "Ik bereken de inverse van een matrix met de methode van Gauss-Jordan: [A|I] → [I|A⁻¹].",
+      "Ik bereken de inverse van een matrix met de TI-84.",
+      "Ik bewijs de uniciteit van de inverse van een matrix."
+    ],
+    exercises: "Must-do: p.83: 1A · p.120: 1B, 1C + OVT",
+    tip: "Zet [A|I] op en doe Gauss-Jordan. Als links I wordt, staat rechts A⁻¹. Gaat niet? → A is singulier.",
+    jarvis: "Geef me een 3×3 matrix en laat me stap voor stap de inverse berekenen met Gauss-Jordan. Controleer elke stap.",
+    formulas: [
+      { name: "Inverse berekenen", formula: "[A | I] →(Gauss-Jordan)→ [I | A⁻¹]" },
+      { name: "Check", formula: "A · A⁻¹ = A⁻¹ · A = I" },
+      { name: "Stelsel oplossen", formula: "A·X = B → X = A⁻¹·B" },
+    ]
+  },
+  {
+    id: "lin-det",
+    phase: 1,
+    number: 4,
+    title: "Lineaire algebra — determinanten",
+    pages: "p.84-125",
+    hours: 2.5,
+    color: "#e8453c",
+    criteria: [
+      "Ik bereken de determinant van een matrix via rijkolom-ontwikkeling (cofactoren).",
+      "Ik bereken de determinant van een 3×3-matrix met de regel van Sarrus.",
+      "Ik bereken de determinant met de TI-84.",
+      "Ik pas de transpositie-eigenschap toe: det(A) = det(Aᵀ).",
+      "Ik pas antisymmetrische eigenschappen toe (rij/kolom verwisselen → teken wisselt).",
+      "Ik pas sesquilineariteitseigenschappen toe (factor uit rij/kolom halen, rijen optellen).",
+      "Ik pas de productregel toe: det(A·B) = det(A) · det(B)."
+    ],
+    exercises: "Must-do: p.89-99 (A's) + p.121-125 (B-E) + OVT",
+    tip: "Veel eigenschappen! Maak een overzichtskaartje: 7 eigenschappen op 1 A4.",
+    jarvis: "Geef me 5 oefeningen over determinanten: 2 met Sarrus, 2 met cofactoren, 1 met eigenschappen toepassen.",
+    formulas: [
+      { name: "Sarrus (3×3)", formula: "det = a₁₁a₂₂a₃₃ + a₁₂a₂₃a₃₁ + a₁₃a₂₁a₃₂ - a₁₃a₂₂a₃₁ - a₁₂a₂₁a₃₃ - a₁₁a₂₃a₃₂" },
+      { name: "Cofactor", formula: "Cᵢⱼ = (-1)^(i+j) · Mᵢⱼ" },
+      { name: "Ontwikkeling rij i", formula: "det(A) = Σⱼ aᵢⱼ · Cᵢⱼ" },
+      { name: "Transpositie", formula: "det(A) = det(Aᵀ)" },
+      { name: "Productregel", formula: "det(A·B) = det(A) · det(B)" },
+      { name: "Inverse", formula: "det(A⁻¹) = 1/det(A)" },
+      { name: "Singulier", formula: "A niet inverteerbaar ⟺ det(A) = 0" },
+    ]
+  },
+
+  // FASE 2 — ANALYSE
+  {
+    id: "analyse-inttech",
+    phase: 2,
+    phaseLabel: "Fase 2 — analyse (zwaarste deel)",
+    number: 5,
+    title: "Analyse — integratietechnieken",
+    pages: "p.12-69",
+    hours: 3.5,
+    color: "#e8943c",
+    criteria: [
+      "Ik bereken de differentiaal van een reële functie.",
+      "Ik bereken een onbepaalde integraal door onmiddellijke integratie en splitsing.",
+      "Ik bereken een onbepaalde integraal door substitutie.",
+      "Ik bereken een onbepaalde integraal door partiële integratie."
+    ],
+    exercises: "Per techniek: alle A-oefeningen + B-F · OVT niet vergeten!",
+    tip: "Leer de technieken apart: eerst onmiddellijk, dan substitutie, dan partieel. Mix pas als je elk apart beheerst.",
+    jarvis: "Geef me 3 integralen die ik moet oplossen met substitutie. Geef hints als ik vastzit, geen directe antwoorden.",
+    formulas: [
+      { name: "Differentiaal", formula: "df = f'(x) · dx" },
+      { name: "Basisintegralen", formula: "∫xⁿ dx = xⁿ⁺¹/(n+1) + C, ∫eˣ dx = eˣ + C, ∫1/x dx = ln|x| + C" },
+      { name: "Substitutie", formula: "∫f(g(x))·g'(x)dx → stel u = g(x), du = g'(x)dx" },
+      { name: "Partiële integratie", formula: "∫u·dv = u·v - ∫v·du" },
+      { name: "Goniometrisch", formula: "∫sin x dx = -cos x + C, ∫cos x dx = sin x + C" },
+    ]
+  },
+  {
+    id: "analyse-bepaald",
+    phase: 2,
+    number: 6,
+    title: "Analyse — bepaalde integraal + oppervlakten",
+    pages: "p.14-37",
+    hours: 3,
+    color: "#e8943c",
+    criteria: [
+      "Ik leg het verband uit tussen ondersommen/bovensommen en de bepaalde integraal.",
+      "Ik leg het verband uit tussen georiënteerde oppervlakte en de bepaalde integraal.",
+      "Ik formuleer en bewijs de middelwaardestelling.",
+      "Ik formuleer en bewijs de hoofdstelling van de integraalrekening.",
+      "Ik formuleer en bewijs de tweede fundamentele stelling.",
+      "Ik bereken de oppervlakte tussen een grafiek en de x-as.",
+      "Ik bereken de oppervlakte tussen twee grafieken."
+    ],
+    exercises: "Alle A-oefeningen + OVT · Bewijzen actief herschrijven!",
+    tip: "3 stellingen met bewijs! Schrijf ze 3x over uit het hoofd. Dat is de beste manier om ze te leren.",
+    jarvis: "Leg de hoofdstelling van de integraalrekening uit in eenvoudige taal. Vraag me daarna om het bewijs te reproduceren en geef feedback.",
+    formulas: [
+      { name: "Bepaalde integraal", formula: "∫ₐᵇ f(x)dx = F(b) - F(a)" },
+      { name: "Middelwaardestelling", formula: "∃c ∈ [a,b]: ∫ₐᵇ f(x)dx = f(c)·(b-a)" },
+      { name: "Hoofdstelling", formula: "F(x) = ∫ₐˣ f(t)dt → F'(x) = f(x)" },
+      { name: "Oppervlakte (x-as)", formula: "∫ₐᵇ |f(x)| dx" },
+      { name: "Oppervlakte (2 curves)", formula: "∫ₐᵇ |f(x) - g(x)| dx" },
+    ]
+  },
+  {
+    id: "analyse-omw",
+    phase: 2,
+    number: 7,
+    title: "Analyse — omwentelingslichamen",
+    pages: "p.98-111",
+    hours: 1.5,
+    color: "#e8943c",
+    criteria: [
+      "Ik bereken de inhoud van een omwentelingslichaam algebraïsch."
+    ],
+    exercises: "p.101: 2A · p.110-111: 2B-2D + OVT",
+    tip: "De formule is vrij simpel — het gaat vooral om correct integreren.",
+    jarvis: "Geef me 2 oefeningen over omwentelingslichamen: één rond de x-as en één rond de y-as.",
+    formulas: [
+      { name: "Volume (x-as)", formula: "V = π · ∫ₐᵇ [f(x)]² dx" },
+      { name: "Volume (y-as)", formula: "V = π · ∫ₐᵇ [g(y)]² dy" },
+      { name: "Volume (2 curves)", formula: "V = π · ∫ₐᵇ |[f(x)]² - [g(x)]²| dx" },
+    ]
+  },
+  {
+    id: "analyse-boog",
+    phase: 2,
+    number: 8,
+    title: "Analyse — booglengte",
+    pages: "p.106-118",
+    hours: 1,
+    color: "#e8943c",
+    criteria: [
+      "Ik bereken de booglengte van een curve algebraïsch."
+    ],
+    exercises: "p.107: 4A · p.117-118: 4B-4F + OVT",
+    tip: "Eén formule — de moeilijkheid zit in het integreren van de wortel.",
+    jarvis: "Geef me 2 oefeningen over booglengte met verschillende functies. Laat me de integraal opzetten.",
+    formulas: [
+      { name: "Booglengte", formula: "L = ∫ₐᵇ √(1 + [f'(x)]²) dx" },
+    ]
+  },
+
+  // FASE 3 — ZELFSTANDIGE BLOKKEN
+  {
+    id: "kanstheorie",
+    phase: 3,
+    phaseLabel: "Fase 3 — zelfstandige blokken",
+    number: 9,
+    title: "Kanstheorie",
+    pages: "p.32-47",
+    hours: 3.5,
+    color: "#3c8ce8",
+    criteria: [
+      "Ik bepaal het universum en gebeurtenissen. Ik bereken relatieve frequenties en onderscheid empirische/theoretische kans.",
+      "Ik pas de formule van Laplace toe en werk met uniforme kansverdeling.",
+      "Ik bereken kansen met kansbomen uit de uitkomstenverzameling.",
+      "Ik lees en stel kruistabellen op en bereken voorwaardelijke kansen.",
+      "Ik herken en bewijs onafhankelijke gebeurtenissen en pas de productregel toe.",
+      "Ik formuleer en pas de wet van de totale kans toe.",
+      "Ik formuleer en pas de regel van Bayes toe."
+    ],
+    exercises: "Per onderdeel alle A-oefeningen + B-reeks + OVT",
+    tip: "1-3 is basis, 4-5 medium, 6-7 moeilijkst. Besteed extra tijd aan Bayes — dat is vaak het examenvraagstuk.",
+    jarvis: "Geef me een probleem over de regel van Bayes met een medische test (vals positief/negatief). Begeleid me stap voor stap.",
+    formulas: [
+      { name: "Laplace", formula: "P(A) = |A| / |Ω|" },
+      { name: "Complement", formula: "P(A') = 1 - P(A)" },
+      { name: "Somregel", formula: "P(A∪B) = P(A) + P(B) - P(A∩B)" },
+      { name: "Voorwaardelijk", formula: "P(A|B) = P(A∩B) / P(B)" },
+      { name: "Onafhankelijk", formula: "A,B onafh. ⟺ P(A∩B) = P(A)·P(B)" },
+      { name: "Totale kans", formula: "P(A) = Σᵢ P(A|Bᵢ)·P(Bᵢ)" },
+      { name: "Bayes", formula: "P(Bⱼ|A) = P(A|Bⱼ)·P(Bⱼ) / Σᵢ P(A|Bᵢ)·P(Bᵢ)" },
+    ]
+  },
+  {
+    id: "ruimtemeetkunde",
+    phase: 3,
+    number: 10,
+    title: "Ruimtemeetkunde",
+    pages: "p.140-209",
+    hours: 5,
+    color: "#3c8ce8",
+    criteria: [
+      "Ik werk met vectorruimten: rekenregels, basis, dimensie.",
+      "Ik werk met vrije en puntvectoren: coördinaten, norm, Chasles-Möbius.",
+      "Ik stel vergelijkingen van rechten op (vectorieel/parametrisch/cartesisch) en bepaal onderlinge ligging.",
+      "Ik stel vergelijkingen van vlakken op en bepaal onderlinge ligging (vlak-vlak, rechte-vlak).",
+      "Ik bereken hoeken: vector-vector, rechte-rechte, vlak-vlak, rechte-vlak.",
+      "Ik bereken afstanden: punt-punt, punt-rechte, punt-vlak, rechte-vlak, vlak-vlak, rechte-rechte."
+    ],
+    exercises: "Per type vergelijking/berekening: minstens 2 oefeningen. A + B-reeks + OVT",
+    tip: "Veel types! Maak een overzicht: welke formule voor welk type vraag. Print het uit en hang het boven je bureau.",
+    jarvis: "Geef me een oefening over de afstand van een punt tot een vlak in R³. Laat me de formule toepassen en controleer.",
+    formulas: [
+      { name: "Norm", formula: "‖v‖ = √(v₁² + v₂² + v₃²)" },
+      { name: "Inproduct", formula: "u·v = u₁v₁ + u₂v₂ + u₃v₃ = ‖u‖·‖v‖·cos θ" },
+      { name: "Rechte (param.)", formula: "P + t·r (t ∈ ℝ)" },
+      { name: "Vlak", formula: "ax + by + cz = d met n = (a,b,c)" },
+      { name: "Hoek vectoren", formula: "cos θ = (u·v) / (‖u‖·‖v‖)" },
+      { name: "Afstand punt-vlak", formula: "d = |ax₀+by₀+cz₀-d| / √(a²+b²+c²)" },
+      { name: "Uitproduct", formula: "u×v = (u₂v₃-u₃v₂, u₃v₁-u₁v₃, u₁v₂-u₂v₁)" },
+    ]
+  },
+  {
+    id: "logica",
+    phase: 3,
+    number: 11,
+    title: "Logica — predicaten en kwantoren",
+    pages: "p.18-39",
+    hours: 1.5,
+    color: "#3c8ce8",
+    criteria: [
+      "Ik onderscheid proposities en predicaten.",
+      "Ik bepaal het waarheidsdomein van een predicaat in een referentieverzameling.",
+      "Ik bepaal de waarheidswaarde van uitspraken met kwantoren, inclusief de negatiestelling.",
+      "Ik respecteer de volgorde van kwantoren in samengestelde uitspraken."
+    ],
+    exercises: "p.21-25 (A's) + p.36-39 (D-E) + OVT",
+    tip: "Negatiestelling: ¬∀ = ∃¬ en ¬∃ = ∀¬. Onthoud dit als een wip: de kwantor flipt, de uitspraak wordt ontkend.",
+    jarvis: "Geef me 5 uitspraken met kwantoren. Laat me de negatie geven en de waarheidswaarde bepalen.",
+    formulas: [
+      { name: "Universeel", formula: "∀x ∈ V: P(x) — voor alle x geldt P" },
+      { name: "Existentieel", formula: "∃x ∈ V: P(x) — er bestaat een x waarvoor P" },
+      { name: "Negatie ∀", formula: "¬(∀x: P(x)) ⟺ ∃x: ¬P(x)" },
+      { name: "Negatie ∃", formula: "¬(∃x: P(x)) ⟺ ∀x: ¬P(x)" },
+    ]
+  },
+  {
+    id: "alg-struct",
+    phase: 3,
+    number: 12,
+    title: "Algebraïsche structuren",
+    pages: "p.44-75",
+    hours: 2.5,
+    color: "#3c8ce8",
+    criteria: [
+      "Ik bepaal of een verzameling met bewerking een groep is (geslotenheid, associativiteit, neutraal element, invers).",
+      "Ik bepaal of een groep commutatief (abels) is.",
+      "Ik reken in Zn: optelling, aftrekking, vermenigvuldiging, machtsverheffing.",
+      "Ik stel een Cayley-tabel op en check groepseigenschappen voor eindige verzamelingen.",
+      "Ik bepaal de symmetriegroep van een meetkundig figuur en bewijs dat het een groep is."
+    ],
+    exercises: "Must-do: 7A,7B(p.59) · 8A(p.61) · 9A,9B(p.63) · 10A,10B(p.65) · 11A(p.67)\nShould-do: 7C-7E · 8B · 9C-9G · 10C-10E · 11B",
+    tip: "Centraal concept: de 4 groepseigenschappen. Alles is een variatie daarop.",
+    jarvis: "Quiz me over algebraïsche structuren: groepen, Zn, Cayley-tabellen, symmetriegroepen. 8 vragen, geef feedback.",
+    formulas: [
+      { name: "Groep (G, *)", formula: "1) Geslotenheid 2) Associativiteit 3) Neutraal e 4) Invers" },
+      { name: "Commutatief", formula: "a * b = b * a voor alle a,b ∈ G" },
+      { name: "Zn optelling", formula: "a ⊕ b = (a + b) mod n" },
+      { name: "Zn vermenigv.", formula: "a ⊗ b = (a · b) mod n" },
+    ]
+  },
+];
+
+const PLANNING = [
+  { day: "Za 24/5", tasks: ["Wiskunde: begin lineaire algebra — stelsels (blok 1)"], note: "1.5u" },
+  { day: "Zo 25/5", tasks: ["Wiskunde: toepassingen matrices (blok 2)", "Wiskunde: begin integratietechnieken (blok 5)"], note: "4u totaal" },
+  { day: "Ma 26/5", tasks: ["Wiskunde: integratietechnieken vervolg (blok 5)"], note: "1.5u na school" },
+  { day: "Di 27/5", tasks: ["Wiskunde: integratietechnieken afwerken (blok 5)"], note: "Ochtend voor badminton" },
+  { day: "Wo 28/5", tasks: ["Wiskunde: bepaalde integraal (blok 6)"], note: "Voor Germain" },
+  { day: "Do 29/5", tasks: ["Wiskunde: omwentelingslichamen (blok 7)", "Wiskunde: booglengte (blok 8)"], note: "Voor Germain" },
+  { day: "Vr 30/5", tasks: ["Wiskunde: logica (blok 11)", "Wiskunde: begin inverse matrices (blok 3)"], note: "Na school" },
+  { day: "Za 31/5", tasks: ["Wiskunde: inverse matrices afwerken (blok 3)", "Ruimtemeetkunde: 5. Hoeken in de ruimte — theorie + oef (blok 10)"], note: "Tennis 11:00. TOETS DINSDAG!" },
+  { day: "Zo 1/6", tasks: ["Ruimtemeetkunde: 6. Afstand in de ruimte — theorie + oef (blok 10)", "REVIEW: hoeken + afstand oefeningen herhalen"], note: "TOETS MORGEN — focus ruimtemeetkunde" },
+  { day: "Ma 2/6", tasks: ["🧪 TOETS: Hoeken en afstand in de ruimte", "Wiskunde: determinanten (blok 4)"], note: "Na toets doorwerken" },
+  { day: "Di 3/6", tasks: ["Wiskunde: kanstheorie 1-3 — Laplace, kansbomen (blok 9)"], note: "2.5u — badminton" },
+  { day: "Wo 4/6", tasks: ["Wiskunde: kanstheorie 4-5 — kruistabellen + onafh. (blok 9)", "Wiskunde: ruimtemeetkunde — vectorruimten + rechten (blok 10)"], note: "4u — ook chemie" },
+  { day: "Do 5/6", tasks: ["Wiskunde: kanstheorie 6-7 — totale kans + Bayes (blok 9)", "Wiskunde: ruimtemeetkunde — vlakken (blok 10)"], note: "5u" },
+  { day: "Vr 6/6", tasks: ["Wiskunde: alg. structuren (blok 12)", "REVIEW: zwakke punten herhalen"], note: "5u" },
+  { day: "Za 7/6", tasks: ["REVIEW: integratietechnieken + kanstheorie oefeningen"], note: "Tennis 11:00. 5u" },
+  { day: "Zo 8/6", tasks: ["FINALE REVIEW: alle formules + moeilijkste oefeningen opnieuw"], note: "LAATSTE dag voor examen!" },
+  { day: "Di 10/6", tasks: ["🎯 EXAMEN Wiskunde deel 1"], note: "" },
+  { day: "Wo 11/6", tasks: ["🎯 EXAMEN Wiskunde deel 2"], note: "" },
+];
+
+
+// ========== STATE ==========
+let checked = JSON.parse(localStorage.getItem('wisk-checked') || '{}');
+
+function saveState() {
+  localStorage.setItem('wisk-checked', JSON.stringify(checked));
+  updateProgress();
+}
+
+function toggleCheck(id) {
+  checked[id] = !checked[id];
+  const el = document.getElementById('chk-' + id);
+  const txt = document.getElementById('txt-' + id);
+  if (el) { el.classList.toggle('checked', !!checked[id]); el.textContent = checked[id] ? '✓' : ''; }
+  if (txt) { txt.classList.toggle('done', !!checked[id]); }
+  saveState();
+}
+
+function updateProgress() {
+  let total = 0, done = 0;
+  CHAPTERS.forEach(ch => {
+    ch.criteria.forEach((_, i) => {
+      total++;
+      if (checked[ch.id + '-' + i]) done++;
+    });
+  });
+  const pct = total > 0 ? Math.round(done / total * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = done + ' / ' + total + ' succescriteria';
+  document.getElementById('progressPct').textContent = pct + '%';
+
+  // stats
+  const totalHours = CHAPTERS.reduce((s, c) => s + c.hours, 0);
+  const doneChapters = CHAPTERS.filter(ch => ch.criteria.every((_, i) => checked[ch.id + '-' + i])).length;
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="stat-number">${CHAPTERS.length}</div><div class="stat-label">Blokken</div></div>
+    <div class="stat"><div class="stat-number">${doneChapters}</div><div class="stat-label">Afgerond</div></div>
+    <div class="stat"><div class="stat-number">${total}</div><div class="stat-label">Criteria</div></div>
+    <div class="stat"><div class="stat-number">${totalHours}u</div><div class="stat-label">Studie</div></div>
+  `;
+}
+
+
+// ========== RENDER ==========
+function renderChapters() {
+  const container = document.getElementById('sec-volgorde');
+  let html = '<button class="reset-btn" onclick="resetProgress()">↺ Reset voortgang</button>';
+  let currentPhase = 0;
+
+  CHAPTERS.forEach(ch => {
+    if (ch.phase !== currentPhase) {
+      currentPhase = ch.phase;
+      const phaseClass = 'phase-' + ch.phase;
+      const label = ch.phaseLabel || '';
+      if (label) html += `<div class="phase ${phaseClass}">${label}</div>`;
+    }
+
+    const allDone = ch.criteria.every((_, i) => checked[ch.id + '-' + i]);
+
+    html += `<div class="chapter ${allDone ? 'completed' : ''}" id="ch-${ch.id}">
+      <div class="chapter-header" onclick="toggleChapter('${ch.id}')">
+        <div class="chapter-number" style="background:${ch.color}22;color:${ch.color}">${ch.number}</div>
+        <div class="chapter-info">
+          <div class="chapter-title">${ch.title}</div>
+          <div class="chapter-meta">${ch.pages} · ${ch.hours}u · ${ch.criteria.length} criteria</div>
+        </div>
+        <div class="chapter-toggle">▼</div>
+      </div>
+      <div class="chapter-body">
+        <div class="chapter-content">`;
+
+    ch.criteria.forEach((c, i) => {
+      const cid = ch.id + '-' + i;
+      const isDone = !!checked[cid];
+      html += `<div class="criteria-item">
+        <div class="criteria-check ${isDone ? 'checked' : ''}" id="chk-${cid}" onclick="event.stopPropagation();toggleCheck('${cid}')">${isDone ? '✓' : ''}</div>
+        <span class="criteria-text ${isDone ? 'done' : ''}" id="txt-${cid}">${c}</span>
+      </div>`;
+    });
+
+    if (ch.exercises) {
+      html += `<div class="exercises"><strong>Oefeningen:</strong> ${ch.exercises.replace(/\n/g, '<br>')}</div>`;
+    }
+    if (ch.tip) {
+      html += `<div class="tip">💡 ${ch.tip}</div>`;
+    }
+    if (ch.jarvis) {
+      html += `<div class="jarvis" onclick="copyJarvis(this, \`${ch.jarvis.replace(/`/g, "'")}\`)">🤖 Jarvis: "${ch.jarvis}"</div>`;
+    }
+
+    html += `</div></div></div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+function renderFormulas() {
+  const container = document.getElementById('sec-formules');
+  let html = '';
+  CHAPTERS.forEach(ch => {
+    if (!ch.formulas || ch.formulas.length === 0) return;
+    html += `<div class="formula-card">
+      <h3><span class="dot" style="background:${ch.color}"></span>${ch.title}</h3>`;
+    ch.formulas.forEach(f => {
+      html += `<div class="formula-item"><span class="formula-name">${f.name}:</span> ${f.formula}</div>`;
+    });
+    html += `</div>`;
+  });
+  container.innerHTML = html;
+}
+
+function renderPlanning() {
+  const container = document.getElementById('sec-planning');
+  let html = '';
+  PLANNING.forEach(p => {
+    const isExam = p.tasks.some(t => t.includes('EXAMEN'));
+    html += `<div class="day-card" style="${isExam ? 'border-color:var(--red);background:var(--redBg)' : ''}">
+      <h3>${p.day} ${p.note ? '<span class="day-date">' + p.note + '</span>' : ''}</h3>
+      <div class="day-tasks">${p.tasks.map(t => {
+        let color = '#666';
+        if (t.includes('EXAMEN') || t.includes('TOETS')) color = 'var(--red)';
+        else if (t.includes('REVIEW') || t.includes('FINALE')) color = 'var(--orange)';
+        else if (t.includes('Alg')) color = 'var(--blue)';
+        return `<div style="color:${color}">→ ${t}</div>`;
+      }).join('')}</div>
+    </div>`;
+  });
+  container.innerHTML = html;
+}
+
+function renderCountdown() {
+  const now = new Date();
+  const exams = [
+    { label: "Deel 1", date: new Date("2026-06-10"), color: "var(--red)" },
+    { label: "Deel 2", date: new Date("2026-06-11"), color: "var(--red)" },
+    { label: "Toets hoeken/afst.", date: new Date("2026-06-02"), color: "var(--blue)" },
+  ];
+  const container = document.getElementById('countdown');
+  container.innerHTML = exams.map(e => {
+    const diff = Math.ceil((e.date - now) / 86400000);
+    const months = ['jan','feb','mrt','apr','mei','jun'];
+    return `<div class="countdown-item" style="border-color:${e.color}30">
+      <div class="countdown-label">${e.label}</div>
+      <div class="countdown-days" style="color:${diff <= 3 ? 'var(--red)' : 'var(--text)'}">D-${diff}</div>
+      <div class="countdown-date">${e.date.getDate()} ${months[e.date.getMonth()]}</div>
+    </div>`;
+  }).join('');
+}
+
+
+// ========== INTERACTIONS ==========
+function toggleChapter(id) {
+  const el = document.getElementById('ch-' + id);
+  el.classList.toggle('open');
+}
+
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-' + name).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function copyJarvis(el, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    el.classList.add('copied');
+    setTimeout(() => el.classList.remove('copied'), 2000);
+  });
+}
+
+function resetProgress() {
+  if (confirm('Weet je zeker dat je alle voortgang wilt resetten?')) {
+    checked = {};
+    localStorage.removeItem('wisk-checked');
+    renderChapters();
+    updateProgress();
+  }
+}
+
+
+// ========== INIT ==========
+renderChapters();
+renderFormulas();
+renderPlanning();
+renderCountdown();
+updateProgress();
+</script>
+</body>
+</html>
