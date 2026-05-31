@@ -3,516 +3,238 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wiskunde 6AWWI — Examenplan</title>
+<title>Examenhub — Gustave</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Serif&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0c0c10;
-  --bg2: #14141c;
-  --bg3: #1c1c28;
-  --border: #2a2a3a;
-  --text: #e4e2dd;
-  --text2: #a8a5a0;
-  --text3: #6b6860;
-  --red: #e8453c;
-  --orange: #e8943c;
-  --green: #3cb06c;
-  --blue: #3c8ce8;
-  --purple: #9c6ce8;
-  --yellow: #e8c83c;
-  --redBg: #e8453c15;
-  --orangeBg: #e8943c15;
-  --greenBg: #3cb06c15;
-  --blueBg: #3c8ce815;
-  --purpleBg: #9c6ce815;
-  --radius: 10px;
-  --mono: 'DM Mono', monospace;
-  --serif: 'Instrument Serif', serif;
-  --sans: 'DM Sans', sans-serif;
+  --bg:#0c0c10; --bg2:#14141c; --bg3:#1c1c28; --border:#2a2a3a;
+  --text:#e4e2dd; --text2:#a8a5a0; --text3:#6b6860;
+  --red:#e8453c; --orange:#e8943c; --green:#3cb06c; --blue:#3c8ce8; --purple:#9c6ce8; --yellow:#e8c83c;
+  --redBg:#e8453c15; --orangeBg:#e8943c15; --greenBg:#3cb06c15; --blueBg:#3c8ce815; --purpleBg:#9c6ce815;
+  --radius:10px; --mono:'DM Mono',monospace; --serif:'Instrument Serif',serif; --sans:'DM Sans',sans-serif;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--sans);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-::selection { background: var(--red); color: #fff; }
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:var(--bg); color:var(--text); font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased; }
+::selection { background:var(--red); color:#fff; }
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+.container { max-width:820px; margin:0 auto; padding:2rem 1.5rem; }
 
-.container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+header { padding:2.5rem 0 1.5rem; }
+header h1 { font-family:var(--serif); font-size:clamp(2.5rem,6vw,4rem); font-weight:400; letter-spacing:-2px; line-height:1.1; }
+header h1 span { color:var(--red); }
+header p { font-size:0.8rem; color:var(--text3); font-family:var(--mono); margin-top:0.25rem; }
 
-/* Header */
-header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
-header h1 {
-  font-family: var(--serif);
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 400;
-  letter-spacing: -2px;
-  line-height: 1.1;
-  margin-bottom: 0.5rem;
-}
-header h1 span { color: var(--red); }
-header p { font-size: 0.9rem; color: var(--text3); font-family: var(--mono); font-size: 0.8rem; }
+.view { display:none; }
+.view.active { display:block; }
 
-/* Progress */
-.progress-bar {
-  margin: 1.5rem 0;
-  background: var(--bg3);
-  border-radius: 20px;
-  height: 8px;
-  overflow: hidden;
-}
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--red), var(--orange));
-  border-radius: 20px;
-  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.progress-label {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  color: var(--text3);
-  margin-top: 0.4rem;
-}
+/* Hub: overall countdown */
+.countdown { display:flex; gap:0.5rem; overflow-x:auto; padding-bottom:0.5rem; margin-bottom:1.5rem; }
+.countdown-item { min-width:96px; padding:0.6rem 0.8rem; background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); text-align:center; flex-shrink:0; }
+.countdown-label { font-family:var(--mono); font-size:0.6rem; color:var(--text3); text-transform:uppercase; letter-spacing:1px; }
+.countdown-days { font-family:var(--serif); font-size:1.7rem; }
+.countdown-date { font-family:var(--mono); font-size:0.65rem; color:var(--text3); }
 
-/* Stats */
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 0.75rem;
-  margin-bottom: 2rem;
-}
-.stat {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1rem;
-  text-align: center;
-}
-.stat-number {
-  font-family: var(--serif);
-  font-size: 2rem;
-  font-weight: 400;
-}
-.stat-label {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 0.2rem;
-}
+/* Group cards */
+.group { background:var(--bg2); border:1px solid var(--border); border-radius:14px; padding:1.25rem; margin-bottom:1rem; }
+.group-head { display:flex; align-items:center; gap:0.85rem; margin-bottom:1rem; }
+.group-emoji { font-size:1.9rem; line-height:1; flex-shrink:0; }
+.group-info { flex:1; min-width:0; }
+.group-name { font-size:1.05rem; font-weight:700; }
+.group-stats { font-family:var(--mono); font-size:0.68rem; color:var(--text3); margin-top:1px; }
+.group-streak { text-align:center; flex-shrink:0; }
+.group-streak-flame { font-family:var(--serif); font-size:1.5rem; line-height:1; }
+.group-streak-label { font-family:var(--mono); font-size:0.55rem; color:var(--text3); text-transform:uppercase; letter-spacing:1px; }
+.group-level-bar { background:var(--bg); border-radius:20px; height:7px; overflow:hidden; margin-bottom:1rem; }
+.group-level-fill { height:100%; border-radius:20px; transition:width 0.6s cubic-bezier(0.16,1,0.3,1); }
 
-/* Nav */
-nav {
-  display: flex;
-  gap: 0.25rem;
-  margin-bottom: 2rem;
-  background: var(--bg2);
-  border-radius: var(--radius);
-  padding: 4px;
-  border: 1px solid var(--border);
-}
-nav button {
-  flex: 1;
-  padding: 0.6rem 0.5rem;
-  border: none;
-  border-radius: 7px;
-  background: transparent;
-  color: var(--text3);
-  font-family: var(--sans);
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-nav button.active {
-  background: var(--bg);
-  color: var(--text);
-  box-shadow: 0 2px 8px #0005;
-}
-nav button:hover:not(.active) { color: var(--text2); }
+/* Subject chips */
+.subjects { display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:0.5rem; }
+.subject-chip { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius); padding:0.8rem 0.9rem; cursor:pointer; transition:all 0.2s; position:relative; }
+.subject-chip.active:hover { border-color:#3a3a4a; transform:translateY(-2px); }
+.subject-chip.locked { opacity:0.55; cursor:default; }
+.subject-chip-top { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem; }
+.subject-chip-emoji { font-size:1.2rem; line-height:1; }
+.subject-chip-name { font-size:0.85rem; font-weight:600; flex:1; }
+.subject-chip-exam { font-family:var(--mono); font-size:0.62rem; color:var(--text3); margin-bottom:0.5rem; }
+.subject-chip-bar { background:var(--bg); border-radius:10px; height:5px; overflow:hidden; }
+.subject-chip-fill { height:100%; border-radius:10px; transition:width 0.5s; }
+.subject-chip-pct { font-family:var(--mono); font-size:0.6rem; color:var(--text3); margin-top:3px; }
+.lock-badge { position:absolute; top:0.7rem; right:0.7rem; font-size:0.7rem; }
+.soon-badge { font-family:var(--mono); font-size:0.6rem; color:var(--text3); }
 
-/* Sections */
-.section { display: none; }
-.section.active { display: block; }
+/* Subject detail */
+.back-btn { background:var(--bg2); border:1px solid var(--border); color:var(--text2); font-family:var(--mono); font-size:0.72rem; padding:7px 14px; border-radius:7px; cursor:pointer; transition:all 0.2s; margin-bottom:1rem; }
+.back-btn:hover { border-color:var(--text3); color:var(--text); }
+.detail-title { font-family:var(--serif); font-size:2.4rem; font-weight:400; letter-spacing:-1px; line-height:1.1; }
+.detail-sub { font-size:0.8rem; color:var(--text3); font-family:var(--mono); margin-bottom:1.25rem; }
 
-/* Phase label */
-.phase {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 0.75rem;
-}
-.phase-1 { background: var(--redBg); color: var(--red); }
-.phase-2 { background: var(--orangeBg); color: var(--orange); }
-.phase-3 { background: var(--blueBg); color: var(--blue); }
+.progress-bar { background:var(--bg3); border-radius:20px; height:8px; overflow:hidden; }
+.progress-fill { height:100%; border-radius:20px; transition:width 0.6s cubic-bezier(0.16,1,0.3,1); }
+.progress-label { display:flex; justify-content:space-between; font-family:var(--mono); font-size:0.72rem; color:var(--text3); margin:0.4rem 0 0.75rem; }
 
-/* Chapter card */
-.chapter {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  margin-bottom: 0.5rem;
-  overflow: hidden;
-  transition: border-color 0.2s;
-}
-.chapter:hover { border-color: #3a3a4a; }
-.chapter.completed { opacity: 0.5; }
-.chapter-header {
-  padding: 1rem 1.25rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  user-select: none;
-}
-.chapter-number {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  font-weight: 500;
-  flex-shrink: 0;
-}
-.chapter-info { flex: 1; min-width: 0; }
-.chapter-title {
-  font-weight: 600;
-  font-size: 0.95rem;
-  line-height: 1.3;
-}
-.chapter-meta {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  color: var(--text3);
-  margin-top: 2px;
-}
-.chapter-toggle {
-  font-size: 0.8rem;
-  color: var(--text3);
-  transition: transform 0.3s;
-  flex-shrink: 0;
-}
-.chapter.open .chapter-toggle { transform: rotate(180deg); }
+.stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:0.6rem; margin:1.25rem 0; }
+.stat { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:0.9rem; text-align:center; }
+.stat-number { font-family:var(--serif); font-size:1.8rem; }
+.stat-label { font-family:var(--mono); font-size:0.65rem; color:var(--text3); text-transform:uppercase; letter-spacing:1px; margin-top:0.2rem; }
 
-.chapter-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.chapter.open .chapter-body { max-height: 2000px; }
-.chapter-content {
-  padding: 0 1.25rem 1.25rem;
-  border-top: 1px solid var(--border);
-  padding-top: 1rem;
-}
+.game-hud { display:flex; gap:0.6rem; margin-bottom:1.25rem; flex-wrap:wrap; }
+.hud-card { flex:1; min-width:140px; background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:0.85rem 1rem; display:flex; align-items:center; gap:0.7rem; }
+.hud-icon { font-size:1.5rem; line-height:1; flex-shrink:0; }
+.hud-body { flex:1; min-width:0; }
+.hud-top { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.3rem; }
+.hud-title { font-size:0.82rem; font-weight:700; }
+.hud-sub { font-family:var(--mono); font-size:0.62rem; color:var(--text3); }
+.hud-mini-bar { background:var(--bg3); border-radius:10px; height:5px; overflow:hidden; }
+.hud-mini-fill { height:100%; border-radius:10px; transition:width 0.5s; }
+.streak-flame { font-family:var(--serif); font-size:1.7rem; line-height:1; }
 
-/* Criteria */
-.criteria-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  padding: 0.5rem 0;
-  font-size: 0.85rem;
-  color: var(--text2);
-  line-height: 1.5;
-}
-.criteria-check {
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
-  border: 2px solid var(--border);
-  cursor: pointer;
-  flex-shrink: 0;
-  margin-top: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  transition: all 0.2s;
-  background: transparent;
-  color: transparent;
-}
-.criteria-check:hover { border-color: var(--text3); }
-.criteria-check.checked {
-  background: var(--green);
-  border-color: var(--green);
-  color: #fff;
-}
-.criteria-text.done { text-decoration: line-through; color: var(--text3); }
+nav { display:flex; gap:0.25rem; margin-bottom:1.5rem; background:var(--bg2); border-radius:var(--radius); padding:4px; border:1px solid var(--border); }
+nav button { flex:1; padding:0.6rem 0.4rem; border:none; border-radius:7px; background:transparent; color:var(--text3); font-family:var(--sans); font-size:0.78rem; font-weight:600; cursor:pointer; transition:all 0.2s; }
+nav button.active { background:var(--bg); color:var(--text); box-shadow:0 2px 8px #0005; }
+nav button:hover:not(.active) { color:var(--text2); }
 
-.exercises {
-  margin-top: 0.75rem;
-  padding: 0.75rem 1rem;
-  background: var(--bg3);
-  border-radius: 7px;
-  font-size: 0.8rem;
-  color: var(--text2);
-  line-height: 1.7;
-}
-.exercises strong { color: var(--text); font-weight: 500; }
-.ex-tier { margin-top: 0.6rem; }
-.ex-tier-label {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 500;
-  margin-bottom: 0.3rem;
-}
-.ex-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.2rem 0;
-  font-size: 0.8rem;
-  color: var(--text2);
-}
-.ex-check {
-  width: 17px;
-  height: 17px;
-  border-radius: 4px;
-  border: 2px solid var(--border);
-  cursor: pointer;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.6rem;
-  transition: all 0.2s;
-  background: transparent;
-  color: transparent;
-}
-.ex-check:hover { border-color: var(--text3); }
-.ex-check.checked {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: #fff;
-}
-.ex-text { font-family: var(--mono); font-size: 0.75rem; }
-.ex-text.done { text-decoration: line-through; color: var(--text3); }
+.section { display:none; }
+.section.active { display:block; }
 
-.tip {
-  margin-top: 0.75rem;
-  padding: 0.6rem 1rem;
-  border-left: 3px solid var(--orange);
-  background: var(--orangeBg);
-  border-radius: 0 7px 7px 0;
-  font-size: 0.8rem;
-  color: var(--orange);
-  line-height: 1.5;
-}
+.phase { display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border-radius:20px; font-family:var(--mono); font-size:0.7rem; font-weight:500; text-transform:uppercase; letter-spacing:1px; margin-bottom:0.75rem; }
+.phase-1 { background:var(--redBg); color:var(--red); }
+.phase-2 { background:var(--orangeBg); color:var(--orange); }
+.phase-3 { background:var(--blueBg); color:var(--blue); }
+.exam-banner { background:linear-gradient(135deg,var(--bg2),var(--redBg)); border:1px solid var(--red); border-radius:var(--radius); padding:0.85rem 1.1rem; margin:1.75rem 0 0.85rem; }
+.exam-banner-title { font-size:0.95rem; font-weight:700; display:flex; align-items:center; gap:0.5rem; }
+.exam-banner-title span { font-family:var(--mono); font-size:0.7rem; font-weight:400; color:var(--text3); background:var(--bg); padding:2px 8px; border-radius:4px; }
+.exam-banner-desc { font-family:var(--mono); font-size:0.68rem; color:var(--text2); margin-top:0.3rem; }
 
-/* Jarvis prompts */
-.jarvis {
-  margin-top: 0.75rem;
-  padding: 0.6rem 1rem;
-  border-left: 3px solid var(--purple);
-  background: var(--purpleBg);
-  border-radius: 0 7px 7px 0;
-  font-size: 0.8rem;
-  color: var(--purple);
-  line-height: 1.5;
-  cursor: pointer;
-  position: relative;
-}
-.jarvis::after {
-  content: 'kopieer';
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  opacity: 0.5;
-}
-.jarvis:hover::after { opacity: 1; }
-.jarvis.copied::after { content: 'gekopieerd ✓'; color: var(--green); }
+.chapter { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:0.5rem; overflow:hidden; transition:border-color 0.2s; }
+.chapter:hover { border-color:#3a3a4a; }
+.chapter.completed { opacity:0.5; }
+.chapter-header { padding:1rem 1.25rem; cursor:pointer; display:flex; align-items:center; gap:0.75rem; user-select:none; }
+.chapter-number { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:0.75rem; font-weight:500; flex-shrink:0; }
+.chapter-info { flex:1; min-width:0; }
+.chapter-title { font-weight:600; font-size:0.95rem; line-height:1.3; }
+.chapter-meta { font-family:var(--mono); font-size:0.7rem; color:var(--text3); margin-top:2px; }
+.chapter-toggle { font-size:0.8rem; color:var(--text3); transition:transform 0.3s; flex-shrink:0; }
+.chapter.open .chapter-toggle { transform:rotate(180deg); }
+.chapter-body { max-height:0; overflow:hidden; transition:max-height 0.4s cubic-bezier(0.16,1,0.3,1); }
+.chapter.open .chapter-body { max-height:2400px; }
+.chapter-content { padding:0 1.25rem 1.25rem; border-top:1px solid var(--border); padding-top:1rem; }
 
-/* Formules section */
-.formula-card {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.25rem;
-  margin-bottom: 0.5rem;
-}
-.formula-card h3 {
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.formula-card h3 .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.formula-item {
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  color: var(--text2);
-  padding: 0.4rem 0;
-  line-height: 1.6;
-  border-bottom: 1px solid var(--border);
-}
-.formula-item:last-child { border: none; }
-.formula-name { color: var(--text); font-family: var(--sans); font-weight: 500; }
+.criteria-item { display:flex; align-items:flex-start; gap:0.6rem; padding:0.5rem 0; font-size:0.85rem; color:var(--text2); line-height:1.5; }
+.criteria-check { width:20px; height:20px; border-radius:5px; border:2px solid var(--border); cursor:pointer; flex-shrink:0; margin-top:2px; display:flex; align-items:center; justify-content:center; font-size:0.7rem; transition:all 0.2s; background:transparent; color:transparent; }
+.criteria-check:hover { border-color:var(--text3); }
+.criteria-check.checked { background:var(--green); border-color:var(--green); color:#fff; }
+.criteria-text.done { text-decoration:line-through; color:var(--text3); }
 
-/* Planning view */
-.day-card {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1rem 1.25rem;
-  margin-bottom: 0.5rem;
-}
-.day-card h3 {
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-.day-card .day-date {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  color: var(--text3);
-}
-.day-tasks {
-  font-size: 0.85rem;
-  color: var(--text2);
-  line-height: 1.8;
-}
-.day-tasks span.subj {
-  font-weight: 600;
-  font-size: 0.75rem;
-  padding: 1px 6px;
-  border-radius: 4px;
-  margin-right: 4px;
-}
+.exercises { margin-top:0.75rem; padding:0.75rem 1rem; background:var(--bg3); border-radius:7px; font-size:0.8rem; color:var(--text2); line-height:1.7; }
+.exercises strong { color:var(--text); font-weight:500; }
+.ex-tier { margin-top:0.6rem; }
+.ex-tier-label { font-family:var(--mono); font-size:0.65rem; text-transform:uppercase; letter-spacing:1px; font-weight:500; margin-bottom:0.3rem; }
+.ex-item { display:flex; align-items:center; gap:0.5rem; padding:0.2rem 0; font-size:0.8rem; color:var(--text2); }
+.ex-check { width:17px; height:17px; border-radius:4px; border:2px solid var(--border); cursor:pointer; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.6rem; transition:all 0.2s; background:transparent; color:transparent; }
+.ex-check:hover { border-color:var(--text3); }
+.ex-check.checked { background:var(--blue); border-color:var(--blue); color:#fff; }
+.ex-text { font-family:var(--mono); font-size:0.75rem; }
+.ex-text.done { text-decoration:line-through; color:var(--text3); }
 
-/* Reset button */
-.reset-btn {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  color: var(--text3);
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  padding: 6px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  float: right;
-  transition: all 0.2s;
-}
-.reset-btn:hover { border-color: var(--red); color: var(--red); }
+.tip { margin-top:0.75rem; padding:0.6rem 1rem; border-left:3px solid var(--orange); background:var(--orangeBg); border-radius:0 7px 7px 0; font-size:0.8rem; color:var(--orange); line-height:1.5; }
+.jarvis { margin-top:0.75rem; padding:0.6rem 1rem; border-left:3px solid var(--purple); background:var(--purpleBg); border-radius:0 7px 7px 0; font-size:0.8rem; color:var(--purple); line-height:1.5; cursor:pointer; position:relative; }
+.jarvis::after { content:'kopieer'; position:absolute; right:10px; top:50%; transform:translateY(-50%); font-family:var(--mono); font-size:0.65rem; opacity:0.5; }
+.jarvis:hover::after { opacity:1; }
+.jarvis.copied::after { content:'gekopieerd ✓'; color:var(--green); }
 
-/* Exam countdown */
-.countdown {
-  display: flex;
-  gap: 0.5rem;
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-.countdown-item {
-  min-width: 110px;
-  padding: 0.75rem 1rem;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  text-align: center;
-  flex-shrink: 0;
-}
-.countdown-label {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-.countdown-days {
-  font-family: var(--serif);
-  font-size: 2rem;
-}
-.countdown-date {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  color: var(--text3);
-}
+.formula-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem; margin-bottom:0.5rem; }
+.formula-card h3 { font-size:0.9rem; font-weight:600; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem; }
+.formula-card h3 .dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.formula-item { font-family:var(--mono); font-size:0.8rem; color:var(--text2); padding:0.4rem 0; line-height:1.6; border-bottom:1px solid var(--border); }
+.formula-item:last-child { border:none; }
+.formula-name { color:var(--text); font-family:var(--sans); font-weight:500; }
 
-/* Footer */
-footer {
-  margin-top: 3rem;
-  padding: 1.5rem 0;
-  border-top: 1px solid var(--border);
-  text-align: center;
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  color: var(--text3);
-}
+.day-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:1rem 1.25rem; margin-bottom:0.5rem; }
+.day-card h3 { font-size:0.9rem; font-weight:600; margin-bottom:0.5rem; }
+.day-card .day-date { font-family:var(--mono); font-size:0.7rem; color:var(--text3); }
+.day-tasks { font-size:0.85rem; color:var(--text2); line-height:1.8; }
 
-@media (max-width: 600px) {
-  .container { padding: 1rem; }
-  header h1 { font-size: 2rem; letter-spacing: -1px; }
-  .stats { grid-template-columns: repeat(2, 1fr); }
-  nav button { font-size: 0.7rem; padding: 0.5rem 0.25rem; }
+.reset-btn { background:var(--bg3); border:1px solid var(--border); color:var(--text3); font-family:var(--mono); font-size:0.7rem; padding:6px 14px; border-radius:6px; cursor:pointer; float:right; transition:all 0.2s; }
+.reset-btn:hover { border-color:var(--red); color:var(--red); }
+
+.game-intro { font-size:0.85rem; color:var(--text2); margin-bottom:1.5rem; line-height:1.6; }
+.level-card { background:linear-gradient(135deg,var(--bg2),var(--bg3)); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem; margin-bottom:1rem; text-align:center; }
+.level-badge { font-family:var(--serif); font-size:3.5rem; line-height:1; background:linear-gradient(135deg,var(--yellow),var(--orange)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.level-title { font-size:1.1rem; font-weight:700; margin:0.25rem 0; }
+.level-xp { font-family:var(--mono); font-size:0.75rem; color:var(--text3); margin-bottom:0.75rem; }
+.level-bar { background:var(--bg); border-radius:20px; height:10px; overflow:hidden; max-width:320px; margin:0 auto; }
+.level-fill { height:100%; background:linear-gradient(90deg,var(--yellow),var(--orange)); border-radius:20px; transition:width 0.6s; }
+.level-next { font-family:var(--mono); font-size:0.65rem; color:var(--text3); margin-top:0.4rem; }
+.section-heading { font-family:var(--serif); font-size:1.5rem; margin:1.5rem 0 0.75rem; }
+.boss { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:1.1rem 1.25rem; margin-bottom:0.6rem; transition:border-color 0.3s; }
+.boss.defeated { border-color:var(--green); background:linear-gradient(135deg,var(--bg2),var(--greenBg)); }
+.boss-top { display:flex; align-items:center; gap:0.75rem; margin-bottom:0.6rem; }
+.boss-emoji { font-size:1.8rem; line-height:1; flex-shrink:0; }
+.boss-info { flex:1; min-width:0; }
+.boss-name { font-weight:700; font-size:0.95rem; }
+.boss-type { font-family:var(--mono); font-size:0.65rem; text-transform:uppercase; letter-spacing:1px; color:var(--text3); }
+.boss-hp-label { font-family:var(--mono); font-size:0.7rem; font-weight:500; flex-shrink:0; }
+.hp-bar { background:var(--bg); border-radius:20px; height:14px; overflow:hidden; border:1px solid var(--border); }
+.hp-fill { height:100%; border-radius:20px; transition:width 0.7s cubic-bezier(0.16,1,0.3,1); background:linear-gradient(90deg,#e8453c,#e8943c); }
+.hp-fill.low { background:linear-gradient(90deg,#e8453c,#c62828); }
+.hp-fill.mid { background:linear-gradient(90deg,#e8943c,#e8c83c); }
+.boss-defeated-label { color:var(--green); font-family:var(--mono); font-size:0.7rem; font-weight:500; margin-top:0.5rem; }
+.boss-meta { font-family:var(--mono); font-size:0.65rem; color:var(--text3); margin-top:0.4rem; }
+.rules-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:1.1rem 1.25rem; font-size:0.8rem; color:var(--text2); line-height:1.9; }
+.rules-card strong { color:var(--text); font-weight:600; }
+.xp-pill { display:inline-block; font-family:var(--mono); font-size:0.7rem; background:var(--bg3); color:var(--yellow); padding:1px 7px; border-radius:4px; }
+.empty-state { text-align:center; padding:3rem 1rem; color:var(--text3); }
+.empty-state .big { font-size:2.5rem; margin-bottom:0.5rem; }
+
+footer { margin-top:3rem; padding:1.5rem 0; border-top:1px solid var(--border); text-align:center; font-family:var(--mono); font-size:0.7rem; color:var(--text3); }
+
+@media (max-width:600px) {
+  .container { padding:1rem; }
+  header h1 { font-size:2rem; letter-spacing:-1px; }
+  .stats { grid-template-columns:repeat(2,1fr); }
+  nav button { font-size:0.68rem; padding:0.5rem 0.2rem; }
+  .subjects { grid-template-columns:repeat(2,1fr); }
 }
 </style>
 </head>
 <body>
 <div class="container">
 
-<header>
-  <h1>Wiskunde<span>.</span></h1>
-  <p>6AWWI · SO-Zenith · Examens 10-11 juni 2026</p>
+<header id="appHeader"></header>
+
+<!-- HUB VIEW -->
+<div class="view active" id="view-hub">
+  <div class="countdown" id="countdown"></div>
+  <div id="groups"></div>
+</div>
+
+<!-- SUBJECT DETAIL VIEW -->
+<div class="view" id="view-subject">
+  <button class="back-btn" onclick="goHub()">← Terug naar overzicht</button>
+  <div id="detailHeader"></div>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-  <div class="progress-label">
-    <span id="progressText">0 / 0 succescriteria</span>
-    <span id="progressPct">0%</span>
-  </div>
-  <div class="progress-bar" style="margin-top:0.75rem"><div class="progress-fill" id="exFill" style="background:linear-gradient(90deg,var(--blue),var(--purple))"></div></div>
-  <div class="progress-label">
-    <span id="exText">0 / 0 oefeningen</span>
-    <span id="exPct">0%</span>
-  </div>
-</header>
-
-<div class="countdown" id="countdown"></div>
-
-<div class="stats" id="stats"></div>
-
-<nav>
-  <button class="active" onclick="showSection('volgorde')">Leervolgorde</button>
-  <button onclick="showSection('formules')">Formules</button>
-  <button onclick="showSection('planning')">Planning</button>
-</nav>
-
-<div class="section active" id="sec-volgorde"></div>
-<div class="section" id="sec-formules"></div>
-<div class="section" id="sec-planning"></div>
+  <div class="progress-label"><span id="progressText"></span><span id="progressPct"></span></div>
+  <div class="progress-bar"><div class="progress-fill" id="exFill" style="background:linear-gradient(90deg,var(--blue),var(--purple))"></div></div>
+  <div class="progress-label"><span id="exText"></span><span id="exPct"></span></div>
+  <div class="stats" id="stats"></div>
+  <div class="game-hud" id="gameHud"></div>
+  <nav id="detailNav">
+    <button class="active" data-tab="volgorde" onclick="showSection('volgorde')">Leervolgorde</button>
+    <button data-tab="game" onclick="showSection('game')">🎮 Game</button>
+    <button data-tab="formules" onclick="showSection('formules')">Formules</button>
+    <button data-tab="planning" onclick="showSection('planning')">Planning</button>
+  </nav>
+  <div class="section active" id="sec-volgorde"></div>
+  <div class="section" id="sec-game"></div>
+  <div class="section" id="sec-formules"></div>
+  <div class="section" id="sec-planning"></div>
+</div>
 
 <footer>
-  Gustave · Wiskunde Examenplan 2026<br>
+  Gustave · Examenhub 2026<br>
   Voortgang wordt lokaal opgeslagen
 </footer>
 
@@ -520,10 +242,11 @@ footer {
 
 <script>
 // ========== DATA ==========
-const CHAPTERS = [
+const WISK_CHAPTERS = [
   // FASE 1 — LINEAIRE ALGEBRA (fundament)
   {
     id: "lin-stelsels",
+    exam: 1,
     phase: 1,
     phaseLabel: "Fase 1 — fundament",
     number: 1,
@@ -554,6 +277,7 @@ const CHAPTERS = [
   },
   {
     id: "lin-toepassingen",
+    exam: 1,
     phase: 1,
     number: 2,
     title: "Lineaire algebra — toepassingen van matrices",
@@ -580,6 +304,7 @@ const CHAPTERS = [
   },
   {
     id: "lin-inverse",
+    exam: 1,
     phase: 1,
     number: 3,
     title: "Lineaire algebra — inverse matrices",
@@ -606,6 +331,7 @@ const CHAPTERS = [
   },
   {
     id: "lin-det",
+    exam: 1,
     phase: 1,
     number: 4,
     title: "Lineaire algebra — determinanten",
@@ -642,6 +368,7 @@ const CHAPTERS = [
   // FASE 2 — ANALYSE
   {
     id: "analyse-inttech",
+    exam: 1,
     phase: 2,
     phaseLabel: "Fase 2 — analyse (zwaarste deel)",
     number: 5,
@@ -672,6 +399,7 @@ const CHAPTERS = [
   },
   {
     id: "analyse-bepaald",
+    exam: 1,
     phase: 2,
     number: 6,
     title: "Analyse — bepaalde integraal + oppervlakten",
@@ -704,6 +432,7 @@ const CHAPTERS = [
   },
   {
     id: "analyse-omw",
+    exam: 1,
     phase: 2,
     number: 7,
     title: "Analyse — omwentelingslichamen",
@@ -728,6 +457,7 @@ const CHAPTERS = [
   },
   {
     id: "analyse-boog",
+    exam: 1,
     phase: 2,
     number: 8,
     title: "Analyse — booglengte",
@@ -752,6 +482,7 @@ const CHAPTERS = [
   // FASE 3 — ZELFSTANDIGE BLOKKEN
   {
     id: "kanstheorie",
+    exam: 1,
     phase: 3,
     phaseLabel: "Fase 3 — zelfstandige blokken",
     number: 9,
@@ -787,6 +518,7 @@ const CHAPTERS = [
   },
   {
     id: "ruimtemeetkunde",
+    exam: 2,
     phase: 3,
     number: 10,
     title: "Ruimtemeetkunde",
@@ -820,6 +552,7 @@ const CHAPTERS = [
   },
   {
     id: "logica",
+    exam: 2,
     phase: 3,
     number: 11,
     title: "Logica — predicaten en kwantoren",
@@ -848,6 +581,7 @@ const CHAPTERS = [
   },
   {
     id: "alg-struct",
+    exam: 2,
     phase: 3,
     number: 12,
     title: "Algebraïsche structuren",
@@ -876,8 +610,7 @@ const CHAPTERS = [
     ]
   },
 ];
-
-const PLANNING = [
+const WISK_PLANNING = [
   { day: "Zo 31/5", tasks: ["✓ Stelsels gedaan (blok 1)", "Ruimtemeetkunde: vectorruimten + vectoren + rechten + vlakken — basis voor de toets (blok 10)"], note: "Tennis 11:00. TOETS DINSDAG!" },
   { day: "Ma 1/6", tasks: ["Ruimtemeetkunde: 5. Hoeken in de ruimte (blok 10)", "Ruimtemeetkunde: 6. Afstand in de ruimte (blok 10)", "REVIEW: hoeken + afstand oefeningen"], note: "TOETS MORGEN — volle focus ruimtemeetkunde" },
   { day: "Di 2/6", tasks: ["🧪 TOETS: Hoeken en afstand in de ruimte", "Wiskunde: toepassingen matrices (blok 2)"], note: "Na toets doorwerken" },
@@ -892,244 +625,463 @@ const PLANNING = [
   { day: "Do 11/6", tasks: ["🎯 EXAMEN Wiskunde deel 2"], note: "" },
 ];
 
+const GROUPS = {
+  wiskunde:      { name:'Wiskunde',            emoji:'📐', color:'#e8453c' },
+  wetenschappen: { name:'Wetenschappen',       emoji:'🔬', color:'#3cb06c' },
+  talen:         { name:'Talen & Mens',        emoji:'🗣️', color:'#3c8ce8' },
+};
+
+const SUBJECTS = {
+  wiskunde:       { name:'Wiskunde', emoji:'📐', color:'#e8453c', group:'wiskunde', active:true, pct:58.9,
+                    exams:[{label:'Deel 1',date:'2026-06-10'},{label:'Deel 2',date:'2026-06-11'}],
+                    chapters:WISK_CHAPTERS, planning:WISK_PLANNING },
+  chemie:         { name:'Chemie', emoji:'🧪', color:'#e8943c', group:'wetenschappen', active:false, pct:64.6,
+                    exams:[{label:'Examen',date:'2026-06-15'}], chapters:[], planning:[] },
+  fysica:         { name:'Fysica', emoji:'⚡', color:'#00b0c8', group:'wetenschappen', active:false, pct:81.6,
+                    exams:[{label:'Examen',date:'2026-06-16'}], chapters:[], planning:[] },
+  biologie:       { name:'Biologie', emoji:'🧬', color:'#3cb06c', group:'wetenschappen', active:false, pct:79.3,
+                    exams:[{label:'Examen',date:'2026-06-17'}], chapters:[], planning:[] },
+  aardrijkskunde: { name:'Aardrijkskunde', emoji:'🌍', color:'#6cb04c', group:'wetenschappen', active:false, pct:55.7,
+                    exams:[{label:'Examen',date:'2026-06-19'}], chapters:[], planning:[] },
+  frans:          { name:'Frans', emoji:'🇫🇷', color:'#9c6ce8', group:'talen', active:false, pct:81.9,
+                    exams:[{label:'Examen',date:'2026-06-12'}], chapters:[], planning:[] },
+  engels:         { name:'Engels', emoji:'🇬🇧', color:'#3c8ce8', group:'talen', active:false, pct:67.2,
+                    exams:[{label:'Examen',date:'2026-06-22'}], chapters:[], planning:[] },
+  nederlands:     { name:'Nederlands', emoji:'📖', color:'#4c7ce8', group:'talen', active:false, pct:68.3,
+                    exams:[{label:'Examen',date:'2026-06-23'}], chapters:[], planning:[] },
+  geschiedenis:   { name:'Geschiedenis', emoji:'🏛️', color:'#9c6ce8', group:'talen', active:false, pct:73.3,
+                    exams:[{label:'Examen',date:'2026-06-18'}], chapters:[], planning:[] },
+};
+
+// ========== GAME CONFIG ==========
+const XP = { criterium:10, mustDo:5, shouldDo:3, extra:1 };
+const HEAVY = { 'analyse-inttech':1.5, 'analyse-bepaald':1.5, 'ruimtemeetkunde':1.5 };
+const LEVELS = [
+  { xp:0, title:'Beginner' }, { xp:60, title:'Leerling' }, { xp:150, title:'Rekenaar' },
+  { xp:300, title:'Analist' }, { xp:480, title:'Strateeg' }, { xp:680, title:'Meester' }, { xp:900, title:'Held' },
+];
 
 // ========== STATE ==========
-let checked = JSON.parse(localStorage.getItem('wisk-checked') || '{}');
-let exChecked = JSON.parse(localStorage.getItem('wisk-ex-checked') || '{}');
+let checked = JSON.parse(localStorage.getItem('hub-checked') || localStorage.getItem('wisk-checked') || '{}');
+let exChecked = JSON.parse(localStorage.getItem('hub-ex-checked') || localStorage.getItem('wisk-ex-checked') || '{}');
+let currentSubject = null;
 
-function toggleEx(id) {
-  exChecked[id] = !exChecked[id];
-  const el = document.getElementById(id);
-  if (el) {
-    el.classList.toggle('checked', !!exChecked[id]);
-    el.textContent = exChecked[id] ? '✓' : '';
-    const txt = el.nextElementSibling;
-    if (txt) txt.classList.toggle('done', !!exChecked[id]);
+// ========== XP / LEVEL ==========
+function subjectXP(key) {
+  const s = SUBJECTS[key];
+  let xp = 0;
+  s.chapters.forEach(ch => {
+    const m = HEAVY[ch.id] || 1;
+    ch.criteria.forEach((_, i) => { if (checked[ch.id + '-' + i]) xp += XP.criterium * m; });
+    if (ch.exercises) ['mustDo','shouldDo','extra'].forEach(t =>
+      (ch.exercises[t] || []).forEach((_, j) => { if (exChecked['ex-' + ch.id + '-' + t + '-' + j]) xp += XP[t] * m; }));
+  });
+  return Math.round(xp);
+}
+function groupXP(g) {
+  return Object.keys(SUBJECTS).filter(k => SUBJECTS[k].group === g).reduce((s, k) => s + subjectXP(k), 0);
+}
+function levelInfo(xp) {
+  let idx = 0;
+  for (let i = 0; i < LEVELS.length; i++) if (xp >= LEVELS[i].xp) idx = i;
+  const cur = LEVELS[idx], next = LEVELS[idx + 1] || null;
+  const pct = next ? Math.round((xp - cur.xp) / (next.xp - cur.xp) * 100) : 100;
+  return { level: idx + 1, title: cur.title, nextXp: next ? next.xp : null, pct, xp };
+}
+
+// ========== STREAK (per group) ==========
+function getStreak(g) {
+  const s = JSON.parse(localStorage.getItem('hub-streak-' + g) || '{"count":0,"last":null}');
+  if (!s.last) return 0;
+  const today = new Date().toISOString().split('T')[0];
+  const yest = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+  return (s.last === today || s.last === yest) ? s.count : 0;
+}
+function bumpStreak(g) {
+  const today = new Date().toISOString().split('T')[0];
+  let s = JSON.parse(localStorage.getItem('hub-streak-' + g) || '{"count":0,"last":null}');
+  if (s.last === today) return;
+  const yest = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+  s.count = (s.last === yest) ? s.count + 1 : 1;
+  s.last = today;
+  localStorage.setItem('hub-streak-' + g, JSON.stringify(s));
+}
+
+// ========== BOSSES (per subject) ==========
+function subjectBosses(key) {
+  const s = SUBJECTS[key];
+  const bosses = [];
+  if (key === 'wiskunde') {
+    // mini-boss: toets hoeken & afstand
+    bosses.push({ id:'miniboss', emoji:'👾', name:'Toets: Hoeken & Afstand', type:'Mini-boss · di 2/6', mini:true });
+    // one boss per exam
+    bosses.push({ id:'exam1', emoji:'🐉', name:'Examen Deel 1', type:'Boss · wo 10/6 · lin. algebra, analyse, kans', exam:1 });
+    bosses.push({ id:'exam2', emoji:'🐙', name:'Examen Deel 2', type:'Boss · do 11/6 · ruimte, logica, alg. structuren', exam:2 });
+    return bosses;
   }
-  localStorage.setItem('wisk-ex-checked', JSON.stringify(exChecked));
-  updateProgress();
+  const phases = [...new Set(s.chapters.map(c => c.phase))].filter(p => p != null);
+  const emojis = ['🐉','🦂','🐙','👹','🦖'];
+  phases.forEach((p, i) => {
+    const lbl = s.chapters.find(c => c.phase === p && c.phaseLabel);
+    bosses.push({ id:'phase'+p, emoji:emojis[i % emojis.length], name:(lbl ? lbl.phaseLabel.replace(/^Fase \d+ — /,'') : ('Fase '+p)), type:'Boss', phase:p });
+  });
+  return bosses;
+}
+function bossStats(key, boss) {
+  const s = SUBJECTS[key];
+  let total = 0, done = 0;
+  if (boss.mini) {
+    [4,5].forEach(i => { total++; if (checked['ruimtemeetkunde-' + i]) done++; });
+    [3,4].forEach(j => { total++; if (exChecked['ex-ruimtemeetkunde-mustDo-' + j]) done++; });
+  } else {
+    const filt = boss.exam != null ? (c => c.exam === boss.exam) : (c => c.phase === boss.phase);
+    s.chapters.filter(filt).forEach(ch => {
+      ch.criteria.forEach((_, i) => { total++; if (checked[ch.id + '-' + i]) done++; });
+      if (ch.exercises) ['mustDo','shouldDo','extra'].forEach(t =>
+        (ch.exercises[t] || []).forEach((_, j) => { total++; if (exChecked['ex-' + ch.id + '-' + t + '-' + j]) done++; }));
+    });
+  }
+  const hp = total > 0 ? Math.max(0, Math.round((1 - done / total) * 100)) : 100;
+  return { hp, done, total };
 }
 
-function saveState() {
-  localStorage.setItem('wisk-checked', JSON.stringify(checked));
-  updateProgress();
+// ========== PROGRESS (per subject) ==========
+function subjectProgress(key) {
+  const s = SUBJECTS[key];
+  let cTotal=0, cDone=0, eTotal=0, eDone=0;
+  s.chapters.forEach(ch => {
+    ch.criteria.forEach((_, i) => { cTotal++; if (checked[ch.id + '-' + i]) cDone++; });
+    if (ch.exercises) ['mustDo','shouldDo','extra'].forEach(t =>
+      (ch.exercises[t] || []).forEach((_, j) => { eTotal++; if (exChecked['ex-' + ch.id + '-' + t + '-' + j]) eDone++; }));
+  });
+  return { cTotal, cDone, eTotal, eDone };
 }
+
+// ========== TOGGLES ==========
+function saveChecked() { localStorage.setItem('hub-checked', JSON.stringify(checked)); }
+function saveEx() { localStorage.setItem('hub-ex-checked', JSON.stringify(exChecked)); }
 
 function toggleCheck(id) {
   checked[id] = !checked[id];
-  const el = document.getElementById('chk-' + id);
-  const txt = document.getElementById('txt-' + id);
+  const el = document.getElementById('chk-' + id), txt = document.getElementById('txt-' + id);
   if (el) { el.classList.toggle('checked', !!checked[id]); el.textContent = checked[id] ? '✓' : ''; }
-  if (txt) { txt.classList.toggle('done', !!checked[id]); }
-  saveState();
+  if (txt) txt.classList.toggle('done', !!checked[id]);
+  if (checked[id] && currentSubject) bumpStreak(SUBJECTS[currentSubject].group);
+  saveChecked();
+  refreshDetail();
+}
+function toggleEx(id) {
+  exChecked[id] = !exChecked[id];
+  const el = document.getElementById(id);
+  if (el) { el.classList.toggle('checked', !!exChecked[id]); el.textContent = exChecked[id] ? '✓' : '';
+    const txt = el.nextElementSibling; if (txt) txt.classList.toggle('done', !!exChecked[id]); }
+  if (exChecked[id] && currentSubject) bumpStreak(SUBJECTS[currentSubject].group);
+  saveEx();
+  refreshDetail();
 }
 
-function updateProgress() {
-  let total = 0, done = 0;
-  CHAPTERS.forEach(ch => {
-    ch.criteria.forEach((_, i) => {
-      total++;
-      if (checked[ch.id + '-' + i]) done++;
-    });
-  });
-  const pct = total > 0 ? Math.round(done / total * 100) : 0;
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressText').textContent = done + ' / ' + total + ' succescriteria';
-  document.getElementById('progressPct').textContent = pct + '%';
+// ========== HUB RENDER ==========
+function renderHeader() {
+  const h = document.getElementById('appHeader');
+  if (currentSubject) { h.innerHTML = ''; return; }
+  h.innerHTML = `<h1>Examenhub<span>.</span></h1><p>Gustave · 6AWWI SO-Zenith · examens 10-23 juni 2026</p>`;
+}
 
-  // exercises (separate count)
-  let exTotal = 0, exDone = 0;
-  CHAPTERS.forEach(ch => {
-    if (!ch.exercises) return;
-    ['mustDo', 'shouldDo', 'extra'].forEach(tier => {
-      (ch.exercises[tier] || []).forEach((_, j) => {
-        exTotal++;
-        if (exChecked['ex-' + ch.id + '-' + tier + '-' + j]) exDone++;
-      });
-    });
-  });
-  const exPct = exTotal > 0 ? Math.round(exDone / exTotal * 100) : 0;
-  document.getElementById('exFill').style.width = exPct + '%';
-  document.getElementById('exText').textContent = exDone + ' / ' + exTotal + ' oefeningen';
-  document.getElementById('exPct').textContent = exPct + '%';
+function renderCountdown() {
+  const now = new Date();
+  const all = [];
+  Object.values(SUBJECTS).forEach(s => s.exams.forEach(e => all.push({ ...e, subj:s })));
+  all.sort((a,b) => a.date.localeCompare(b.date));
+  const months = ['jan','feb','mrt','apr','mei','jun'];
+  document.getElementById('countdown').innerHTML = all.map(e => {
+    const d = Math.ceil((new Date(e.date) - now) / 86400000);
+    const dt = new Date(e.date);
+    return `<div class="countdown-item" style="border-color:${d<=3?e.subj.color+'55':'var(--border)'}">
+      <div class="countdown-label">${e.subj.emoji} ${e.subj.name.slice(0,5)}</div>
+      <div class="countdown-days" style="color:${d<=3?'var(--red)':'var(--text)'}">D-${d}</div>
+      <div class="countdown-date">${dt.getDate()} ${months[dt.getMonth()]}</div>
+    </div>`;
+  }).join('');
+}
 
-  // stats
-  const totalHours = CHAPTERS.reduce((s, c) => s + c.hours, 0);
-  const doneChapters = CHAPTERS.filter(ch => ch.criteria.every((_, i) => checked[ch.id + '-' + i])).length;
+function renderGroups() {
+  const container = document.getElementById('groups');
+  let html = '';
+  Object.entries(GROUPS).forEach(([gKey, g]) => {
+    const subs = Object.keys(SUBJECTS).filter(k => SUBJECTS[k].group === gKey);
+    const xp = groupXP(gKey);
+    const lvl = levelInfo(xp);
+    const streak = getStreak(gKey);
+    html += `<div class="group">
+      <div class="group-head">
+        <div class="group-emoji">${g.emoji}</div>
+        <div class="group-info">
+          <div class="group-name">${g.name}</div>
+          <div class="group-stats">Level ${lvl.level} · ${lvl.title} · ${xp} XP</div>
+        </div>
+        <div class="group-streak">
+          <div class="group-streak-flame" style="color:${streak>=1?'var(--orange)':'var(--text3)'}">${streak>=1?'🔥':'💨'} ${streak}</div>
+          <div class="group-streak-label">streak</div>
+        </div>
+      </div>
+      <div class="group-level-bar"><div class="group-level-fill" style="width:${lvl.pct}%;background:linear-gradient(90deg,${g.color},var(--yellow))"></div></div>
+      <div class="subjects">`;
+    subs.forEach(k => {
+      const s = SUBJECTS[k];
+      const exam = s.exams[0];
+      const months = ['jan','feb','mrt','apr','mei','jun'];
+      const dt = new Date(exam.date);
+      const d = Math.ceil((new Date(exam.date) - new Date()) / 86400000);
+      if (s.active) {
+        const pr = subjectProgress(k);
+        const total = pr.cTotal + pr.eTotal, done = pr.cDone + pr.eDone;
+        const pct = total > 0 ? Math.round(done / total * 100) : 0;
+        html += `<div class="subject-chip active" onclick="openSubject('${k}')">
+          <div class="subject-chip-top"><span class="subject-chip-emoji">${s.emoji}</span><span class="subject-chip-name">${s.name}</span></div>
+          <div class="subject-chip-exam">🎯 ${dt.getDate()} ${months[dt.getMonth()]} · D-${d}</div>
+          <div class="subject-chip-bar"><div class="subject-chip-fill" style="width:${pct}%;background:${s.color}"></div></div>
+          <div class="subject-chip-pct">${pct}% · ${done}/${total}</div>
+        </div>`;
+      } else {
+        html += `<div class="subject-chip locked">
+          <span class="lock-badge">🔒</span>
+          <div class="subject-chip-top"><span class="subject-chip-emoji">${s.emoji}</span><span class="subject-chip-name">${s.name}</span></div>
+          <div class="subject-chip-exam">🎯 ${dt.getDate()} ${months[dt.getMonth()]} · D-${d}</div>
+          <div class="soon-badge">Binnenkort</div>
+        </div>`;
+      }
+    });
+    html += `</div></div>`;
+  });
+  container.innerHTML = html;
+}
+
+// ========== SUBJECT DETAIL ==========
+function openSubject(key) {
+  currentSubject = key;
+  document.getElementById('view-hub').classList.remove('active');
+  document.getElementById('view-subject').classList.add('active');
+  // reset to first tab
+  document.querySelectorAll('#detailNav button').forEach((b,i) => b.classList.toggle('active', i===0));
+  document.querySelectorAll('#view-subject .section').forEach((s,i) => s.classList.toggle('active', i===0));
+  renderHeader();
+  renderDetail();
+  window.scrollTo(0,0);
+}
+function goHub() {
+  currentSubject = null;
+  document.getElementById('view-subject').classList.remove('active');
+  document.getElementById('view-hub').classList.add('active');
+  renderHeader();
+  renderHub();
+  window.scrollTo(0,0);
+}
+function refreshDetail() {
+  if (!currentSubject) return;
+  renderDetailHeader();
+  renderHud();
+  renderGame();
+  // re-render hub-in-background not needed until goHub
+}
+
+function renderDetailHeader() {
+  const key = currentSubject, s = SUBJECTS[key];
+  const pr = subjectProgress(key);
+  const cPct = pr.cTotal ? Math.round(pr.cDone/pr.cTotal*100) : 0;
+  const ePct = pr.eTotal ? Math.round(pr.eDone/pr.eTotal*100) : 0;
+  document.getElementById('detailHeader').innerHTML =
+    `<div class="detail-title">${s.emoji} ${s.name}</div><div class="detail-sub">${s.pct}% vorig jaar · ${s.chapters.length} blokken</div>`;
+  document.getElementById('progressFill').style.width = cPct + '%';
+  document.getElementById('progressFill').style.background = 'linear-gradient(90deg,'+s.color+',var(--orange))';
+  document.getElementById('progressText').textContent = pr.cDone + ' / ' + pr.cTotal + ' succescriteria';
+  document.getElementById('progressPct').textContent = cPct + '%';
+  document.getElementById('exFill').style.width = ePct + '%';
+  document.getElementById('exText').textContent = pr.eDone + ' / ' + pr.eTotal + ' oefeningen';
+  document.getElementById('exPct').textContent = ePct + '%';
+  const totalHours = s.chapters.reduce((a,c) => a + (c.hours||0), 0);
+  const doneChapters = s.chapters.filter(ch => ch.criteria.every((_, i) => checked[ch.id + '-' + i])).length;
   document.getElementById('stats').innerHTML = `
-    <div class="stat"><div class="stat-number">${CHAPTERS.length}</div><div class="stat-label">Blokken</div></div>
+    <div class="stat"><div class="stat-number">${s.chapters.length}</div><div class="stat-label">Blokken</div></div>
     <div class="stat"><div class="stat-number">${doneChapters}</div><div class="stat-label">Afgerond</div></div>
-    <div class="stat"><div class="stat-number">${exDone}/${exTotal}</div><div class="stat-label">Oefeningen</div></div>
-    <div class="stat"><div class="stat-number">${totalHours}u</div><div class="stat-label">Studie</div></div>
-  `;
+    <div class="stat"><div class="stat-number">${pr.eDone}/${pr.eTotal}</div><div class="stat-label">Oefeningen</div></div>
+    <div class="stat"><div class="stat-number">${totalHours}u</div><div class="stat-label">Studie</div></div>`;
 }
 
+function renderHud() {
+  const key = currentSubject, s = SUBJECTS[key], g = s.group;
+  const xp = groupXP(g), lvl = levelInfo(xp), streak = getStreak(g);
+  document.getElementById('gameHud').innerHTML = `
+    <div class="hud-card"><div class="hud-icon">⭐</div><div class="hud-body">
+      <div class="hud-top"><span class="hud-title">Level ${lvl.level}</span><span class="hud-sub">${GROUPS[g].name}</span></div>
+      <div class="hud-mini-bar"><div class="hud-mini-fill" style="width:${lvl.pct}%;background:linear-gradient(90deg,var(--yellow),var(--orange))"></div></div>
+      <div class="hud-sub" style="margin-top:3px">${xp} XP${lvl.nextXp?' · nog '+(lvl.nextXp-xp)+' tot lvl '+(lvl.level+1):' · MAX'}</div>
+    </div></div>
+    <div class="hud-card"><div class="hud-icon">${streak>=7?'🔥🔥':streak>=1?'🔥':'💨'}</div><div class="hud-body">
+      <div class="hud-top"><span class="hud-title">Streak</span><span class="hud-sub">${GROUPS[g].name}</span></div>
+      <div class="streak-flame" style="color:${streak>=1?'var(--orange)':'var(--text3)'}">${streak}</div>
+    </div></div>`;
+}
 
-// ========== RENDER ==========
+function renderDetail() {
+  renderDetailHeader();
+  renderHud();
+  renderChapters();
+  renderGame();
+  renderFormulas();
+  renderPlanning();
+}
+
 function renderChapters() {
+  const s = SUBJECTS[currentSubject];
   const container = document.getElementById('sec-volgorde');
-  let html = '<button class="reset-btn" onclick="resetProgress()">↺ Reset voortgang</button>';
-  let currentPhase = 0;
-
-  CHAPTERS.forEach(ch => {
-    if (ch.phase !== currentPhase) {
-      currentPhase = ch.phase;
-      const phaseClass = 'phase-' + ch.phase;
-      const label = ch.phaseLabel || '';
-      if (label) html += `<div class="phase ${phaseClass}">${label}</div>`;
+  if (!s.chapters.length) { container.innerHTML = emptyState('Nog geen leerstof toegevoegd voor dit vak.'); return; }
+  let html = '<button class="reset-btn" onclick="resetSubject()">↺ Reset voortgang</button>';
+  let currentPhase = 0, currentExam = 0;
+  s.chapters.forEach(ch => {
+    if (ch.exam && ch.exam !== currentExam) {
+      currentExam = ch.exam;
+      const examInfo = currentExam === 1
+        ? { d:'wo 10/6', desc:'Lineaire algebra · Analyse · Kanstheorie' }
+        : { d:'do 11/6', desc:'Ruimtemeetkunde · Logica · Algebraïsche structuren' };
+      html += `<div class="exam-banner">
+        <div class="exam-banner-title">🎯 Examen Deel ${currentExam} <span>${examInfo.d}</span></div>
+        <div class="exam-banner-desc">${examInfo.desc}</div>
+      </div>`;
+      currentPhase = 0; // reset phase labels within each exam block
     }
-
+    if (ch.phaseLabel && ch.phase !== currentPhase) {
+      currentPhase = ch.phase;
+      html += `<div class="phase phase-${ch.phase}">${ch.phaseLabel}</div>`;
+    }
     const allDone = ch.criteria.every((_, i) => checked[ch.id + '-' + i]);
-
-    html += `<div class="chapter ${allDone ? 'completed' : ''}" id="ch-${ch.id}">
+    html += `<div class="chapter ${allDone?'completed':''}" id="ch-${ch.id}">
       <div class="chapter-header" onclick="toggleChapter('${ch.id}')">
         <div class="chapter-number" style="background:${ch.color}22;color:${ch.color}">${ch.number}</div>
-        <div class="chapter-info">
-          <div class="chapter-title">${ch.title}</div>
-          <div class="chapter-meta">${ch.pages} · ${ch.hours}u · ${ch.criteria.length} criteria</div>
-        </div>
+        <div class="chapter-info"><div class="chapter-title">${ch.title}</div>
+          <div class="chapter-meta">${ch.pages} · ${ch.hours}u · ${ch.criteria.length} criteria</div></div>
         <div class="chapter-toggle">▼</div>
-      </div>
-      <div class="chapter-body">
-        <div class="chapter-content">`;
-
+      </div><div class="chapter-body"><div class="chapter-content">`;
     ch.criteria.forEach((c, i) => {
-      const cid = ch.id + '-' + i;
-      const isDone = !!checked[cid];
+      const cid = ch.id + '-' + i, done = !!checked[cid];
       html += `<div class="criteria-item">
-        <div class="criteria-check ${isDone ? 'checked' : ''}" id="chk-${cid}" onclick="event.stopPropagation();toggleCheck('${cid}')">${isDone ? '✓' : ''}</div>
-        <span class="criteria-text ${isDone ? 'done' : ''}" id="txt-${cid}">${c}</span>
-      </div>`;
+        <div class="criteria-check ${done?'checked':''}" id="chk-${cid}" onclick="event.stopPropagation();toggleCheck('${cid}')">${done?'✓':''}</div>
+        <span class="criteria-text ${done?'done':''}" id="txt-${cid}">${c}</span></div>`;
     });
-
     if (ch.exercises) {
-      const tiers = [
-        { key: 'mustDo', label: 'Must-do', color: 'var(--red)' },
-        { key: 'shouldDo', label: 'Should-do', color: 'var(--orange)' },
-        { key: 'extra', label: 'Extra', color: 'var(--text3)' },
-      ];
+      const tiers = [{key:'mustDo',label:'Must-do',color:'var(--red)'},{key:'shouldDo',label:'Should-do',color:'var(--orange)'},{key:'extra',label:'Extra',color:'var(--text3)'}];
       html += `<div class="exercises"><strong>Oefeningen</strong>`;
       tiers.forEach(tier => {
         const list = ch.exercises[tier.key] || [];
-        if (list.length === 0) return;
+        if (!list.length) return;
         html += `<div class="ex-tier"><div class="ex-tier-label" style="color:${tier.color}">${tier.label}</div>`;
         list.forEach((ex, j) => {
-          const exid = 'ex-' + ch.id + '-' + tier.key + '-' + j;
-          const exDone = !!exChecked[exid];
-          html += `<div class="ex-item">
-            <div class="ex-check ${exDone ? 'checked' : ''}" id="${exid}" onclick="event.stopPropagation();toggleEx('${exid}')">${exDone ? '✓' : ''}</div>
-            <span class="ex-text ${exDone ? 'done' : ''}">${ex}</span>
-          </div>`;
+          const exid = 'ex-' + ch.id + '-' + tier.key + '-' + j, done = !!exChecked[exid];
+          html += `<div class="ex-item"><div class="ex-check ${done?'checked':''}" id="${exid}" onclick="event.stopPropagation();toggleEx('${exid}')">${done?'✓':''}</div><span class="ex-text ${done?'done':''}">${ex}</span></div>`;
         });
         html += `</div>`;
       });
       html += `</div>`;
     }
-    if (ch.tip) {
-      html += `<div class="tip">💡 ${ch.tip}</div>`;
-    }
-    if (ch.jarvis) {
-      html += `<div class="jarvis" onclick="copyJarvis(this, \`${ch.jarvis.replace(/`/g, "'")}\`)">🤖 Jarvis: "${ch.jarvis}"</div>`;
-    }
-
+    if (ch.tip) html += `<div class="tip">💡 ${ch.tip}</div>`;
+    if (ch.jarvis) html += `<div class="jarvis" onclick="copyJarvis(this, \`${ch.jarvis.replace(/`/g,"'")}\`)">🤖 Jarvis: "${ch.jarvis}"</div>`;
     html += `</div></div></div>`;
   });
-
   container.innerHTML = html;
 }
 
 function renderFormulas() {
+  const s = SUBJECTS[currentSubject];
   const container = document.getElementById('sec-formules');
+  const withF = s.chapters.filter(ch => ch.formulas && ch.formulas.length);
+  if (!withF.length) { container.innerHTML = emptyState('Nog geen formules toegevoegd voor dit vak.'); return; }
   let html = '';
-  CHAPTERS.forEach(ch => {
-    if (!ch.formulas || ch.formulas.length === 0) return;
-    html += `<div class="formula-card">
-      <h3><span class="dot" style="background:${ch.color}"></span>${ch.title}</h3>`;
-    ch.formulas.forEach(f => {
-      html += `<div class="formula-item"><span class="formula-name">${f.name}:</span> ${f.formula}</div>`;
-    });
+  withF.forEach(ch => {
+    html += `<div class="formula-card"><h3><span class="dot" style="background:${ch.color}"></span>${ch.title}</h3>`;
+    ch.formulas.forEach(f => html += `<div class="formula-item"><span class="formula-name">${f.name}:</span> ${f.formula}</div>`);
     html += `</div>`;
   });
   container.innerHTML = html;
 }
 
 function renderPlanning() {
+  const s = SUBJECTS[currentSubject];
   const container = document.getElementById('sec-planning');
+  if (!s.planning || !s.planning.length) { container.innerHTML = emptyState('Nog geen planning toegevoegd voor dit vak.'); return; }
   let html = '';
-  PLANNING.forEach(p => {
+  s.planning.forEach(p => {
     const isExam = p.tasks.some(t => t.includes('EXAMEN'));
-    html += `<div class="day-card" style="${isExam ? 'border-color:var(--red);background:var(--redBg)' : ''}">
-      <h3>${p.day} ${p.note ? '<span class="day-date">' + p.note + '</span>' : ''}</h3>
+    html += `<div class="day-card" style="${isExam?'border-color:var(--red);background:var(--redBg)':''}">
+      <h3>${p.day} ${p.note?'<span class="day-date">'+p.note+'</span>':''}</h3>
       <div class="day-tasks">${p.tasks.map(t => {
-        let color = '#666';
-        if (t.includes('EXAMEN') || t.includes('TOETS')) color = 'var(--red)';
-        else if (t.includes('REVIEW') || t.includes('FINALE')) color = 'var(--orange)';
-        else if (t.includes('Alg')) color = 'var(--blue)';
-        return `<div style="color:${color}">→ ${t}</div>`;
-      }).join('')}</div>
-    </div>`;
+        let c = '#888';
+        if (t.includes('EXAMEN')||t.includes('TOETS')) c='var(--red)';
+        else if (t.includes('REVIEW')||t.includes('FINALE')) c='var(--orange)';
+        else if (t.startsWith('✓')) c='var(--green)';
+        return `<div style="color:${c}">→ ${t}</div>`;
+      }).join('')}</div></div>`;
   });
   container.innerHTML = html;
 }
 
-function renderCountdown() {
-  const now = new Date();
-  const exams = [
-    { label: "Deel 1", date: new Date("2026-06-10"), color: "var(--red)" },
-    { label: "Deel 2", date: new Date("2026-06-11"), color: "var(--red)" },
-    { label: "Toets hoeken/afst.", date: new Date("2026-06-02"), color: "var(--blue)" },
-  ];
-  const container = document.getElementById('countdown');
-  container.innerHTML = exams.map(e => {
-    const diff = Math.ceil((e.date - now) / 86400000);
-    const months = ['jan','feb','mrt','apr','mei','jun'];
-    return `<div class="countdown-item" style="border-color:${e.color}30">
-      <div class="countdown-label">${e.label}</div>
-      <div class="countdown-days" style="color:${diff <= 3 ? 'var(--red)' : 'var(--text)'}">D-${diff}</div>
-      <div class="countdown-date">${e.date.getDate()} ${months[e.date.getMonth()]}</div>
-    </div>`;
-  }).join('');
+function renderGame() {
+  const key = currentSubject, s = SUBJECTS[key], g = s.group;
+  const container = document.getElementById('sec-game');
+  const xp = groupXP(g), lvl = levelInfo(xp), streak = getStreak(g);
+  let html = `<div class="game-intro">XP en streak gelden voor de hele groep <strong>${GROUPS[g].name}</strong>. Versla de bosses van dit vak door hun HP naar 0 te brengen.</div>`;
+  html += `<div class="level-card"><div class="level-badge">${lvl.level}</div><div class="level-title">${lvl.title} — ${GROUPS[g].name}</div>
+    <div class="level-xp">${xp} XP totaal</div><div class="level-bar"><div class="level-fill" style="width:${lvl.pct}%"></div></div>
+    <div class="level-next">${lvl.nextXp?'Nog '+(lvl.nextXp-xp)+' XP tot level '+(lvl.level+1):'Maximaal level! 🏆'}</div></div>`;
+  html += `<div class="hud-card" style="margin-bottom:1rem"><div class="hud-icon">${streak>=1?'🔥':'💨'}</div><div class="hud-body">
+    <div class="hud-top"><span class="hud-title">${streak} dag${streak===1?'':'en'} op rij</span></div>
+    <div class="hud-sub">${streak===0?'Vink vandaag iets af om te starten!':streak>=7?'On fire! 🔥':'Mooi bezig — niet onderbreken!'}</div></div></div>`;
+  if (s.chapters.length) {
+    html += `<div class="section-heading">Boss battles</div>`;
+    subjectBosses(key).forEach(boss => {
+      const st = bossStats(key, boss), defeated = st.hp === 0;
+      const hpClass = st.hp <= 30 ? 'low' : st.hp <= 65 ? 'mid' : '';
+      html += `<div class="boss ${defeated?'defeated':''}">
+        <div class="boss-top"><div class="boss-emoji">${defeated?'🏆':boss.emoji}</div>
+          <div class="boss-info"><div class="boss-name">${boss.name}</div><div class="boss-type">${boss.type}</div></div>
+          <div class="boss-hp-label" style="color:${defeated?'var(--green)':'var(--text2)'}">${defeated?'VERSLAGEN':'HP '+st.hp+'%'}</div></div>
+        ${defeated?'':`<div class="hp-bar"><div class="hp-fill ${hpClass}" style="width:${st.hp}%"></div></div>`}
+        ${defeated?`<div class="boss-defeated-label">✓ Verslagen — ${st.done}/${st.total} voltooid</div>`:`<div class="boss-meta">${st.done}/${st.total} taken · nog ${st.total-st.done} te gaan</div>`}
+      </div>`;
+    });
+  }
+  html += `<div class="section-heading">Hoe verdien je XP?</div><div class="rules-card">
+    <strong>Per actie:</strong><br>Succescriterium — <span class="xp-pill">+10 XP</span><br>Must-do oefening — <span class="xp-pill">+5 XP</span><br>
+    Should-do — <span class="xp-pill">+3 XP</span><br>Extra — <span class="xp-pill">+1 XP</span><br><br>
+    <strong>Bonus:</strong> de zwaarste blokken geven <span class="xp-pill">×1.5 XP</span>.</div>`;
+  container.innerHTML = html;
 }
 
+function emptyState(msg) {
+  return `<div class="empty-state"><div class="big">🚧</div>${msg}<br><span style="font-size:0.75rem">De structuur staat klaar — leerstof kan later toegevoegd worden.</span></div>`;
+}
 
 // ========== INTERACTIONS ==========
-function toggleChapter(id) {
-  const el = document.getElementById('ch-' + id);
-  el.classList.toggle('open');
-}
-
+function toggleChapter(id) { document.getElementById('ch-' + id).classList.toggle('open'); }
 function showSection(name) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('#view-subject .section').forEach(s => s.classList.remove('active'));
   document.getElementById('sec-' + name).classList.add('active');
-  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  document.querySelectorAll('#detailNav button').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
 }
-
-function copyJarvis(el, text) {
-  navigator.clipboard.writeText(text).then(() => {
-    el.classList.add('copied');
-    setTimeout(() => el.classList.remove('copied'), 2000);
+function copyJarvis(el, text) { navigator.clipboard.writeText(text).then(() => { el.classList.add('copied'); setTimeout(() => el.classList.remove('copied'), 2000); }); }
+function resetSubject() {
+  const s = SUBJECTS[currentSubject];
+  if (!confirm('Voortgang van ' + s.name + ' resetten? (criteria én oefeningen)')) return;
+  s.chapters.forEach(ch => {
+    ch.criteria.forEach((_, i) => delete checked[ch.id + '-' + i]);
+    if (ch.exercises) ['mustDo','shouldDo','extra'].forEach(t => (ch.exercises[t]||[]).forEach((_, j) => delete exChecked['ex-' + ch.id + '-' + t + '-' + j]));
   });
+  saveChecked(); saveEx();
+  renderDetail();
 }
 
-function resetProgress() {
-  if (confirm('Weet je zeker dat je alle voortgang wilt resetten? (criteria én oefeningen)')) {
-    checked = {};
-    exChecked = {};
-    localStorage.removeItem('wisk-checked');
-    localStorage.removeItem('wisk-ex-checked');
-    renderChapters();
-    updateProgress();
-  }
-}
-
+function renderHub() { renderHeader(); renderCountdown(); renderGroups(); }
 
 // ========== INIT ==========
-renderChapters();
-renderFormulas();
-renderPlanning();
-renderCountdown();
-updateProgress();
+renderHub();
 </script>
 </body>
 </html>
