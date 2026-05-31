@@ -269,6 +269,46 @@ nav button:hover:not(.active) { color: var(--text2); }
   line-height: 1.7;
 }
 .exercises strong { color: var(--text); font-weight: 500; }
+.ex-tier { margin-top: 0.6rem; }
+.ex-tier-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+.ex-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.2rem 0;
+  font-size: 0.8rem;
+  color: var(--text2);
+}
+.ex-check {
+  width: 17px;
+  height: 17px;
+  border-radius: 4px;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  transition: all 0.2s;
+  background: transparent;
+  color: transparent;
+}
+.ex-check:hover { border-color: var(--text3); }
+.ex-check.checked {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+.ex-text { font-family: var(--mono); font-size: 0.75rem; }
+.ex-text.done { text-decoration: line-through; color: var(--text3); }
 
 .tip {
   margin-top: 0.75rem;
@@ -450,6 +490,11 @@ footer {
     <span id="progressText">0 / 0 succescriteria</span>
     <span id="progressPct">0%</span>
   </div>
+  <div class="progress-bar" style="margin-top:0.75rem"><div class="progress-fill" id="exFill" style="background:linear-gradient(90deg,var(--blue),var(--purple))"></div></div>
+  <div class="progress-label">
+    <span id="exText">0 / 0 oefeningen</span>
+    <span id="exPct">0%</span>
+  </div>
 </header>
 
 <div class="countdown" id="countdown"></div>
@@ -490,7 +535,11 @@ const CHAPTERS = [
       "Ik bepaal de oplossingenverzameling van een stelsel met de methode van Gauss-Jordan.",
       "Ik bepaal de rang van een matrix met de methode van Gauss-Jordan."
     ],
-    exercises: "Must-do: p.39: 6B · p.61-63: 6D t.e.m. 6K + OVT",
+    exercises: {
+      mustDo: ["p.39: 6B", "p.61: 6D", "p.61: 6E", "p.62: 6F", "p.62: 6G", "p.62: 6H", "p.63: 6I", "p.63: 6J", "p.63: 6K"],
+      shouldDo: [],
+      extra: ["OVT (oefen voor de toets)"]
+    },
     tip: "Gauss-Jordan is de basis voor ALLES. Oefen tot het automatisch gaat.",
     jarvis: "Geef me 3 stelsels van 3 vergelijkingen met 3 onbekenden. Laat me ze oplossen met Gauss-Jordan en controleer mijn antwoorden stap voor stap.",
     formulas: [
@@ -516,7 +565,11 @@ const CHAPTERS = [
       "Ik modelleer een populatieprobleem met Lesliematrices en bereken de populatievector na k stappen.",
       "Ik stel een verbindingsmatrix op van een graaf en bepaal graad, k-stapsverbindingen en diameter."
     ],
-    exercises: "Must-do: p.47-53 (A's) + p.64-73 (B-G) + OVT",
+    exercises: {
+      mustDo: ["p.47-53: A-oef Markov", "p.47-53: A-oef Leslie", "p.47-53: A-oef verbindingsmatrices"],
+      shouldDo: ["p.64-73: B", "p.64-73: C", "p.64-73: D", "p.64-73: E", "p.64-73: F", "p.64-73: G"],
+      extra: ["OVT"]
+    },
     tip: "Bij Markovketens: kolomsommen = 1. Bij Leslie: eerste rij = geboorte, subdiagonaal = overleving.",
     jarvis: "Leg Markovketens uit met een concreet voorbeeld. Geef me dan een oefening met een overgangsmatrix van 3 toestanden.",
     formulas: [
@@ -538,7 +591,11 @@ const CHAPTERS = [
       "Ik bereken de inverse van een matrix met de TI-84.",
       "Ik bewijs de uniciteit van de inverse van een matrix."
     ],
-    exercises: "Must-do: p.83: 1A · p.120: 1B, 1C + OVT",
+    exercises: {
+      mustDo: ["p.83: 1A", "p.120: 1B", "p.120: 1C"],
+      shouldDo: [],
+      extra: ["OVT"]
+    },
     tip: "Zet [A|I] op en doe Gauss-Jordan. Als links I wordt, staat rechts A⁻¹. Gaat niet? → A is singulier.",
     jarvis: "Geef me een 3×3 matrix en laat me stap voor stap de inverse berekenen met Gauss-Jordan. Controleer elke stap.",
     formulas: [
@@ -564,7 +621,11 @@ const CHAPTERS = [
       "Ik pas sesquilineariteitseigenschappen toe (factor uit rij/kolom halen, rijen optellen).",
       "Ik pas de productregel toe: det(A·B) = det(A) · det(B)."
     ],
-    exercises: "Must-do: p.89-99 (A's) + p.121-125 (B-E) + OVT",
+    exercises: {
+      mustDo: ["p.89-99: A-oef Sarrus", "p.89-99: A-oef cofactoren", "p.89-99: A-oef eigenschappen"],
+      shouldDo: ["p.121: B", "p.122: C", "p.124: D", "p.125: E"],
+      extra: ["OVT"]
+    },
     tip: "Veel eigenschappen! Maak een overzichtskaartje: 7 eigenschappen op 1 A4.",
     jarvis: "Geef me 5 oefeningen over determinanten: 2 met Sarrus, 2 met cofactoren, 1 met eigenschappen toepassen.",
     formulas: [
@@ -594,7 +655,11 @@ const CHAPTERS = [
       "Ik bereken een onbepaalde integraal door substitutie.",
       "Ik bereken een onbepaalde integraal door partiële integratie."
     ],
-    exercises: "Per techniek: alle A-oefeningen + B-F · OVT niet vergeten!",
+    exercises: {
+      mustDo: ["A-oef onmiddellijke integratie", "A-oef substitutie", "A-oef partiële integratie"],
+      shouldDo: ["B-oef alle technieken", "C-oef alle technieken", "D-oef alle technieken", "E-oef alle technieken", "F-oef alle technieken"],
+      extra: ["OVT"]
+    },
     tip: "Leer de technieken apart: eerst onmiddellijk, dan substitutie, dan partieel. Mix pas als je elk apart beheerst.",
     jarvis: "Geef me 3 integralen die ik moet oplossen met substitutie. Geef hints als ik vastzit, geen directe antwoorden.",
     formulas: [
@@ -622,7 +687,11 @@ const CHAPTERS = [
       "Ik bereken de oppervlakte tussen een grafiek en de x-as.",
       "Ik bereken de oppervlakte tussen twee grafieken."
     ],
-    exercises: "Alle A-oefeningen + OVT · Bewijzen actief herschrijven!",
+    exercises: {
+      mustDo: ["A-oef ondersommen/bovensommen", "A-oef oppervlakte x-as", "A-oef oppervlakte tussen 2 curves", "Bewijzen 3x overschrijven uit het hoofd"],
+      shouldDo: [],
+      extra: ["OVT"]
+    },
     tip: "3 stellingen met bewijs! Schrijf ze 3x over uit het hoofd. Dat is de beste manier om ze te leren.",
     jarvis: "Leg de hoofdstelling van de integraalrekening uit in eenvoudige taal. Vraag me daarna om het bewijs te reproduceren en geef feedback.",
     formulas: [
@@ -644,7 +713,11 @@ const CHAPTERS = [
     criteria: [
       "Ik bereken de inhoud van een omwentelingslichaam algebraïsch."
     ],
-    exercises: "p.101: 2A · p.110-111: 2B-2D + OVT",
+    exercises: {
+      mustDo: ["p.101: 2A", "p.110: 2B", "p.110: 2C", "p.111: 2D"],
+      shouldDo: [],
+      extra: ["OVT"]
+    },
     tip: "De formule is vrij simpel — het gaat vooral om correct integreren.",
     jarvis: "Geef me 2 oefeningen over omwentelingslichamen: één rond de x-as en één rond de y-as.",
     formulas: [
@@ -664,7 +737,11 @@ const CHAPTERS = [
     criteria: [
       "Ik bereken de booglengte van een curve algebraïsch."
     ],
-    exercises: "p.107: 4A · p.117-118: 4B-4F + OVT",
+    exercises: {
+      mustDo: ["p.107: 4A", "p.117: 4B", "p.117: 4C", "p.118: 4D", "p.118: 4E", "p.118: 4F"],
+      shouldDo: [],
+      extra: ["OVT"]
+    },
     tip: "Eén formule — de moeilijkheid zit in het integreren van de wortel.",
     jarvis: "Geef me 2 oefeningen over booglengte met verschillende functies. Laat me de integraal opzetten.",
     formulas: [
@@ -691,7 +768,11 @@ const CHAPTERS = [
       "Ik formuleer en pas de wet van de totale kans toe.",
       "Ik formuleer en pas de regel van Bayes toe."
     ],
-    exercises: "Per onderdeel alle A-oefeningen + B-reeks + OVT",
+    exercises: {
+      mustDo: ["A-oef 1. Emp/theor kans", "A-oef 2. Laplace", "A-oef 3. Kansbomen", "A-oef 4. Kruistabellen", "A-oef 5. Onafhankelijkheid", "A-oef 6. Totale kans", "A-oef 7. Bayes"],
+      shouldDo: ["B-reeks kanstheorie"],
+      extra: ["OVT"]
+    },
     tip: "1-3 is basis, 4-5 medium, 6-7 moeilijkst. Besteed extra tijd aan Bayes — dat is vaak het examenvraagstuk.",
     jarvis: "Geef me een probleem over de regel van Bayes met een medische test (vals positief/negatief). Begeleid me stap voor stap.",
     formulas: [
@@ -720,7 +801,11 @@ const CHAPTERS = [
       "Ik bereken hoeken: vector-vector, rechte-rechte, vlak-vlak, rechte-vlak.",
       "Ik bereken afstanden: punt-punt, punt-rechte, punt-vlak, rechte-vlak, vlak-vlak, rechte-rechte."
     ],
-    exercises: "Per type vergelijking/berekening: minstens 2 oefeningen. A + B-reeks + OVT",
+    exercises: {
+      mustDo: ["A-oef vectoren + norm", "A-oef rechten", "A-oef vlakken", "A-oef hoeken", "A-oef afstanden"],
+      shouldDo: ["B-reeks rechten/vlakken", "B-reeks hoeken/afstanden"],
+      extra: ["OVT"]
+    },
     tip: "Veel types! Maak een overzicht: welke formule voor welk type vraag. Print het uit en hang het boven je bureau.",
     jarvis: "Geef me een oefening over de afstand van een punt tot een vlak in R³. Laat me de formule toepassen en controleer.",
     formulas: [
@@ -747,7 +832,11 @@ const CHAPTERS = [
       "Ik bepaal de waarheidswaarde van uitspraken met kwantoren, inclusief de negatiestelling.",
       "Ik respecteer de volgorde van kwantoren in samengestelde uitspraken."
     ],
-    exercises: "p.21-25 (A's) + p.36-39 (D-E) + OVT",
+    exercises: {
+      mustDo: ["p.21-25: A-oef predicaten", "p.21-25: A-oef kwantoren"],
+      shouldDo: ["p.36: D", "p.39: E"],
+      extra: ["OVT"]
+    },
     tip: "Negatiestelling: ¬∀ = ∃¬ en ¬∃ = ∀¬. Onthoud dit als een wip: de kwantor flipt, de uitspraak wordt ontkend.",
     jarvis: "Geef me 5 uitspraken met kwantoren. Laat me de negatie geven en de waarheidswaarde bepalen.",
     formulas: [
@@ -772,7 +861,11 @@ const CHAPTERS = [
       "Ik stel een Cayley-tabel op en check groepseigenschappen voor eindige verzamelingen.",
       "Ik bepaal de symmetriegroep van een meetkundig figuur en bewijs dat het een groep is."
     ],
-    exercises: "Must-do: 7A,7B(p.59) · 8A(p.61) · 9A,9B(p.63) · 10A,10B(p.65) · 11A(p.67)\nShould-do: 7C-7E · 8B · 9C-9G · 10C-10E · 11B",
+    exercises: {
+      mustDo: ["p.59: 7A", "p.59: 7B", "p.61: 8A", "p.63: 9A", "p.63: 9B", "p.65: 10A", "p.65: 10B", "p.67: 11A"],
+      shouldDo: ["7C", "7D", "7E", "8B", "9C", "9D", "9E", "9F", "9G", "10C", "10D", "10E", "11B"],
+      extra: ["OVT"]
+    },
     tip: "Centraal concept: de 4 groepseigenschappen. Alles is een variatie daarop.",
     jarvis: "Quiz me over algebraïsche structuren: groepen, Zn, Cayley-tabellen, symmetriegroepen. 8 vragen, geef feedback.",
     formulas: [
@@ -802,6 +895,20 @@ const PLANNING = [
 
 // ========== STATE ==========
 let checked = JSON.parse(localStorage.getItem('wisk-checked') || '{}');
+let exChecked = JSON.parse(localStorage.getItem('wisk-ex-checked') || '{}');
+
+function toggleEx(id) {
+  exChecked[id] = !exChecked[id];
+  const el = document.getElementById(id);
+  if (el) {
+    el.classList.toggle('checked', !!exChecked[id]);
+    el.textContent = exChecked[id] ? '✓' : '';
+    const txt = el.nextElementSibling;
+    if (txt) txt.classList.toggle('done', !!exChecked[id]);
+  }
+  localStorage.setItem('wisk-ex-checked', JSON.stringify(exChecked));
+  updateProgress();
+}
 
 function saveState() {
   localStorage.setItem('wisk-checked', JSON.stringify(checked));
@@ -830,13 +937,29 @@ function updateProgress() {
   document.getElementById('progressText').textContent = done + ' / ' + total + ' succescriteria';
   document.getElementById('progressPct').textContent = pct + '%';
 
+  // exercises (separate count)
+  let exTotal = 0, exDone = 0;
+  CHAPTERS.forEach(ch => {
+    if (!ch.exercises) return;
+    ['mustDo', 'shouldDo', 'extra'].forEach(tier => {
+      (ch.exercises[tier] || []).forEach((_, j) => {
+        exTotal++;
+        if (exChecked['ex-' + ch.id + '-' + tier + '-' + j]) exDone++;
+      });
+    });
+  });
+  const exPct = exTotal > 0 ? Math.round(exDone / exTotal * 100) : 0;
+  document.getElementById('exFill').style.width = exPct + '%';
+  document.getElementById('exText').textContent = exDone + ' / ' + exTotal + ' oefeningen';
+  document.getElementById('exPct').textContent = exPct + '%';
+
   // stats
   const totalHours = CHAPTERS.reduce((s, c) => s + c.hours, 0);
   const doneChapters = CHAPTERS.filter(ch => ch.criteria.every((_, i) => checked[ch.id + '-' + i])).length;
   document.getElementById('stats').innerHTML = `
     <div class="stat"><div class="stat-number">${CHAPTERS.length}</div><div class="stat-label">Blokken</div></div>
     <div class="stat"><div class="stat-number">${doneChapters}</div><div class="stat-label">Afgerond</div></div>
-    <div class="stat"><div class="stat-number">${total}</div><div class="stat-label">Criteria</div></div>
+    <div class="stat"><div class="stat-number">${exDone}/${exTotal}</div><div class="stat-label">Oefeningen</div></div>
     <div class="stat"><div class="stat-number">${totalHours}u</div><div class="stat-label">Studie</div></div>
   `;
 }
@@ -880,7 +1003,27 @@ function renderChapters() {
     });
 
     if (ch.exercises) {
-      html += `<div class="exercises"><strong>Oefeningen:</strong> ${ch.exercises.replace(/\n/g, '<br>')}</div>`;
+      const tiers = [
+        { key: 'mustDo', label: 'Must-do', color: 'var(--red)' },
+        { key: 'shouldDo', label: 'Should-do', color: 'var(--orange)' },
+        { key: 'extra', label: 'Extra', color: 'var(--text3)' },
+      ];
+      html += `<div class="exercises"><strong>Oefeningen</strong>`;
+      tiers.forEach(tier => {
+        const list = ch.exercises[tier.key] || [];
+        if (list.length === 0) return;
+        html += `<div class="ex-tier"><div class="ex-tier-label" style="color:${tier.color}">${tier.label}</div>`;
+        list.forEach((ex, j) => {
+          const exid = 'ex-' + ch.id + '-' + tier.key + '-' + j;
+          const exDone = !!exChecked[exid];
+          html += `<div class="ex-item">
+            <div class="ex-check ${exDone ? 'checked' : ''}" id="${exid}" onclick="event.stopPropagation();toggleEx('${exid}')">${exDone ? '✓' : ''}</div>
+            <span class="ex-text ${exDone ? 'done' : ''}">${ex}</span>
+          </div>`;
+        });
+        html += `</div>`;
+      });
+      html += `</div>`;
     }
     if (ch.tip) {
       html += `<div class="tip">💡 ${ch.tip}</div>`;
@@ -970,9 +1113,11 @@ function copyJarvis(el, text) {
 }
 
 function resetProgress() {
-  if (confirm('Weet je zeker dat je alle voortgang wilt resetten?')) {
+  if (confirm('Weet je zeker dat je alle voortgang wilt resetten? (criteria én oefeningen)')) {
     checked = {};
+    exChecked = {};
     localStorage.removeItem('wisk-checked');
+    localStorage.removeItem('wisk-ex-checked');
     renderChapters();
     updateProgress();
   }
