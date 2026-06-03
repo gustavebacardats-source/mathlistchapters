@@ -625,6 +625,765 @@ const WISK_PLANNING = [
   { day: "Do 11/6", tasks: ["🎯 EXAMEN Wiskunde deel 2"], note: "" },
 ];
 
+// ===== AARDRIJKSKUNDE =====
+const AARD_CHAPTERS = [
+  { id:'aard-zee', number:1, title:'Zeeën en oceanen', pages:'4.1.2', hours:1, color:'#6cb04c', phase:1, phaseLabel:'Algemene thema\'s',
+    criteria:[
+      'Ik leg uit hoe zeestromen ontstaan en welke factoren ze beïnvloeden.',
+      'Ik beschrijf het verschil tussen warme en koude zeestromen en hun invloed op het klimaat.'
+    ],
+    exercises:{ mustDo:['Zeestromen op wereldkaart aanduiden','Effect zeestroom op kustklimaat verklaren'], shouldDo:[], extra:['Test jezelf-vragen'] },
+    tip:'Koppel zeestromen aan klimaat: warme stroom = milder kustklimaat (bv. Golfstroom).',
+    jarvis:'Leg uit hoe zeestromen ontstaan en geef me 3 oefenvragen over hun invloed op het klimaat.' },
+  { id:'aard-ruimte', number:2, title:'Ruimtelijke ordening', pages:'5.1.2 + 5.2.1', hours:1.5, color:'#6cb04c', phase:1,
+    criteria:[
+      'Ik analyseer ons leefgebied aan de hand van ruimtelijke ordeningsprincipes (5.1.2).',
+      'Ik beschrijf toekomstige woonvormen en duurzame ontwikkelingen (5.2.1 Wonen in de toekomst).'
+    ],
+    exercises:{ mustDo:['Leefgebied analyseren met kaartmateriaal','Duurzame woonvorm beschrijven + argumenteren'], shouldDo:[], extra:['Test jezelf-vragen'] },
+    tip:'Denk aan kernbegrippen: verdichting, functiemenging, duurzaamheid.',
+    jarvis:'Stel me 4 examenvragen over ruimtelijke ordening en wonen in de toekomst.' },
+  { id:'aard-platen-struct', number:3, title:'Platentektoniek — structuur', pages:'7.1.2 + 7.2.2', hours:2, color:'#6cb04c', phase:2, phaseLabel:'Platentektoniek & geologie',
+    criteria:[
+      'Ik beschrijf de inwendige structuur van de aarde (korst, mantel, kern) (7.1.2).',
+      'Ik leg uit wat de lithosfeer is en hoe de aarde is ontstaan (7.2.2).'
+    ],
+    exercises:{ mustDo:['Lagen van de aarde benoemen + schets','Lithosfeer vs asthenosfeer onderscheiden'], shouldDo:[], extra:['Test jezelf-vragen'] },
+    tip:'Teken een doorsnede van de aarde met alle lagen en hun eigenschappen.',
+    jarvis:'Quiz me over de inwendige structuur van de aarde en de lithosfeer. 6 vragen met feedback.' },
+  { id:'aard-platen-bew', number:4, title:'Platentektoniek — plaatbewegingen', pages:'7.2.3 + 7.2.4', hours:2, color:'#6cb04c', phase:2,
+    criteria:[
+      'Ik leg uit wat divergente platen zijn en welke verschijnselen ze veroorzaken (7.2.3).',
+      'Ik leg uit wat convergente en transforme platen zijn en hun gevolgen (7.2.4).'
+    ],
+    exercises:{ mustDo:['Divergente plaatgrens schetsen + voorbeeld','Convergente plaatgrens schetsen + voorbeeld','Transforme plaatgrens herkennen'], shouldDo:[], extra:['Test jezelf-vragen'] },
+    tip:'Onthoud per plaatgrens: beweging + verschijnsel + voorbeeld (bv. convergent = subductie, Andes).',
+    jarvis:'Geef me oefenvragen over divergente, convergente en transforme plaatgrenzen met voorbeelden.' },
+  { id:'aard-geo', number:5, title:'Geologische fenomenen bij plaatverschuivingen', pages:'7.3.1 + 7.3.2', hours:2, color:'#6cb04c', phase:2,
+    criteria:[
+      'Ik verklaar hoe aardbevingen en tsunami\'s ontstaan bij plaatverschuivingen (7.3.1).',
+      'Ik verklaar hoe vulkanen ontstaan en welke types er zijn (7.3.2).'
+    ],
+    exercises:{ mustDo:['Ontstaan aardbeving verklaren (focus, epicentrum)','Ontstaan tsunami verklaren','Vulkaantypes onderscheiden'], shouldDo:[], extra:['Test jezelf-vragen'] },
+    tip:'Koppel elk fenomeen aan het type plaatgrens waar het voorkomt.',
+    jarvis:'Stel me examenvragen over aardbevingen, tsunami\'s en vulkanen en hun verband met plaatgrenzen.' },
+  { id:'aard-vaard', number:6, title:'Basisvaardigheden', pages:'10.14.1 + 10.17.1', hours:1.5, color:'#6cb04c', phase:3, phaseLabel:'Basisvaardigheden',
+    criteria:[
+      'Ik lees en interpreteer een klimatogram correct (10.14.1).',
+      'Ik determineer een klimaat op basis van temperatuur- en neerslaggegevens (10.17.1).'
+    ],
+    exercises:{ mustDo:['Klimatogram aflezen: temperatuur + neerslag','Klimaat determineren met determineerschema'], shouldDo:['Extra klimatogram oefenen'], extra:['Test jezelf-vragen'] },
+    tip:'Dit komt bijna zeker op het examen! Oefen het determineerschema stap voor stap.',
+    jarvis:'Geef me een klimatogram met cijfers en laat me het klimaat determineren. Controleer mijn stappen.' },
+];
+const AARD_PLANNING = [
+  { day: "Do 18/6", tasks: ["Aardrijkskunde: zeestromen + ruimtelijke ordening (blok 1-2)", "Aardrijkskunde: structuur aarde (blok 3)"], note: "Na examen geschiedenis" },
+  { day: "Vr 19/6", tasks: ["🎯 EXAMEN Aardrijkskunde"], note: "" },
+];
+
+// ===== FRANS =====
+const FRANS_CHAPTERS = [
+  { id:'fr-d2-voc', number:1, title:'D2 — Vocabulaire', pages:'pp. 191-195', hours:1.5, color:'#9c6ce8', phase:1, phaseLabel:'CDC6 Dossier 2',
+    criteria:[
+      'Ik ken het vocabulaire van pp. 191-195.',
+      'Ik los de woordenschatoefeningen op (ER1, ER3, ER4).'
+    ],
+    exercises:{ mustDo:['Voc pp. 191-195 instuderen','ER1 woordenschat','ER3 woordenschat','ER4 woordenschat'], shouldDo:[], extra:['Scoodle digitale oefeningen'] },
+    tip:'Maak flashcards van de woordenschat — laat Jarvis je overhoren.',
+    jarvis:'Overhoor me de Franse woordenschat van Dossier 2. Geef het Nederlands, ik geef het Frans.' },
+  { id:'fr-d2-gram', number:2, title:'D2 — Grammaire', pages:'pp. 129-188', hours:3, color:'#9c6ce8', phase:1,
+    criteria:[
+      'Ik vorm en gebruik de subjonctif présent correct (p. 129 · Coup de Main 16).',
+      'Ik gebruik de conjonctions de cause, conséquence en opposition (pp. 129-135 · CdM 26).',
+      'Ik gebruik de conjonctions de temps, but en manière (pp. 148-153 · CdM 26).',
+      'Ik vorm en gebruik de conditionnel passé (pp. 170-173 · CdM 12.6).',
+      'Ik vorm en gebruik de participe présent (pp. 185-188 · CdM 17).',
+      'Ik gebruik de juiste prépositions (Scoodle Mix et Match D2 ER1+ER2 · CdM 28).',
+      'Ik vervoeg de werkwoorden correct (Scoodle Mix et Match D2 ER3+ER4 · CdM 12).'
+    ],
+    exercises:{ mustDo:['Subjonctif présent oefenen','Conjonctions cause/conséquence/opposition','Conjonctions temps/but/manière','Conditionnel passé oefenen','Participe présent oefenen'], shouldDo:['Mix et Match prépositions (ER1+ER2)','Mix et Match conjugaisons (ER3+ER4)'], extra:['Scoodle digitale oefeningen'] },
+    tip:'Subjonctif en conjonctions zijn de kern — daar vallen de meeste punten. Oefen de werkwoordsvormen actief.',
+    jarvis:'Geef me 5 Franse zinnen waar ik de subjonctif of conditionnel passé moet invullen. Corrigeer me.' },
+  { id:'fr-d2-comp', number:3, title:'D2 — Vaardigheden (mystères, merveilles, légendes)', pages:'ER1, ER3, ER4', hours:1.5, color:'#9c6ce8', phase:1,
+    criteria:[
+      'Ik begrijp documenten over mystères, merveilles du monde en légendes (ER1, ER3, ER4).',
+      'Ik reageer op berichten op sociale media en vertel waarom een mystère me boeit (ER1).',
+      'Ik praat over en debatteer over mystères, merveilles en légendes (ER1, ER3, ER4).',
+      'Ik vat een légende samen en spreek er creatief en overtuigend over (ER3, ER4).',
+      'Ik druk mijn mening uit (mondeling en schriftelijk) en reageer op gesprekspartners (ER1, ER3, ER4).'
+    ],
+    exercises:{ mustDo:['Document over mystères lezen + samenvatten','Légende samenvatten','Mening formuleren over een merveille'], shouldDo:['Mondeling debat oefenen'], extra:[] },
+    tip:'Bereid een paar standaardzinnen voor om je mening te geven en te reageren (à mon avis, je suis d\'accord/pas d\'accord parce que...).',
+    jarvis:'Speel een gesprekspartner. Debatteer met mij in het Frans over een mystère en corrigeer mijn fouten.' },
+  { id:'fr-d3-voc', number:4, title:'D3 — Vocabulaire', pages:'pp. 261-263', hours:1, color:'#9c6ce8', phase:2, phaseLabel:'CDC6 Dossier 3',
+    criteria:[
+      'Ik ken het vocabulaire van pp. 261-263.',
+      'Ik los de woordenschatoefeningen op (ER1, ER2).'
+    ],
+    exercises:{ mustDo:['Voc pp. 261-263 instuderen','ER1 woordenschat','ER2 woordenschat'], shouldDo:[], extra:['Scoodle digitale oefeningen'] },
+    tip:'Thema\'s: métavers en keuzes na het secundair. Leer het themavocabulaire goed.',
+    jarvis:'Overhoor me de Franse woordenschat van Dossier 3 over het métavers en studiekeuzes.' },
+  { id:'fr-d3-gram', number:5, title:'D3 — Grammaire', pages:'pp. 236-259', hours:1.5, color:'#9c6ce8', phase:2,
+    criteria:[
+      'Ik vorm en gebruik de plus-que-parfait correct (pp. 236-241 · Coup de Main 12.11).',
+      'Ik vorm en gebruik de subjonctif correct (pp. 257-259 · Coup de Main 16).'
+    ],
+    exercises:{ mustDo:['Plus-que-parfait oefenen','Subjonctif oefenen'], shouldDo:[], extra:['Scoodle digitale oefeningen'] },
+    tip:'Plus-que-parfait = avoir/être in imparfait + participe passé. Oefen het verschil met passé composé.',
+    jarvis:'Geef me oefenzinnen voor de plus-que-parfait en subjonctif. Corrigeer en leg fouten uit.' },
+  { id:'fr-d3-comp', number:6, title:'D3 — Vaardigheden (métavers, studiekeuzes)', pages:'ER1, ER2', hours:1, color:'#9c6ce8', phase:2,
+    criteria:[
+      'Ik begrijp documenten en een enquête over het métavers (ER1).',
+      'Ik begrijp documenten over keuzes na het secundair onderwijs (ER2).',
+      'Ik praat over en debatteer over het métavers en de conclusies van een enquête (ER1, ER2).',
+      'Ik druk mijn mening uit (mondeling en schriftelijk) en reageer op gesprekspartners (ER1, ER2).'
+    ],
+    exercises:{ mustDo:['Document over métavers lezen','Enquête-conclusies samenvatten','Mening over studiekeuzes formuleren'], shouldDo:['Mondeling debat oefenen'], extra:[] },
+    tip:'Oefen het uitdrukken van een mening en reageren — dat komt terug in beide ER\'s.',
+    jarvis:'Debatteer met mij in het Frans over het métavers. Reageer en corrigeer mijn taalfouten.' },
+];
+const FRANS_PLANNING = [
+  { day: "Ma 8/6", tasks: ["Frans: D2 vocabulaire + grammaire begin (blok 1-2)"], note: "Naast wiskunde" },
+  { day: "Di 9/6", tasks: ["Frans: D2 grammaire afwerken + vaardigheden (blok 2-3)"], note: "" },
+  { day: "Wo 10/6", tasks: ["Frans: D3 vocabulaire + grammaire (blok 4-5)"], note: "Na examen wiskunde deel 1" },
+  { day: "Do 11/6", tasks: ["Frans: D3 vaardigheden + FINALE REVIEW (blok 6)"], note: "Na examen wiskunde deel 2" },
+  { day: "Vr 12/6", tasks: ["🎯 EXAMEN Frans"], note: "" },
+];
+
+// ===== FYSICA =====
+const FYS_CHAPTERS = [
+  { id:'fys-arbeid', number:1, title:'1.3 Arbeid en energie', pages:'Thema 1', hours:2, color:'#00b0c8', phase:1, phaseLabel:'Thema 1 — Mechanica',
+    criteria:[
+      'Ik pas de formule van arbeid bij een constante kracht toe in berekeningen.',
+      'Ik bereken de arbeid van een niet-constante kracht met de integraalmethode.',
+      'Ik leg het verschil tussen conservatieve en niet-conservatieve krachten uit en geef voorbeelden.',
+      'Ik leg uit hoe de energie van een voorwerp verandert als er arbeid op wordt verricht.',
+      'Ik pas de wet van behoud van energie toe in situaties met niet-conservatieve krachten.'
+    ],
+    exercises:{ mustDo:['Oef 2, 3, 5, 6 (arbeid constante kracht)','Oef 9, 10 (integraalmethode)','Oef 12-18 (energie + behoud)'], shouldDo:['Oef 20-25 (combinatie)'], extra:['Online leerpad Arbeid en energie'] },
+    tip:'De integraalmethode koppelt aan je wiskunde! Arbeid = oppervlakte onder de F(x)-grafiek.',
+    jarvis:'Geef me 3 oefeningen over arbeid en behoud van energie met niet-conservatieve krachten. Begeleid me stap voor stap.' },
+  { id:'fys-ht-kenmerken', number:2, title:'2.1.1-2.1.3 HT: kenmerken, vgl & faseverschil', pages:'Thema 2', hours:2, color:'#00b0c8', phase:2, phaseLabel:'Thema 2 — Trillingen & golven',
+    criteria:[
+      'Ik beschrijf de kenmerken van een HT (periode, frequentie, evenwichtslijn, uitwijking, amplitude) via de trillingsvergelijking.',
+      'Ik analyseer en kwantificeer harmonische trillingen.',
+      'Ik pas de begrippen pulsatie, fase, beginfase en faseverschuiving toe.'
+    ],
+    exercises:{ mustDo:['Oef 1, 3, 4, 5 (kenmerken HT)','Oef 6-9 (trillingsvergelijking)','Oef 11-14 (fase + faseverschil)'], shouldDo:['Oef 15-21 (combinatie)'], extra:['Online leerpad Harmonische trillingen'] },
+    tip:'Leer de standaardvergelijking y = A·sin(ωt + φ) en wat elke parameter betekent.',
+    jarvis:'Leg pulsatie, fase en faseverschil uit met een voorbeeld. Geef me daarna 3 oefenvragen.' },
+  { id:'fys-ht-snelheid', number:3, title:'2.1.4 Snelheid en versnelling van een HT', pages:'Thema 2', hours:1.5, color:'#00b0c8', phase:2,
+    criteria:[
+      'Ik beschrijf de uitwijkings-, snelheids- en versnellingsgrafiek van een HT en interpreteer hun samenhang.',
+      'Ik bereken de snelheid en versnelling op elk tijdstip van een HT.'
+    ],
+    exercises:{ mustDo:['Oef snelheid/versnelling berekenen','Grafieken x(t), v(t), a(t) tekenen + verband'], shouldDo:['Oef 23-27 (gemengd HT)'], extra:['Online leerpad'] },
+    tip:'v loopt 90° voor op x, a loopt 90° voor op v. Afgeleiden — opnieuw je wiskunde!',
+    jarvis:'Quiz me over de samenhang tussen uitwijking, snelheid en versnelling bij een HT.' },
+  { id:'fys-ht-krachten', number:4, title:'2.1.5-2.1.7 Krachten, eigenfrequentie & energie', pages:'Thema 2', hours:2, color:'#00b0c8', phase:2,
+    criteria:[
+      'Ik beschrijf en bereken de eigenfrequentie bij een harmonische trilling.',
+      'Ik beschrijf en bereken de resulterende kracht op een trillend massa-veersysteem.',
+      'Ik beschrijf de verschillende soorten energie en hun onderling verband in een HT.'
+    ],
+    exercises:{ mustDo:['Oef eigenfrequentie massa-veersysteem','Oef resulterende kracht (F = -k·x)','Oef energie-omzetting Ekin ↔ Epot'], shouldDo:['Oef 28-31 (gemengd)'], extra:['Online leerpad'] },
+    tip:'Eigenfrequentie f = (1/2π)·√(k/m). Totale energie blijft constant: Ekin + Epot = constant.',
+    jarvis:'Geef me een oefening over een massa-veersysteem: bereken eigenfrequentie, kracht en energie.' },
+  { id:'fys-golven', number:5, title:'2.2.1 Golven: golfmodel & golfvergelijking', pages:'Thema 2', hours:2, color:'#00b0c8', phase:2,
+    criteria:[
+      'Ik leg het verschil uit tussen een trilling en een golf.',
+      'Ik onderscheid soorten golven (mechanisch/EM, transversaal/longitudinaal, n-dimensionaal).',
+      'Ik analyseer en bereken het verband tussen frequentie, golflengte en golfsnelheid.',
+      'Ik kwantificeer lopende golven met hun golfvergelijking.',
+      'Ik leg het verschil tussen links- en rechtslopende golven uit met het golfgetal en herken ze op grafieken.'
+    ],
+    exercises:{ mustDo:['Oef 1-5 (soorten golven)','Oef 6-10 (v = λ·f)','Oef 11-15 (golfvergelijking)'], shouldDo:['Oef 16-20 (links/rechtslopend)'], extra:['Online leerpad Golven'] },
+    tip:'Kernformule: v = λ·f. Golfvergelijking lijkt op trillingsvergelijking maar met plaats én tijd.',
+    jarvis:'Leg het verschil uit tussen een trilling en een golf, en tussen transversaal en longitudinaal. Geef oefenvragen.' },
+  { id:'fys-intensiteit', number:6, title:'2.2.2 Intensiteit bij golven', pages:'Thema 2', hours:1.5, color:'#00b0c8', phase:2,
+    criteria:[
+      'Ik licht het verband toe tussen de intensiteit van een lopende golf en de afstand tot de bron met de formule.',
+      'Ik verklaar het verband tussen geluidsintensiteit en geluidsniveau.'
+    ],
+    exercises:{ mustDo:['Oef intensiteit vs afstand (I ~ 1/r²)','Oef geluidsniveau in dB berekenen'], shouldDo:['Gemengde oefeningen intensiteit'], extra:['Online leerpad'] },
+    tip:'Intensiteit neemt af met 1/r². Geluidsniveau (dB) is logaritmisch: L = 10·log(I/I₀).',
+    jarvis:'Geef me oefeningen over geluidsintensiteit en geluidsniveau in decibel.' },
+  { id:'fys-eigenschappen', number:7, title:'2.2.3 Eigenschappen + staande golven & resonantie', pages:'Thema 2', hours:2.5, color:'#00b0c8', phase:2,
+    criteria:[
+      'Ik verklaar fenomenen via het golfmodel: lopende/staande golven, weerkaatsing, breking, interferentie, buiging, dopplereffect.',
+      'Ik bereken hoe golven breken met de snelheid, de hoek of de brekingsindex.',
+      'Ik verklaar fenomenen via staande golven, interferentie en resonantie.'
+    ],
+    exercises:{ mustDo:['Oef 1-4 (breking + brekingsindex)','Oef 5-8 (interferentie + buiging)','Oef 9-11 (staande golven + resonantie)','Oef 12-14 (dopplereffect)'], shouldDo:['Gemengde toepassingen golfmodel'], extra:['Online leerpad Eigenschappen van golven'] },
+    tip:'Veel fenomenen — maak een overzichtskaart: per fenomeen de definitie + 1 voorbeeld + formule.',
+    jarvis:'Quiz me over breking, interferentie, buiging, staande golven, resonantie en het dopplereffect.' },
+  { id:'fys-em', number:8, title:'2.2.4 Elektromagnetische golven', pages:'Thema 2', hours:1.5, color:'#00b0c8', phase:2,
+    criteria:[
+      'Ik leg het gedrag van elektromagnetische golven uit en het verband tussen energie en frequentie.',
+      'Ik illustreer fenomenen van het EM-spectrum (lichtsnelheid, gevaren bij blootstelling).'
+    ],
+    exercises:{ mustDo:['Oef 1-6 (EM-spectrum + E = h·f)','Oef 7-12 (lichtsnelheid + toepassingen)'], shouldDo:[], extra:['Online leerpad EM golven'] },
+    tip:'E = h·f: hogere frequentie = meer energie = gevaarlijker (UV, X, gamma). Leer de volgorde van het spectrum.',
+    jarvis:'Overhoor me het EM-spectrum van laag naar hoge frequentie, met energie en gevaren.' },
+  { id:'fys-kwantum', number:9, title:'3.1 Kwantumfysica', pages:'Thema 3', hours:2.5, color:'#00b0c8', phase:3, phaseLabel:'Thema 3 — Moderne fysica',
+    criteria:[
+      'Ik leg uit dat energie gekwantiseerd is (Planck) en pas E = h·ν toe.',
+      'Ik verklaar het foto-elektrisch effect (Einstein) en het lichtkwantum/foton.',
+      'Ik leg de deeltje-golfdualiteit en de hypothese van de Broglie uit (λ = h/p).',
+      'Ik leg het onzekerheidsprincipe van Heisenberg uit (Δx·Δp ≥ ℏ/2).',
+      'Ik beschrijf het atoommodel van Bohr (gekwantiseerde energieniveaus) en spectraallijnen.'
+    ],
+    exercises:{ mustDo:['Oef E = h·ν berekenen','Oef foto-elektrisch effect','Oef de Broglie golflengte λ = h/p'], shouldDo:['Oef spectraallijnen + Balmerreeks'], extra:['Samenvattingsschema kwantumfysici doornemen'] },
+    tip:'Leer per fysicus: wie + welk concept + welke formule + welk experiment. Dat is de structuur van de toets.',
+    jarvis:'Overhoor me de kwantumfysici: Planck, Einstein, de Broglie, Heisenberg, Bohr — concept, formule en experiment.' },
+];
+const FYS_PLANNING = [
+  { day: "Vr 12/6", tasks: ["Fysica: arbeid en energie + begin HT (blok 1-2)"], note: "Na examen Frans" },
+  { day: "Za 13/6", tasks: ["Fysica: HT snelheid/versnelling + krachten/energie (blok 3-4)", "Fysica: golven (blok 5)"], note: "5u" },
+  { day: "Zo 14/6", tasks: ["Fysica: intensiteit + eigenschappen golven (blok 6-7)", "Fysica: EM golven (blok 8)"], note: "Tennis 11:00" },
+  { day: "Ma 15/6", tasks: ["Fysica: kwantumfysica (blok 9)", "FINALE REVIEW: formuleblad maken"], note: "Na examen chemie" },
+  { day: "Di 16/6", tasks: ["🎯 EXAMEN Fysica"], note: "" },
+];
+
+// ===== NEDERLANDS =====
+const NED_CHAPTERS = [
+  { id:'ned-kinglear', number:1, title:'Les 14 — King Lear', pages:'Literatuur', hours:1.5, color:'#4c7ce8', phase:1, phaseLabel:'Literatuur & cultuur',
+    criteria:[
+      'Ik ken de inhoud, thema\'s en hoofdpersonages van King Lear.',
+      'Ik analyseer King Lear als tragedie (tragische held, structuur, motieven).'
+    ],
+    exercises:{ mustDo:['Samenvatting verhaallijn + personages maken','Thema\'s en tragische elementen noteren'], shouldDo:['Oefenvragen over de tragedie'], extra:[] },
+    tip:'Focus op de tragische held, de vader-dochterconflicten en het thema waanzin/inzicht.',
+    jarvis:'Overhoor me over King Lear: personages, thema\'s en waarom het een tragedie is.' },
+  { id:'ned-stadsdichters', number:2, title:'Les 16 — Stadsdichters', pages:'Literatuur', hours:1, color:'#4c7ce8', phase:1,
+    criteria:[
+      'Ik leg uit wat een stadsdichter is en welke functie die heeft.',
+      'Ik analyseer een stadsgedicht (vorm, thema, beeldspraak).'
+    ],
+    exercises:{ mustDo:['Begrip stadsdichter + rol noteren','Een stadsgedicht analyseren'], shouldDo:[], extra:[] },
+    tip:'Koppel de inhoud van het gedicht aan de stad/plaats waarover het gaat.',
+    jarvis:'Leg uit wat een stadsdichter is en geef me een gedicht om te analyseren.' },
+  { id:'ned-theater', number:3, title:'Les 21 — Episch en absurdistisch theater', pages:'Literatuur', hours:1.5, color:'#4c7ce8', phase:1,
+    criteria:[
+      'Ik leg de kenmerken van episch theater uit (vervreemding, Brecht) en herken ze.',
+      'Ik leg de kenmerken van absurdistisch theater uit en herken ze in voorbeelden.'
+    ],
+    exercises:{ mustDo:['Kenmerken episch theater (Brecht) noteren','Kenmerken absurdistisch theater noteren','Verschil episch vs absurdistisch maken'], shouldDo:[], extra:[] },
+    tip:'Episch = vervreemdingseffect (Brecht). Absurdistisch = zinloosheid, gebroken logica (Beckett, Ionesco).',
+    jarvis:'Quiz me over het verschil tussen episch en absurdistisch theater met voorbeelden.' },
+  { id:'ned-dystopie', number:4, title:'Les 24 — De dystopische roman', pages:'Literatuur', hours:1.5, color:'#4c7ce8', phase:1,
+    criteria:[
+      'Ik beschrijf de kenmerken van de dystopische roman.',
+      'Ik herken dystopische elementen in voorbeelden en leg hun functie uit.'
+    ],
+    exercises:{ mustDo:['Kenmerken dystopie noteren','Voorbeelden + functie analyseren'], shouldDo:['Oefenvraag dystopische roman'], extra:[] },
+    tip:'Denk aan: totalitaire controle, onderdrukking, schijnbaar perfecte maar verstikkende samenleving.',
+    jarvis:'Overhoor me de kenmerken van de dystopische roman met concrete voorbeelden.' },
+  { id:'ned-verlichting', number:5, title:'Les 27 — De Verlichting', pages:'Literatuur & cultuur', hours:1.5, color:'#4c7ce8', phase:1,
+    criteria:[
+      'Ik situeer de Verlichting historisch en cultureel.',
+      'Ik ken de literaire en filosofische kenmerken van de Verlichting.'
+    ],
+    exercises:{ mustDo:['Tijdlijn + context Verlichting maken','Kernideeën (rede, vooruitgang) noteren'], shouldDo:['Oefenvragen Verlichting'], extra:[] },
+    tip:'Rede, kritiek op kerk/absolutisme, vooruitgangsgeloof. Koppel aan auteurs en ideeën.',
+    jarvis:'Quiz me over de Verlichting: periode, kernideeën en literaire kenmerken.' },
+  { id:'ned-chattaal', number:6, title:'Les 15 — Communicatie analyseren: chattaal', pages:'Taalkunde', hours:1, color:'#4c7ce8', phase:2, phaseLabel:'Taalkunde',
+    criteria:[
+      'Ik analyseer de kenmerken van chattaal en digitale communicatie.',
+      'Ik leg uit hoe register en context de taal beïnvloeden.'
+    ],
+    exercises:{ mustDo:['Kenmerken chattaal opsommen','Een chatgesprek analyseren'], shouldDo:[], extra:[] },
+    tip:'Let op afkortingen, emoji, weglatingen en het verschil met standaardtaal.',
+    jarvis:'Geef me een stukje chattaal en laat me de taalkundige kenmerken analyseren.' },
+  { id:'ned-valentie', number:7, title:'Les 18 — Redekundig ontleden: valentie', pages:'Taalkunde', hours:1.5, color:'#4c7ce8', phase:2,
+    criteria:[
+      'Ik ontleed zinnen redekundig (zinsdelen benoemen).',
+      'Ik pas het valentiemodel toe (werkwoordsvalentie: hoeveel en welke aanvullingen een werkwoord vraagt).'
+    ],
+    exercises:{ mustDo:['Zinnen redekundig ontleden','Valentie van werkwoorden bepalen'], shouldDo:['Extra ontleedoefeningen'], extra:[] },
+    tip:'Valentie = het aantal verplichte aanvullingen dat een werkwoord nodig heeft. Oefen met verschillende werkwoorden.',
+    jarvis:'Geef me 5 zinnen om redekundig te ontleden en de valentie van het werkwoord te bepalen.' },
+  { id:'ned-pragmatiek', number:8, title:'Les 23 — Pragmatiek', pages:'Taalkunde', hours:1.5, color:'#4c7ce8', phase:2,
+    criteria:[
+      'Ik pas pragmatische begrippen toe (taalhandelingen, context, bedoeling).',
+      'Ik herken implicaturen en het verschil tussen wat gezegd en bedoeld wordt.'
+    ],
+    exercises:{ mustDo:['Begrippen pragmatiek noteren','Taalhandelingen in voorbeelden herkennen'], shouldDo:[], extra:[] },
+    tip:'Pragmatiek = taal in context. Denk aan: wat doet een uiting (vraag, belofte, bevel) en wat impliceert ze?',
+    jarvis:'Leg pragmatiek uit met voorbeelden en quiz me over taalhandelingen en implicaturen.' },
+  { id:'ned-taaltech', number:9, title:'Les 29 — Taaltechnologie 2', pages:'Taalkunde', hours:1, color:'#4c7ce8', phase:2,
+    criteria:[
+      'Ik leg de werking en toepassingen van taaltechnologie uit.',
+      'Ik beoordeel mogelijkheden en beperkingen van taaltechnologie.'
+    ],
+    exercises:{ mustDo:['Toepassingen taaltechnologie noteren','Voor- en nadelen afwegen'], shouldDo:[], extra:[] },
+    tip:'Denk aan spraakherkenning, machinevertaling, chatbots — en hun beperkingen.',
+    jarvis:'Overhoor me over taaltechnologie: toepassingen, werking en beperkingen.' },
+  { id:'ned-discussie', number:10, title:'Les 30 — Probleemoplossend discussiëren', pages:'Vaardigheden', hours:1, color:'#4c7ce8', phase:3, phaseLabel:'Vaardigheden',
+    criteria:[
+      'Ik pas technieken voor probleemoplossend discussiëren toe.',
+      'Ik bouw een gestructureerd argument op en reageer op tegenargumenten.'
+    ],
+    exercises:{ mustDo:['Structuur van een discussie noteren','Argument + tegenargument oefenen'], shouldDo:[], extra:[] },
+    tip:'Werk volgens stappen: probleem afbakenen, standpunten, argumenten, afweging, conclusie.',
+    jarvis:'Speel een discussiepartner. Oefen probleemoplossend discussiëren met mij over een stelling.' },
+];
+const NED_PLANNING = [
+  { day: "Za 20/6", tasks: ["Nederlands: literatuur — King Lear, stadsdichters, theater (blok 1-3)"], note: "Na examen aardrijkskunde" },
+  { day: "Zo 21/6", tasks: ["Nederlands: dystopie + Verlichting (blok 4-5)", "Nederlands: taalkunde begin (blok 6-7)"], note: "Tennis 11:00" },
+  { day: "Ma 22/6", tasks: ["Nederlands: pragmatiek + taaltechnologie + discussiëren (blok 8-10)"], note: "Na examen Engels" },
+  { day: "Di 23/6", tasks: ["🎯 EXAMEN Nederlands", "FINALE REVIEW 's ochtends"], note: "LAATSTE EXAMEN! 🎉" },
+];
+
+// ===== GESCHIEDENIS (mondeling examen) =====
+const GES_CHAPTERS = [
+  { id:'ges-h3', number:1, title:'H3 — Naar een bipolaire wereld (1945-1960)', pages:'Sapiens H3', hours:2, color:'#9c6ce8', phase:1, phaseLabel:'Hoofdstukken (historische vragen)',
+    criteria:[
+      'HV4: Ik leg uit hoe de Koude Oorlog naar een "warmere" fase evolueerde.',
+      'HV5: Ik leg uit welke impact de media hadden op de publieke opinie tijdens de Vietnamoorlog.',
+      'U1: Ik leg uit wie de ruimtewedloop won tijdens de Koude Oorlog.'
+    ],
+    exercises:{ mustDo:['Synthesetekst H3 samenvatten','Tijdlijn Koude Oorlog + Vietnam maken','HV4, HV5, U1 mondeling beantwoorden'], shouldDo:['Bronopdrachten H3 opnieuw maken'], extra:['Begrippen H3 verklaren (p.252-263)'] },
+    tip:'Oefen elke HV hardop alsof je voor de examinator staat — dit is een mondeling examen.',
+    jarvis:'Stel me de historische vraag HV4 over de Koude Oorlog en luister naar mijn mondeling antwoord. Geef feedback en stel een vervolgvraag.' },
+  { id:'ges-h4', number:2, title:'H4 — Dekolonisatie na WO II', pages:'Sapiens H4', hours:2.5, color:'#9c6ce8', phase:1,
+    criteria:[
+      'HV1: Ik leg uit hoe gekoloniseerde volkeren hun onafhankelijkheid afdwongen (Brits-Indië & Belgisch-Congo).',
+      'HV2: Ik leg uit hoe Belgen en Congolezen naar de dekolonisatie keken (speeches Boudewijn-Lumumba).',
+      'HV3: Ik leg uit waarom bijna geen enkele ex-kolonie een stabiele, autonome koers kon varen.',
+      'HV4: Ik leg uit hoe het AfricaMuseum de veranderende blik op het koloniale verleden uitbeeldt.'
+    ],
+    exercises:{ mustDo:['Synthesetekst H4 samenvatten','Speeches Boudewijn vs Lumumba analyseren','Dekolonisatieproces Congo reconstrueren','HV1-HV4 mondeling beantwoorden'], shouldDo:['Bronopdrachten H4 opnieuw maken','Vergelijking Brits-Indië vs Belgisch-Congo'], extra:['Begrippen H4 verklaren'] },
+    tip:'De speeches Boudewijn-Lumumba zijn een klassieke bronanalyse — oefen het contrast in perspectief.',
+    jarvis:'Geef me de bron van de speeches Boudewijn en Lumumba. Laat me ze contextualiseren en hun perspectief vergelijken.' },
+  { id:'ges-h5', number:3, title:'H5 — België 1960-1980', pages:'Sapiens H5', hours:2.5, color:'#9c6ce8', phase:1,
+    criteria:[
+      'HV1: Ik leg uit hoe de pil bijdroeg tot de emancipatie van de vrouw.',
+      'HV2: Ik leg uit hoe het Amerikaanse consumentisme het dagelijks leven van Belgen veranderde (1950-1970).',
+      'HV3: Ik leg uit hoe de studentenprotesten in België in de jaren 1960 ontstonden.',
+      'HV4: Ik leg uit hoe België evolueerde van een unitaire naar een federale staat.',
+      'Ik leg de werking en het basisprincipe (solidariteit) van de sociale zekerheid en de verzorgingsstaat uit.'
+    ],
+    exercises:{ mustDo:['Synthesetekst H5 samenvatten','Schema welvaartsstaat instuderen','HV1-HV4 mondeling beantwoorden','Sociale zekerheid uitleggen (verbetersleutel)'], shouldDo:['Bronopdrachten H5 opnieuw maken','Staatshervormingen op tijdlijn zetten'], extra:['Begrippen H5 verklaren'] },
+    tip:'Het schema van de welvaartsstaat (burgers-markt-overheid-middenveld) komt zeker terug. Teken het uit het hoofd.',
+    jarvis:'Overhoor me het schema van de sociale welvaartsstaat: de vier actoren en hun onderlinge relaties.' },
+  { id:'ges-h6', number:4, title:'H6 — Naar een multipolaire wereld', pages:'Sapiens H6', hours:2, color:'#9c6ce8', phase:1,
+    criteria:[
+      'HV1: Ik leg uit wie de Berlijnse Muur liet vallen en de Koude Oorlog beëindigde.',
+      'Ik leg de opkomst van China uit.',
+      'Ik leg uit waarom vrede steeds verder weg lijkt in Palestina.',
+      'U2: Ik leg uit waarom het Midden-Oosten een politiek kruitvat is.',
+      'Open vraag: Ik beargumenteer welke laag (koloniaal, moreel-religieus of geopolitiek) het meest bepalend is in het Israël-Palestina-conflict, en plaats de drie lagen in een onderbouwde rangorde.'
+    ],
+    exercises:{ mustDo:['Synthesetekst H6 samenvatten','Val Berlijnse Muur + einde KO uitleggen','HV1 + China + Palestina mondeling beantwoorden','Open vraag oefenen: 3 lagen wegen + rangorde onderbouwen'], shouldDo:['Tijdlijn 1989-heden maken'], extra:['Begrippen H6 verklaren'] },
+    tip:'Bij de open vraag over de 3 lagen: kies één laag als meest bepalend, onderbouw met een concreet historisch argument, en erken dat de lagen verweven zijn. Die nuance levert punten op.',
+    jarvis:'Speel mijn examinator. Stel me de open vraag: welke laag (koloniaal, moreel-religieus of geopolitiek) is het meest bepalend in het Israël-Palestina-conflict? Luister naar mijn argumentatie en daag ze uit.' },
+  { id:'ges-histokit', number:5, title:'Histokit — historisch denken & bronnen', pages:'Sapiens p.237-251', hours:1.5, color:'#9c6ce8', phase:2, phaseLabel:'Vaardigheden (Histokit)',
+    criteria:[
+      'Ik ken de begrippen: historische beeldvorming, historische vragen, soorten bronnen, maatschappelijke domeinen, oorzaken/gevolgen, veralgemenen/stereotypen, collectieve herinnering.',
+      'Ik voer een bronnenstudie uit: identificeren, situeren in tijd en ruimte, contextualiseren.',
+      'Ik beoordeel de waarde van bronnen en combineer bewijs uit verschillende bronnen.'
+    ],
+    exercises:{ mustDo:['Histokit-begrippen instuderen (p.237-251)','Een bron identificeren + contextualiseren oefenen','Waarde van een bron beoordelen'], shouldDo:['Lees- en kijkstrategieën oefenen op een bron'], extra:[] },
+    tip:'De toepassingsvraag op je examen is een bronanalyse — beheers de Histokit-stappen, dan kun je elke bron aan.',
+    jarvis:'Geef me een onbekende historische bron en laat me hem identificeren, situeren, contextualiseren en de waarde beoordelen.' },
+];
+const GES_PLANNING = [
+  { day: "Wo 17/6", tasks: ["Geschiedenis: H3 bipolair + H4 dekolonisatie (blok 1-2)"], note: "Na examen biologie" },
+  { day: "Do 18/6", tasks: ["🎯 EXAMEN Geschiedenis (mondeling)", "Geschiedenis: H5 + H6 + Histokit als laatste review (blok 3-5)"], note: "Mondeling: 15min voorbereiding + 15min spreken" },
+];
+
+// ===== CHEMIE =====
+const CHEM_CHAPTERS = [
+  // THEMA 3 — ZUUR-BASE
+  { id:'chem-zb1', number:1, title:'T3 H1-H2 — Zuren/basen + zuur-base-evenwicht', pages:'pg 106-110', hours:2, color:'#e8943c', phase:3, phaseLabel:'Thema 3 — Zuur-base',
+    criteria:[
+      'Ik bespreek de zuur-basetheorie van Arrhenius en van Brönsted en Lowry.',
+      'Ik bepaal welke stoffen als zuur of base optreden en schrijf zuur-base-koppels.',
+      'Ik interpreteer het ionenproduct van water.',
+      'Ik interpreteer de sterkte van zuren en basen (Kz, Kb, pKz, pKb).'
+    ],
+    exercises:{ mustDo:['H1: oef 1-3 (geconjugeerde zuren/basen)','H2: oef 1-6 (evenwicht + sterkte)'], shouldDo:['H2: oef 7-12'], extra:['Themasynthese p.152 doornemen'] },
+    tip:'Kern: Kz · Kb = 10⁻¹⁴ en pKz + pKb = 14. Sterk zuur: Kz > 1.',
+    jarvis:'Geef me 5 stoffen en laat me bepalen of ze zuur of base zijn + het geconjugeerde koppel schrijven.' },
+  { id:'chem-zb2', number:2, title:'T3 H3-H4 — Zuurtegraad + pH berekenen', pages:'pg 120-125', hours:2.5, color:'#e8943c', phase:3,
+    criteria:[
+      'Ik beschrijf begrippen rond de zuurtegraad van een oplossing (pH, pOH).',
+      'Ik bereken de pH van een oplossing van een sterk zuur of sterke base.',
+      'Ik bereken de pH van een oplossing van een zwak zuur of zwakke base. (2-uurs)'
+    ],
+    exercises:{ mustDo:['H4: oef 1-4 (pH sterk zuur/base)','H4: oef 5-10 (pH + massaconcentratie)'], shouldDo:['H4: oef 11-18 (zwak zuur/base, 2-uurs)'], extra:['Themasynthese pH-tabel p.153'] },
+    tip:'pH + pOH = 14. Sterk zuur: pH = -log c. Zwak zuur: via evenwichtsreactie en Kz.',
+    jarvis:'Geef me 3 pH-berekeningen: één sterk zuur, één sterke base, één zwak zuur. Begeleid me stap voor stap.' },
+  { id:'chem-zb3', number:3, title:'T3 H5-H6 — Buffers + titraties', pages:'pg 138-143', hours:2.5, color:'#e8943c', phase:3,
+    criteria:[
+      'Ik definieer buffers en leg uit hoe een oplossing een bufferende werking vertoont. (2-uurs)',
+      'Ik bepaal of een mengsel van twee stoffen als pH-bufferend mengsel optreedt. (2-uurs)',
+      'Ik leg een toepassing van buffers in het menselijk lichaam uit.',
+      'Ik leg het principe van een zuur-base-titratie uit.',
+      'Ik bepaal de concentratie of het volume van een stof in een titratievraagstuk.',
+      'Ik leg uit wat een pH-indicator is en kies een geschikte indicator.',
+      'Ik interpreteer titratiecurves.'
+    ],
+    exercises:{ mustDo:['H5: oef 1-5 (buffers)','H6: oef 1-4 (titratieberekeningen)'], shouldDo:['H6: oef 5-7 (titratiecurves + indicator)'], extra:['Themasynthese titraties p.154'] },
+    tip:'Titratie: c_b = (b/a)·(c_z·V_z)/V_b. Kies indicator met omslaggebied rond het equivalentiepunt.',
+    jarvis:'Geef me een titratievraagstuk: bereken de onbekende concentratie en kies een geschikte indicator.' },
+  // THEMA 4 — REDOX
+  { id:'chem-redox1', number:4, title:'T4 H1-H2 — Herhaling + redoxreactie opstellen', pages:'pg 157-165', hours:2, color:'#e8943c', phase:4, phaseLabel:'Thema 4 — Redoxreacties',
+    criteria:[
+      'Ik stel een gasvormingsreactie met de vorming van koolzuur op.',
+      'Ik bepaal het oxidatiegetal van een atoom in een anorganische of organische verbinding.',
+      'Ik gebruik begrippen inzake redoxreacties correct (reductor, oxidator, oxidatie, reductie).',
+      'Ik stel redoxreacties op in basisch of zuur milieu op basis van gegeven ionen. (2-uurs)'
+    ],
+    exercises:{ mustDo:['Oxidatiegetallen bepalen (anorganisch + organisch)','Redoxreactie opstellen met het stappenplan (5 stappen)'], shouldDo:['Redox in zuur én basisch milieu oefenen'], extra:['Themasynthese p.198'] },
+    tip:'Stappenplan: 1) redoxbruggen 2) elektronenbalans 3) ladingsbalans (H₃O⁺/OH⁻) 4) atoombalans (H₂O) 5) stoffenvergelijking.',
+    jarvis:'Geef me twee redoxreacties om op te stellen: één in zuur en één in basisch milieu. Controleer mijn stappen.' },
+  { id:'chem-redox2', number:5, title:'T4 H3-H4 — Sterkte red/ox + galvanische cel', pages:'pg 170-177', hours:2.5, color:'#e8943c', phase:4,
+    criteria:[
+      'Ik vergelijk de sterkte van reductoren en oxidatoren in verdringingen.',
+      'Ik voorspel kwantitatief of een redoxreactie spontaan kan verlopen (ΔE°).',
+      'Ik verklaar de werking van een galvanische cel en geef die schematisch weer.',
+      'Ik bepaal de spanning die een gegeven galvanische cel kan opwekken.',
+      'Ik leg de waterstof-zuurstofbrandstofcel uit als voorbeeld van duurzame chemie.'
+    ],
+    exercises:{ mustDo:['Verdringingsreeks toepassen','U° = E°ox - E°red berekenen','Galvanische cel schematiseren (anode/kathode/pool)'], shouldDo:['Spontaniteit voorspellen via ΔE°'], extra:['Themasynthese galvanische cel p.198-199'] },
+    tip:'ΔE° > 0 → spontane reactie. Anode = oxidatie = negatieve pool (bij galvanische cel).',
+    jarvis:'Geef me een galvanische cel met twee halfreacties. Laat me anode, kathode, polen en celspanning bepalen.' },
+  { id:'chem-redox3', number:6, title:'T4 H5-H6 — Elektrolyse + redoxtitraties', pages:'pg 185-195', hours:2, color:'#e8943c', phase:4,
+    criteria:[
+      'Ik leg het principe van elektrolysecellen uit.',
+      'Ik stel een elektrolyse van een waterige oplossing op met gegeven elektroden (inert of actief). (2-uurs)',
+      'Ik vergelijk elektrolysecellen met galvanische cellen.',
+      'Ik bespreek het opladen of ontladen van een Li-ion accu.',
+      'Ik bespreek het principe van redoxtitraties.'
+    ],
+    exercises:{ mustDo:['Elektrolyse opstellen (inerte elektroden)','Elektrolyse opstellen (actieve elektroden)','Galvanische cel vs elektrolysecel vergelijken'], shouldDo:['Li-ion accu opladen/ontladen bespreken'], extra:['Themasynthese elektrolyse p.199'] },
+    tip:'Elektrolyse = gedwongen (niet-spontane) redoxreactie. Sterkste OX reduceert aan kathode, sterkste RED oxideert aan anode.',
+    jarvis:'Leg het verschil uit tussen een galvanische cel en een elektrolysecel, en geef me een elektrolyse-oefening.' },
+  // THEMA 5 — BIOMOLECULEN
+  { id:'chem-bio', number:7, title:'T5 — Biomoleculen', pages:'pg 203-219', hours:2.5, color:'#e8943c', phase:5, phaseLabel:'Thema 5-7 — Toegepaste chemie',
+    criteria:[
+      'Ik herken de algemene structuur van (poly)sachariden, lipiden en proteïnen en geef die schematisch weer.',
+      'Ik bepaal of een sacharide een pentose/hexose en een aldose/ketose is.',
+      'Ik vergelijk de structuur van glycogeen en cellulose met die van kunststoffen.',
+      'Ik beschrijf de vorming van een peptidebinding en van triglyceriden als condensatiereacties.',
+      'Ik verklaar de aggregatietoestand van vetten aan de hand van de verzadigingsgraad.'
+    ],
+    exercises:{ mustDo:['Sachariden klasseren (pentose/hexose, aldose/ketose)','Peptidebinding + triglyceride-vorming tekenen','Verzadigde vs onverzadigde vetten verklaren'], shouldDo:['Structuurformules biomoleculen oefenen'], extra:['Themasynthese p.223-226'] },
+    tip:'4 groepen: sachariden, eiwitten (proteïnen), lipiden, nucleïnezuren. Onverzadigde vetten = vloeibaar (knik in keten).',
+    jarvis:'Overhoor me de vier groepen biomoleculen: structuur, opbouw en functie van elk.' },
+  { id:'chem-kunst', number:8, title:'T6 — Kunststoffen', pages:'pg 229-245', hours:2, color:'#e8943c', phase:5,
+    criteria:[
+      'Ik bespreek polymerisatie, polycondensatie en polyadditie als vormingsprocessen van kunststoffen.',
+      'Ik verklaar de eigenschappen van kunststoffen aan de hand van hun structuur (thermoharders, thermoplasten, elastomeren).',
+      'Ik verklaar voor elk type waarom het gerecycleerd of verbrand wordt.',
+      'Ik bespreek waarom inzetten op circulaire economie momenteel beter is dan bioplastics.'
+    ],
+    exercises:{ mustDo:['3 vormingsprocessen onderscheiden','Thermoharder vs thermoplast vs elastomeer','Recyclage/verbranding per type verklaren'], shouldDo:['Circulaire economie vs bioplastics argumenteren'], extra:['Themasynthese p.256-257'] },
+    tip:'Thermoplast = smelt opnieuw (herbruikbaar). Thermoharder = verbrandt, hard. Elastomeer = elastisch.',
+    jarvis:'Quiz me over de drie types kunststoffen en hun recycleerbaarheid op basis van structuur.' },
+  { id:'chem-nano', number:9, title:'T7 — Nanomaterialen', pages:'pg 261-264', hours:1, color:'#e8943c', phase:5,
+    criteria:[
+      'Ik situeer de grootteorde van nanomaterialen.',
+      'Ik bespreek twee toepassingen van nanomaterialen.'
+    ],
+    exercises:{ mustDo:['Grootteorde nanomateriaal (1-100 nm) situeren','Twee toepassingen bespreken'], shouldDo:[], extra:['Themasynthese p.264'] },
+    tip:'Nano = 1 tot 100 nm, met heel specifieke eigenschappen. Productie: bottom-up of top-down.',
+    jarvis:'Vraag me de grootteorde van nanomaterialen en laat me twee toepassingen uitleggen.' },
+];
+const CHEM_PLANNING = [
+  { day: "Wo 10/6", tasks: ["Chemie: zuur-base H1-H4 (blok 1-2)"], note: "Na examen wiskunde deel 1" },
+  { day: "Do 11/6", tasks: ["Chemie: buffers + titraties (blok 3)", "Chemie: redox opstellen (blok 4)"], note: "Na examen wiskunde deel 2" },
+  { day: "Vr 12/6", tasks: ["Chemie: galvanische cel + elektrolyse (blok 5-6)"], note: "Na examen Frans" },
+  { day: "Za 13/6", tasks: ["Chemie: biomoleculen + kunststoffen + nano (blok 7-9)", "Chemie: oefeningen herhalen"], note: "5u" },
+  { day: "Zo 14/6", tasks: ["FINALE REVIEW: alle thema's + zwakke punten (succescriteria!)"], note: "Tennis 11:00" },
+  { day: "Ma 15/6", tasks: ["🎯 EXAMEN Chemie"], note: "" },
+];
+
+// ===== BIOLOGIE =====
+const BIO_CHAPTERS = [
+  // FASE 1 — OVERERVING (Thema 1 + celdelingen als basis)
+  { id:'bio-celdeling', number:1, title:'Celdelingen — mitose & meiose', pages:'Thema 2 · p.68-69', hours:1.5, color:'#3cb06c', phase:1, phaseLabel:'Overerving',
+    criteria:[
+      'Ik onderscheid mitose en meiose: doel, aantal delingen, ploïdie (2n→2n vs 2n→n) en genetisch (on)identieke dochtercellen.',
+      'Ik beschrijf de fasen van de mitose (profase, metafase, anafase, telofase + cytokinese) en de celcyclus (interfase G1-S-G2).',
+      'Ik beschrijf de fasen van de meiose (meiose 1 als reductiedeling + meiose 2) en het verschil profase 1 (paarvorming) vs mitose.',
+      'Ik leg het belang van de meiose uit: haploïde gameten, genetische variatie via crossing-over en mixing.'
+    ],
+    exercises:{ mustDo:['p.68-69: nrs 1-7','p.68-69: nrs 8-14'], shouldDo:['Schema mitose vs meiose uit het hoofd tekenen'], extra:['Celcyclus-controlemomenten + kanker (factoren celdeling)'] },
+    tip:'Kernverschil: meiose 1 scheidt homologe chromosomen (reductie 2n→n), meiose 2 scheidt zusterchromatiden (zoals mitose). Crossing-over gebeurt in profase 1.',
+    jarvis:'Overhoor me het verschil tussen mitose en meiose: doel, fasen, ploïdie en genetische variatie. Geef daarna 3 oefenvragen.' },
+  { id:'bio-mendel', number:2, title:'Mendeliaanse overerving (§1)', pages:'6.2 T1 · p.10-23', hours:2.5, color:'#3cb06c', phase:1,
+    criteria:[
+      'Ik gebruik de basisbegrippen correct: gen, allel, homozygoot/heterozygoot, dominant/recessief/co-dominant, genotype/fenotype.',
+      'Ik stel een monohybride kruisingsschema op en bespreek genotypes, fenotypes en gameten (§1.2).',
+      'Ik herken en bespreek intermediaire en co-dominante kruisingen (§1.2).',
+      'Ik stel een dihybride kruisingsschema op en bespreek genotypes, fenotypes en gameten (§1.3).',
+      'Ik bespreek de wetten van Mendel (uniformiteit, splitsing 3/1 of 1/2/1, onafhankelijkheid 9:3:3:1) aan de hand van een kruisingsschema.'
+    ],
+    exercises:{ mustDo:['Monohybride kruising opstellen (Punnett-vierkant)','Intermediaire/codominante kruising opstellen','Dihybride kruising opstellen (4×4 Punnett)'], shouldDo:['Wetten van Mendel benoemen bij een gegeven schema','Verhoudingen 3:1, 1:2:1 en 9:3:3:1 verklaren'], extra:['Test jezelf-vragen p.10-23'] },
+    tip:'Monohybride: 1 kenmerk, 2×2-vierkant. Dihybride: 2 kenmerken, 4×4-vierkant met gameten EZ/Ez/eZ/ez. Dominant-recessief → 3/1, intermediair/codominant → 1/2/1.',
+    jarvis:'Geef me een monohybride én een dihybride kruisingsoefening. Laat me het Punnett-vierkant invullen en genotype/fenotype-verhoudingen bepalen. Controleer.' },
+  { id:'bio-chrombasis', number:3, title:'Chromosomale basis van overerving (§2)', pages:'6.2 T1 · p.24', hours:1, color:'#3cb06c', phase:1,
+    criteria:[
+      'Ik leg uit dat chromosomen de dragers van genen zijn en wat een locus is.',
+      'Ik leg uit hoe het geslacht erfelijk bepaald wordt (heterosomen X/Y, autosomen; eicel X, zaadcel X of Y; 50/50).',
+      'Ik koppel de meiose (profase 1, homologe paren) aan de overerving van allelen.'
+    ],
+    exercises:{ mustDo:['Locus + homologe chromosomen schetsen','Geslachtsbepaling met kruisingsschema (X/Y)'], shouldDo:[], extra:['Test jezelf-vragen p.24'] },
+    tip:'Locus = vaste plaats van een gen op een chromosoom. Homologe chromosomen dragen op dezelfde loci dezelfde genen (mogelijk andere allelen).',
+    jarvis:'Quiz me over de chromosomale basis van overerving: locus, heterosomen/autosomen en geslachtsbepaling.' },
+  { id:'bio-bijzonder', number:4, title:'Bijzondere gevallen van overerving (§3)', pages:'6.2 T1 · p.25-29', hours:2, color:'#3cb06c', phase:1,
+    criteria:[
+      'Ik bespreek multipele allelen aan de hand van het ABO-bloedgroepsysteem (IA, IB co-dominant, Io recessief) (§3.1).',
+      'Ik herken en bespreek recessieve, dominante, X-gebonden en Y-gebonden erfelijke aandoeningen (daltonisme, Huntington, mucoviscidose, hemofilie A, DMD) (§3.2-3.3).',
+      'Ik voer een stamboomanalyse uit: dominant vs recessief en autosomaal vs geslachtsgebonden bepalen (§3.4).'
+    ],
+    exercises:{ mustDo:['Bloedgroepkruising opstellen (multipele allelen)','Stamboom analyseren: dominant/recessief bepalen','Stamboom analyseren: autosomaal/X-gebonden bepalen'], shouldDo:['Erfelijke aandoeningen klasseren naar overervingstype'], extra:['Test jezelf-vragen p.25-29'] },
+    tip:'Stamboom-truc: komt het in élke generatie voor? Mogelijk dominant. Recessief X-gebonden? Zoek aangedane moeder → al haar zonen aangedaan. Dominant X-gebonden? Zoek aangedane vader → al zijn dochters aangedaan.',
+    jarvis:'Geef me een stamboom-oefening. Laat me bepalen of het allel dominant/recessief en autosomaal/X-gebonden is, en mijn redenering verantwoorden.' },
+  { id:'bio-gekoppeld', number:5, title:'Gekoppelde genen, crossing-over & genenkaart (§4)', pages:'6.2 T1 · p.30-43', hours:2, color:'#3cb06c', phase:1,
+    criteria:[
+      'Ik leg het onderzoek van Morgan (fruitvliegen) uit en wat gekoppelde genen zijn (§4.1-4.2).',
+      'Ik leg crossing-over uit als mechanisme dat allelencombinaties wijzigt en recombinanten vormt (§4.3).',
+      'Ik bepaal de volgorde van genen op basis van recombinatie-/koppelingsfrequenties en stel een genenkaart op (1% = 1 cM) (§4.4).'
+    ],
+    exercises:{ mustDo:['Genen op volgorde zetten via recombinatiefrequenties','Genenkaart opstellen (cM-afstanden)'], shouldDo:['Verklaren waarom Morgan afwijkt van Mendel (¾ i.p.v. 9:3:3:1)'], extra:['Test jezelf-vragen p.30-43'] },
+    tip:'Hoe verder twee genen op een chromosoom uit elkaar liggen, hoe groter de kans op crossing-over → grotere recombinatiefrequentie. 1% recombinatie = 1 centiMorgan (cM) afstand.',
+    jarvis:'Geef me recombinatiefrequenties tussen 3-4 genen. Laat me ze op volgorde zetten en een genenkaart in cM tekenen. Controleer mijn afstanden.' },
+
+  // FASE 2 — VOORTPLANTING & EMBRYOGENESE (Thema 4, examen 17/6)
+  { id:'bio-embryo', number:6, title:'Embryogenese (§10)', pages:'5.2/6.2 T4 · p.108-116', hours:2.5, color:'#3cb06c', phase:2, phaseLabel:'Voortplanting & embryogenese',
+    criteria:[
+      'Ik bespreek de processen binnen de embryogenese (klievingsdelingen, vorming morula, vorming blastocyst, nidatie, vorming twee- en driebladige kiemschijf, organogenese).',
+      'Ik leg begrippen binnen de embryogenese in eigen woorden uit (blastomeer, totipotent, trofoblast, embryoblast, hypoblast/epiblast).',
+      'Ik leg voor de verschillende celtypes en cellagen uit hoe de ontwikkeling verloopt (ecto-, meso-, endoderm → welke organen).',
+      'Ik geef functies van relevante structuren (bv. syncytiotrofoblast, chorionvlokken).'
+    ],
+    exercises:{ mustDo:['Tijdlijn zygote→morula→blastula→gastrula→organogenese maken','Drie kiembladen koppelen aan organen (ecto/meso/endo)','Nidatie + vorming kiemschijven beschrijven'], shouldDo:['Begrippen embryogenese flashcards'], extra:['Test jezelf-vragen (PGD §10.1 NIET, zwangerschapstest §10.2 NIET)'] },
+    tip:'Volgorde: klievingsdeling (mitose, géén groei, totipotente blastomeren) → morula (8 cellen) → blastula (holte + trofoblast/embryoblast) → nidatie → 2-bladig → 3-bladig (gastrula) → organogenese. Ecto=huid/zenuwen, meso=skelet/spieren/bloed, endo=spijsvertering/ademhaling.',
+    jarvis:'Overhoor me de volledige volgorde van de embryogenese met de juiste begrippen, en laat me de drie kiembladen aan de juiste organen koppelen.' },
+  { id:'bio-foetus', number:7, title:'Foetale periode (§11)', pages:'5.2/6.2 T4 · p.117', hours:1, color:'#3cb06c', phase:2,
+    criteria:[
+      'Ik situeer de grote veranderingen die de foetus in de derde, vierde/vijfde en zesde tot negende maand doormaakt.',
+      'Ik leg uit dat de placenta de progesteronproductie overneemt van het geel lichaam (rond maand 3).'
+    ],
+    exercises:{ mustDo:['Tijdlijn foetale ontwikkeling per maand maken'], shouldDo:['Lengtegroei (maand 3-5) vs massagroei (maand 8-9) onderscheiden'], extra:['Test jezelf-vragen p.117'] },
+    tip:'Lengtegroei is het opvallendst in maand 3, 4 en 5; massagroei (gewicht) vooral in maand 8 en 9. Geel lichaam verschrompelt rond maand 3, placenta neemt over.',
+    jarvis:'Vraag me de grote veranderingen van de foetus per maand (3, 4/5, 6-9) en het moment waarop de placenta de hormoonproductie overneemt.' },
+  { id:'bio-vruchtvliezen', number:8, title:'Vruchtvliezen en vruchtwater (§12)', pages:'5.2/6.2 T4 · p.117', hours:0.5, color:'#3cb06c', phase:2,
+    criteria:[
+      'Ik leg uit hoe de vruchtvliezen tot stand komen.',
+      'Ik geef functies van het vruchtwater (bescherming, temperatuur, bewegingsruimte).'
+    ],
+    exercises:{ mustDo:['Vruchtvliezen + functies vruchtwater noteren'], shouldDo:[], extra:['Test jezelf-vragen p.117'] },
+    tip:'Vruchtwater (amnionvocht) beschermt tegen schokken, houdt de temperatuur stabiel en geeft de foetus bewegingsruimte voor de ontwikkeling van spieren en longen.',
+    jarvis:'Overhoor me hoe de vruchtvliezen ontstaan en welke functies het vruchtwater heeft.' },
+  { id:'bio-placenta', number:9, title:'Placenta (§13)', pages:'5.2/6.2 T4 · p.120-123', hours:1.5, color:'#3cb06c', phase:2,
+    criteria:[
+      'Ik leg uit hoe de structuur van de placenta haar functie als uitwisselingsorgaan mogelijk maakt (§13.1) (diffusie van O₂/CO₂, voedings- en afvalstoffen, antistoffen; geen bloedcontact).',
+      'Ik situeer de placenta als hormoonproducerend orgaan in de vrouwelijke hormonale huishouding (§13.2) (progesteron en oestrogeen; verhinderen nieuwe eicelrijping, borstklieren).'
+    ],
+    exercises:{ mustDo:['Uitwisseling via placenta verklaren (diffusie, geen bloedcontact)','Hormoonfunctie placenta in de hormonale huishouding plaatsen'], shouldDo:['Negatieve stoffen die de placenta passeren benoemen'], extra:['Test jezelf-vragen p.120-123'] },
+    tip:'Cruciaal: er is GÉÉN direct bloedcontact tussen moeder en foetus — uitwisseling gebeurt via diffusie over de chorionvlokken. Progesteron uit de placenta houdt de baarmoeder rustig en verhindert nieuwe eicelrijping.',
+    jarvis:'Leg me uit hoe de bouw van de placenta uitwisseling mogelijk maakt zonder bloedcontact, en welke hormonen ze produceert. Quiz me daarna.' },
+  { id:'bio-teratogeen', number:10, title:'Teratogene factoren (§15)', pages:'5.2/6.2 T4 · p.124-127', hours:1, color:'#3cb06c', phase:2,
+    criteria:[
+      'Ik leg uit wat een teratogene factor is (§15.1) (factor die afwijkingen veroorzaakt; moment van blootstelling vaak bepalender dan de factor zelf).',
+      'Ik geef voorbeelden van verschillende teratogene factoren (§15.2) (chemische stoffen, stralingen, ziekteverwekkers).'
+    ],
+    exercises:{ mustDo:['Definitie teratogene factor + belang van timing','Voorbeelden geven per categorie (chemisch/straling/ziekteverwekker)'], shouldDo:['FAS, rubella, toxoplasmose, listeria situeren'], extra:['Test jezelf-vragen p.124'] },
+    tip:'Je moet vóórbeelden kunnen geven (alcohol→FAS, rubellavirus, toxoplasmose, röntgenstraling), maar NIET het exacte verloop/de effecten en het kader p.126-127. Onthoud: het mòment van blootstelling bepaalt de ernst meer dan de factor zelf.',
+    jarvis:'Vraag me wat een teratogene factor is en laat me per categorie (chemisch, straling, ziekteverwekker) een voorbeeld geven.' },
+  { id:'bio-geboorte', number:11, title:'Indaling & geboorte (§16-17)', pages:'5.2/6.2 T4 · p.128-134', hours:1.5, color:'#3cb06c', phase:2,
+    criteria:[
+      'Ik leg uit hoe de indaling van de foetus verloopt (§16) (start w31-32, voltooid w35, liefst hoofdligging).',
+      'Ik leg uit hoe de bevalling verloopt (§17): ontsluitingsfase (weeën, ontsluiting tot 10 cm), uitdrijvingsfase (persweeën, geboortekanaal) en nageboorte (placenta + vruchtvliezen).'
+    ],
+    exercises:{ mustDo:['Drie fasen van de bevalling beschrijven','Indaling situeren in de tijd'], shouldDo:['Kenmerken weeën doorheen de ontsluitingsfase'], extra:['Test jezelf-vragen p.128-134'] },
+    tip:'Drie fasen: ontsluiting (weeën worden sterker/frequenter, tot 10 cm) → uitdrijving (persweeën, baby door geboortekanaal) → nageboorte (placenta + vruchtvliezen los, ±20 min later). Keizersnede en de hormonale/neurale kaders hoef je NIET te kennen.',
+    jarvis:'Overhoor me de drie fasen van de bevalling en de timing van de indaling van de foetus.' },
+  { id:'bio-anticonceptie', number:12, title:'Vruchtbaarheidsbeheersing (§19)', pages:'5.2/6.2 T4 · p.135-138', hours:1, color:'#3cb06c', phase:2,
+    criteria:[
+      'Ik bespreek de soorten anticonceptie en hun werking (§19.1): hormonaal, mechanisch, zaaddodend, natuurlijk.',
+      'Ik kan een verantwoorde keuze beargumenteren voor hoe men de levensstijl kan aanpassen in functie van de controle van de vruchtbaarheid (§19.2) (betrouwbaarheid, gezondheid, combinatie).'
+    ],
+    exercises:{ mustDo:['Anticonceptiemethoden klasseren + werking uitleggen','Verantwoorde keuze argumenteren (betrouwbaarheid + gezondheid)'], shouldDo:['Voor- en nadelen hormonale anticonceptie afwegen'], extra:['Test jezelf-vragen p.135-138'] },
+    tip:'Hormonaal (pil/ring/spiraal): verhindert eicelrijping + maakt slijmprop taai. Mechanisch (condoom): fysieke barrière, beschermt óók tegen SOA. Condoom + hormonaal samen = veiligst.',
+    jarvis:'Quiz me over de werking en betrouwbaarheid van de anticonceptiemethoden, en laat me een onderbouwde keuze argumenteren.' },
+  { id:'bio-soa', number:13, title:'Seksueel overdraagbare aandoeningen (§20)', pages:'5.2/6.2 T4 · p.192-200', hours:1.5, color:'#3cb06c', phase:2,
+    criteria:[
+      'Ik leg uit wat soa zijn (§20.1).',
+      'Ik leg uit hoe soa opgespoord worden (§20.2).',
+      'Ik leg uit hoe soa behandeld worden (§20.3).',
+      'Ik leg uit hoe soa voorkomen worden (§20.4).'
+    ],
+    exercises:{ mustDo:['Definitie soa + voorbeelden noteren','Opsporing, behandeling en preventie per soa-type','Onderscheid bacterieel (behandelbaar) vs viraal'], shouldDo:['Preventie koppelen aan mechanische anticonceptie'], extra:['Test jezelf-vragen p.192-200'] },
+    tip:'Onderscheid bacteriële soa (chlamydia, gonorroe, syfilis — met antibiotica te behandelen) van virale soa (hiv, hepatitis, HPV, herpes — niet te genezen, wel te onderdrukken/voorkomen). Condoom = belangrijkste preventie.',
+    jarvis:'Overhoor me over soa: wat ze zijn, hoe ze worden opgespoord, behandeld en voorkomen. Onderscheid bacterieel van viraal.' },
+
+  // FASE 3 — EVOLUTIE (Thema 5)
+  { id:'bio-soort', number:14, title:'Soortbegrip & soortvorming', pages:'6.2 T5 · evolutie', hours:1, color:'#3cb06c', phase:3, phaseLabel:'Evolutie van soorten',
+    criteria:[
+      'Ik gebruik begrippen rond soorten en soortvorming correct in mijn uitleg (soort, ondersoort, speciatie als fluïde proces).',
+      'Ik leg uit waarom het soortbegrip niet altijd scherp af te bakenen is (geografische ondersoorten).'
+    ],
+    exercises:{ mustDo:['Soortbegrip definiëren + reproductieve isolatie','Geografische ondersoorten als voorbeeld bespreken'], shouldDo:[], extra:['Test jezelf-vragen evolutie'] },
+    tip:'Soort = groep organismen die zich onderling vruchtbaar kan voortplanten. Speciatie is een fluïde, traag proces — ondersoorten tonen tussenstadia.',
+    jarvis:'Leg me het soortbegrip uit en quiz me over soortvorming en geografische ondersoorten.' },
+  { id:'bio-lamarck-darwin', number:15, title:'Lamarck & Darwin', pages:'6.2 T5 · evolutie', hours:2, color:'#3cb06c', phase:3,
+    criteria:[
+      'Ik leg de idee van Lamarck uit (innerlijk streven, gebruik/onbruik, overerving van verworven eigenschappen) en de kritiek erop.',
+      'Ik leg de argumenten die Darwin op zijn reis (HMS Beagle) gebruikte in eigen woorden uit (geologie/actualiteitsprincipe, embryologie, comparatieve anatomie, biogeografie).',
+      'Ik leg het Darwinisme in eigen woorden uit (On the Origin of Species, 1859).',
+      'Ik leg de hoofdideeën achter natuurlijke selectie uit als Darwins motor voor soortvorming (overproductie, struggle for life, variatie, survival of the fittest).'
+    ],
+    exercises:{ mustDo:['Lamarckisme uitleggen + kritiek','Darwins 4 bewijslijnen opsommen + uitleggen','Natuurlijke selectie in eigen woorden uitleggen'], shouldDo:['Homologie vs analogie onderscheiden (+ rudimentaire organen)','Darwinvinken als voorbeeld bespreken'], extra:['Test jezelf-vragen evolutie'] },
+    tip:'Lamarck = verworven eigenschappen worden doorgegeven (fout: giraf rekt nek uit). Darwin = variatie bestaat al, selectie kiest. Homologie (zelfde bouw, andere functie) wijst op gemeenschappelijke voorouder; analogie (andere bouw, zelfde functie) niet.',
+    jarvis:'Speel mijn examinator. Laat me het verschil tussen Lamarck en Darwin uitleggen, en daarna Darwins vier bewijslijnen voor evolutie in eigen woorden geven.' },
+  { id:'bio-neodarwin', number:16, title:'Neodarwinisme & drijvende krachten', pages:'6.2 T5 · evolutie', hours:2, color:'#3cb06c', phase:3,
+    criteria:[
+      'Ik leg de moderne synthese / het neodarwinisme in eigen woorden uit.',
+      'Ik leg de drijvende krachten in het neodarwinisme uit en wijs een voorbeeld aan elke factor toe (mutatie, recombinatie/cross-over/mixing, natuurlijke selectie incl. seksuele selectie, genetische drift).',
+      'Ik leg verschillende vormen van sympatrische en allopatrische soortvorming uit en herken ze in een voorbeeld (ecologisch, ethologisch, morfologisch, temporeel; genetische drift ~ Hardy-Weinberg).'
+    ],
+    exercises:{ mustDo:['Drijvende krachten neodarwinisme opsommen + voorbeeld per factor','Allopatrische vs sympatrische soortvorming onderscheiden','Vier vormen sympatrische isolatie herkennen in voorbeelden'], shouldDo:['Seksuele selectie + dimorfisme bespreken','Genetische drift koppelen aan kleine populaties'], extra:['Test jezelf-vragen evolutie'] },
+    tip:'Allo = anders (geografische scheiding), Sym = zelfde (zelfde gebied, andere isolatie). Sympatrische isolatievormen: ecologisch (niche), ethologisch (gedrag), morfologisch (bouw), temporeel (tijd). Neodarwinisme = Darwin + genetica.',
+    jarvis:'Geef me telkens een voorbeeld en laat me bepalen welke drijvende kracht (mutatie/selectie/drift) en welk type soortvorming (allopatrisch/sympatrisch, en welke isolatievorm) het illustreert.' },
+  { id:'bio-bewijzen', number:17, title:'Gegevens over het evolutieverloop', pages:'6.2 T5 · evolutie', hours:1.5, color:'#3cb06c', phase:3,
+    criteria:[
+      'Ik bespreek gegevens uit de paleontologie die het evolutieverloop uitklaren (fossilisatie, gidsfossielen, datering, overgangsvormen, continue reeksen).',
+      'Ik bespreek gegevens uit de (bio)geografie die het evolutieverloop uitklaren.',
+      'Ik bespreek gegevens uit de moleculaire biologie (cladogram/boomdiagram: nabijheid ~ verwantschap).'
+    ],
+    exercises:{ mustDo:['Fossilisatie + gidsfossielen + datering uitleggen','Cladogram interpreteren (verwantschap aflezen)'], shouldDo:['Overgangsvormen + continue reeksen als bewijs bespreken','Biogeografie als bewijslijn bespreken'], extra:['Test jezelf-vragen evolutie'] },
+    tip:'Drie bewijslijnen voor het verloop: paleontologie (fossielen, gidsfossielen, overgangsvormen), biogeografie (verspreiding van soorten), moleculaire biologie (DNA-vergelijking → cladogram: hoe dichter bij elkaar, hoe nauwer verwant).',
+    jarvis:'Geef me een cladogram en laat me de verwantschappen aflezen. Quiz me daarna over fossilisatie, gidsfossielen en overgangsvormen.' },
+  { id:'bio-hominisatie', number:18, title:'Mens & hominisatie', pages:'6.2 T5 · evolutie', hours:1, color:'#3cb06c', phase:3,
+    criteria:[
+      'Ik weet een antwoord te vormen op de uitspraak: "Ik geloof niet in evolutie, want ik ben niet afkomstig van de apen."',
+      'Ik bespreek het proces van de hominisatie (menswording, ±5 miljoen jaar, Hominidae, set kenmerken: groot brein, stereoscopie, opponeerbare duim, platte nagels, lange zwangerschap; bipedale beweging + voordelen).'
+    ],
+    exercises:{ mustDo:['Misvatting "afkomstig van apen" weerleggen (gemeenschappelijke voorouder)','Kenmerken hominisatie opsommen + voordelen bipedie'], shouldDo:['Theory of mind situeren'], extra:['Test jezelf-vragen evolutie'] },
+    tip:'Sleutel-weerlegging: de mens stamt NIET àf van de huidige apen, maar mens en aap hebben een gemeenschappelijke voorouder. Bipedie-voordelen: handen vrij, betere verdediging/overzicht, minder UV-blootstelling.',
+    jarvis:'Speel een scepticus die zegt "ik kom niet van de apen". Laat me het correct weerleggen, en overhoor me daarna het proces van de hominisatie.' },
+];
+const BIO_PLANNING = [
+  { day: "Vr 12/6", tasks: ["Biologie: celdelingen + Mendel (blok 1-2)"], note: "Na examen Frans — start vroeg, dit is veel stof" },
+  { day: "Za 13/6", tasks: ["Biologie: chromosomale basis + bijzondere gevallen + gekoppelde genen (blok 3-5)", "Biologie: kruisingsoefeningen + stambomen inoefenen"], note: "Overerving = veel oefeningen!" },
+  { day: "Zo 14/6", tasks: ["Biologie: embryogenese + foetus + vruchtvliezen + placenta (blok 6-9)"], note: "Tennis 11:00" },
+  { day: "Ma 15/6", tasks: ["Biologie: teratogeen + geboorte + anticonceptie + soa (blok 10-13)"], note: "Na examen Chemie" },
+  { day: "Di 16/6", tasks: ["Biologie: evolutie volledig — soortvorming t.e.m. hominisatie (blok 14-18)", "Biologie: FINALE REVIEW alle succescriteria"], note: "Na examen Fysica — examen biologie MORGEN" },
+  { day: "Wo 17/6", tasks: ["🎯 EXAMEN Biologie"], note: "" },
+];
+
+// ===== ENGELS =====
+// Oral exam "Living in the future today" — TED talk over AI Centralization vs. Decentralization (hybride standpunt)
+const ENG_CHAPTERS = [
+  // FASE 1 — RESEARCH & TEXT (Step 1-4, telt voor /20 "Text")
+  { id:'eng-topic', number:1, title:'Step 1 — Onderwerp & kernboodschap vastleggen', pages:'Opdracht stap 1', hours:1, color:'#3c8ce8', phase:1, phaseLabel:'Research & Text (/20)',
+    criteria:[
+      'Ik kan mijn topic in één zin uitleggen: "Should AI power be centralized in a few big companies, or decentralized across many?"',
+      'Ik kan mijn standpunt formuleren: een hybride model (centralisatie voor veiligheid/zware modellen, decentralisatie voor controle/privacy/innovatie).',
+      'Ik kan in één pakkende "hook"-zin zeggen waarom dit ertoe doet voor de toekomst.'
+    ],
+    exercises:{ mustDo:['Schrijf je centrale stelling (thesis) op in 1 Engelse zin','Schrijf 3 mogelijke openingszinnen (hooks) en kies de beste'], shouldDo:['Bedenk een persoonlijk voorbeeld: jouw eigen lokale AI (Jarvis) + cloud-AI als "hybride in de praktijk"'], extra:['Bedenk een titel voor je TED talk (bv. "Who Should Own the Brain of the Future?")'] },
+    tip:'Een TED talk draait om ÉÉN idee. Jouw idee: "AI mag niet volledig in handen van een paar bedrijven liggen, maar ook niet volledig wild — we hebben een hybride model nodig." Jouw eigen setup (Jarvis lokaal + Claude in de cloud) is een goudmijn aan concrete voorbeelden.',
+    jarvis:'Act as my English teacher. I want to give a TED talk on AI centralization vs decentralization with a hybrid stance. Ask me 3 questions to sharpen my central message into one clear sentence.' },
+  { id:'eng-sources', number:2, title:'Step 2 — Minimum 5 bronnen zoeken', pages:'Opdracht stap 2', hours:1.5, color:'#3c8ce8', phase:1,
+    criteria:[
+      'Ik heb minstens 5 betrouwbare Engelstalige bronnen gevonden over AI-centralisatie/decentralisatie.',
+      'Ik heb van elke bron de kernboodschap in 1-2 zinnen genoteerd (in eigen woorden).',
+      'Ik heb bronnen van verschillende kanten (pro-centralisatie én pro-decentralisatie) zodat ik "different angles" kan tonen.'
+    ],
+    exercises:{ mustDo:['Vind 5 bronnen: bv. artikels over OpenAI/Google (centralisatie), open-source AI (Llama, Mistral, decentralisatie), AI-veiligheid, big-tech-macht','Noteer bij elke bron: titel + link + 1-2 zinnen kernidee'], shouldDo:['Zoek minstens 1 bron die jouw hybride standpunt tegenspreekt (om te weerleggen)'], extra:['Bewaar de bronnenlijst netjes — die telt mee voor de /20 Text'] },
+    tip:'Goede zoektermen: "AI centralization risks", "open source AI vs big tech", "decentralized AI governance", "AI monopoly power". Betrouwbare bronnen: MIT Technology Review, The Verge, Nature, Wired, BBC. Vermijd random blogs.',
+    jarvis:'I need 5 sources on AI centralization vs decentralization. Suggest the types of articles and reliable outlets I should look for, and give me search terms in English.' },
+  { id:'eng-vocab', number:3, title:'Step 3 — Vocabulairelijst (±20 woorden)', pages:'Opdracht stap 3', hours:1, color:'#3c8ce8', phase:1,
+    criteria:[
+      'Ik heb een lijst van ±20 nuttige Engelse woorden/uitdrukkingen om dit topic te bespreken.',
+      'Ik kan elk woord correct uitspreken en in een eigen zin gebruiken.',
+      'Ik gebruik een online woordenboek om uitspraak en betekenis te checken.'
+    ],
+    exercises:{ mustDo:['Stel een lijst van ±20 termen op (zie tip voor startset)','Schrijf bij elk woord een korte Engelse voorbeeldzin','Check uitspraak van moeilijke woorden in een online dictionary'], shouldDo:['Oefen de 5 moeilijkste woorden hardop tot ze vlot gaan'], extra:['Markeer 5 "wow"-woorden die je zeker in je talk wil gebruiken'] },
+    tip:'Startset: centralization, decentralization, monopoly, open-source, accountability, surveillance, infrastructure, governance, bias, transparency, scalability, privacy, regulation, innovation, concentration of power, gatekeeper, level playing field, safeguards, autonomy, trade-off. Dat zijn er al 20!',
+    jarvis:'Give me the IPA pronunciation and a simple example sentence for these words: accountability, surveillance, governance, scalability, gatekeeper. Then quiz me by asking me to use each in a sentence.' },
+  { id:'eng-analysis', number:4, title:'Step 4 — Probleemanalyse + oplossing (schematisch)', pages:'Opdracht stap 4', hours:2, color:'#3c8ce8', phase:1,
+    criteria:[
+      'Ik heb het probleem schematisch geanalyseerd vanuit verschillende invalshoeken (NIET als lopende tekst).',
+      'Ik heb de voor- en nadelen van centralisatie én decentralisatie naast elkaar gezet.',
+      'Ik heb mijn hybride oplossing/voorspelling schematisch uitgewerkt (wie doet wat, waarom werkt dit).'
+    ],
+    exercises:{ mustDo:['Maak een schema/mindmap: probleem in het midden, takken naar verschillende invalshoeken','Maak een voor/nadelen-tabel: centralisatie vs decentralisatie','Werk je hybride oplossing schematisch uit (bullet points, geen lopende tekst)'], shouldDo:['Bedenk per nadeel van jouw oplossing een tegenargument/antwoord (voor de Q&A)'], extra:['Voorspel een concrete uitkomst: "In 10 years, AI will look like..."'] },
+    tip:'De opdracht zegt expliciet: "This is not a running text but a schematic representation." Dus: mindmap, tabel of bullet-schema. Invalshoeken voor jouw topic: economie (macht/geld), veiligheid, privacy, innovatie, toegankelijkheid. Jouw hybride oplossing: zware/gevaarlijke modellen gereguleerd + centraal, kleinere/open modellen vrij + lokaal.',
+    jarvis:'Help me build a schematic pros-and-cons analysis of AI centralization vs decentralization across these angles: economy, safety, privacy, innovation, access. Keep it as bullet points, not running text.' },
+
+  // FASE 2 — BUILD THE PRESENTATION (Step 5, telt voor /5 PPP + inhoud)
+  { id:'eng-script', number:5, title:'Step 6a — Spreektekst & structuur schrijven', pages:'Opdracht stap 6', hours:2.5, color:'#3c8ce8', phase:2, phaseLabel:'Presentatie bouwen (/5)',
+    criteria:[
+      'Ik heb een duidelijke structuur: hook → probleem → invalshoeken → hybride oplossing → call to action.',
+      'Ik heb een spreektekst geschreven die 5 tot 10 minuten duurt (richtlijn: ±130 woorden = 1 minuut → 700-1200 woorden).',
+      'Ik gebruik mijn vocabulaire en spreektaal (geen schrijftaal), met signaalwoorden (first, however, on the other hand, in conclusion).'
+    ],
+    exercises:{ mustDo:['Schrijf de opening (hook + thesis) — max 1 minuut','Schrijf de kern (probleem + invalshoeken + oplossing) — 3 tot 7 minuten','Schrijf de afsluiting (samenvatting + call to action) — 1 minuut'], shouldDo:['Lees je tekst hardop en schrap alles wat moeilijk uit te spreken is','Bouw 1-2 retorische vragen in om je "exam buddy" te betrekken'], extra:['Voeg een verrassend feit of cijfer toe in je opening'] },
+    tip:'TED-structuur die altijd werkt: 1) Hook (vraag/verhaal/feit) 2) "Here\'s the problem" 3) "Let\'s look at both sides" 4) "Here\'s my solution: a hybrid model" 5) "Here\'s what you can do / what the future holds". Schrijf zoals je práát, niet zoals je schrijft.',
+    jarvis:'Review my TED talk script for spoken English (not written style). Flag sentences that are too long or hard to say aloud, and suggest signal words to connect my ideas.' },
+  { id:'eng-ppt', number:6, title:'Step 5 — Tekstvrije PowerPoint maken', pages:'Opdracht stap 5 · telt /5', hours:1.5, color:'#3c8ce8', phase:2,
+    criteria:[
+      'Ik heb een PowerPoint zonder tekst (of een absoluut minimum aan kernwoorden).',
+      'Elke slide ondersteunt één idee met een beeld, grafiek of icoon — niet met zinnen.',
+      'De PowerPoint volgt de structuur van mijn talk (hook → probleem → 2 kanten → oplossing → slot).'
+    ],
+    exercises:{ mustDo:['Maak een titelslide (titel + jouw naam)','Maak 1 slide per kernidee met enkel beeld/keyword','Maak een slot-slide (jouw hybride model in 1 sterk beeld)'], shouldDo:['Vervang elke zin door een beeld of icoon','Test: kan iemand je slides NIET begrijpen zonder jouw uitleg? Goed zo!'], extra:['Gebruik een consistent kleurenschema (bv. blauw = centraal, groen = decentraal)'] },
+    tip:'PPP telt /5 en moet TEKSTVRIJ zijn. De slides zijn er voor het publiek, niet als spiekbrief. Eén beeld per idee. Voor jouw topic: een beeld van enkele grote bedrijven vs. een netwerk van kleine knooppunten zegt meer dan 10 woorden. Je mag dit door Claude laten ontwerpen en in PowerPoint zetten.',
+    jarvis:'Suggest one strong visual idea per slide for my AI centralization vs decentralization talk. No text on slides — only images, icons or simple diagrams.' },
+
+  // FASE 3 — PRACTICE & PRESENT (Step 6, telt voor /20 Presentation)
+  { id:'eng-memorize', number:7, title:'Oefenen 1 — Inhoud leren (niet vanbuiten blokken)', pages:'Presentatie /20', hours:2, color:'#3c8ce8', phase:3, phaseLabel:'Oefenen & presenteren (/20)',
+    criteria:[
+      'Ik ken de structuur van mijn talk vanbuiten (de volgorde van mijn ideeën, niet woord-voor-woord).',
+      'Ik kan elke slide uitleggen zonder mijn tekst te lezen.',
+      'Ik heb steekwoord-kaartjes (cue cards) gemaakt voor het geval ik vastloop.'
+    ],
+    exercises:{ mustDo:['Maak voor elke slide 3-5 steekwoorden op een kaartje','Oefen elke slide los: zeg de inhoud bij enkel het beeld','Doorloop de hele structuur 1x op kladpapier uit het hoofd'], shouldDo:['Oefen de overgangen tussen slides ("So, now that we\'ve seen X, let\'s look at Y")'], extra:['Neem jezelf 1x op terwijl je de structuur navertelt'] },
+    tip:'NIET woord-voor-woord vanbuiten leren — dat klinkt robotachtig en je blokkeert als je één woord vergeet. Leer de FLOW: welk idee komt na welk idee. Bij elke slide weet je waarover je praat. Steekwoorden op kaartjes mogen, hele zinnen niet.',
+    jarvis:'Quiz me: name one of my slides and I\'ll explain it out loud from memory. Tell me if I covered the key point or missed something. Do this for all slides.' },
+  { id:'eng-pronunciation', number:8, title:'Oefenen 2 — Uitspraak & vloeiendheid', pages:'Presentatie /20', hours:2, color:'#3c8ce8', phase:3,
+    criteria:[
+      'Ik spreek vloeiend, zonder lange stiltes of veel "euh".',
+      'Ik spreek de moeilijke woorden uit mijn vocabulaire correct uit.',
+      'Ik praat op een rustig tempo met pauzes op de juiste plaatsen (niet te snel uit zenuwen).'
+    ],
+    exercises:{ mustDo:['Lees je hele talk 3x hardop','Markeer de 10 moeilijkste woorden en oefen ze apart','Oefen 1x heel traag, met overdreven pauzes (tegen het te-snel-praten)'], shouldDo:['Neem jezelf op en luister terug: waar struikel je? Oefen net die stukken','Oefen je openingszin tot ze 100% vlot en zelfverzekerd klinkt'], extra:['Oefen voor de spiegel of tijdens een wandeling (helpt tegen zenuwen)'] },
+    tip:'Tegen zenuwen: hoe beter je je ÓPENING kent, hoe rustiger je wordt — de eerste 30 seconden bepalen alles. Praat bewust trager dan normaal; onder stress versnel je vanzelf. Pauzes zijn krachtig, geen falen. Adem diep in vóór je begint.',
+    jarvis:'I\'ll read my opening lines. Listen for filler words and too-fast pace, and give me 3 concrete tips to sound more fluent and confident. Then let me try again.' },
+  { id:'eng-interaction', number:9, title:'Oefenen 3 — Interactie & Q&A voorbereiden', pages:'Presentatie /20 · INTERACT!', hours:1.5, color:'#3c8ce8', phase:3,
+    criteria:[
+      'Ik kan vragen stellen aan mijn exam buddy om interactie uit te lokken (de opdracht eist dit!).',
+      'Ik heb antwoorden voorbereid op waarschijnlijke vragen over mijn standpunt.',
+      'Ik kan rustig en overtuigend reageren als iemand het oneens is.'
+    ],
+    exercises:{ mustDo:['Bedenk 2-3 vragen die JIJ aan je buddy/leerkracht stelt tijdens de talk','Bedenk 5 vragen die ZIJ aan jou kunnen stellen + jouw antwoord','Oefen het beantwoorden van een lastige vraag (bv. "Isn\'t a hybrid model just a compromise that pleases no one?")'], shouldDo:['Oefen overtuigingstechnieken: oogcontact, een sterk voorbeeld, een retorische vraag'], extra:['Bereid een "fallback"-antwoord voor als je een vraag niet snapt: "That\'s an interesting point — could you clarify what you mean by...?"'] },
+    tip:'De opdracht zegt expliciet "Interact! Ask and answer questions" en "talents of persuasive manipulation" telt mee in de /20. Plan dus actief momenten waar je een vraag stelt: "What would YOU choose — safety or freedom?" Dat maakt je talk levendig en scoort punten.',
+    jarvis:'Play my exam buddy and teacher. After I summarize my talk, ask me 5 critical questions about a hybrid AI model — including one that disagrees with me — so I can practice answering persuasively.' },
+  { id:'eng-dryrun', number:10, title:'Oefenen 4 — Volledige try-outs + timing', pages:'Presentatie /20 · 5-10 min', hours:2, color:'#3c8ce8', phase:3,
+    criteria:[
+      'Ik heb mijn volledige talk minstens 3x van begin tot eind geoefend.',
+      'Mijn talk duurt tussen 5 en 10 minuten (gechronometreerd).',
+      'Ik voel me zeker genoeg: ik ken mijn opening, mijn flow en mijn slot.'
+    ],
+    exercises:{ mustDo:['Doe een volledige try-out MET de PowerPoint en chronometer — noteer de tijd','Pas aan: te kort? voorbeeld toevoegen. Te lang? schrappen','Doe een 2e en 3e volledige try-out, liefst voor iemand anders (familie/vriend)'], shouldDo:['Doe 1 try-out staand, met gebaren en oogcontact zoals op het echte examen','Film je laatste try-out en kijk terug met een kritische blik'], extra:['Plan je laatste oefenmoment de avond vóór het examen — kort, niet uitputtend'] },
+    tip:'Mik op ±7 minuten zodat je veilig binnen de 5-10 min valt, ook als je sneller praat door zenuwen. Oefenen voor een echt persoon (zelfs je hond telt half) is goud waard. De avond vóór: 1 rustige doorloop, dan stoppen en goed slapen — overdrijf niet.',
+    jarvis:'Time me on a full run-through summary of my talk. Tell me if I\'m within 5-10 minutes, and give me 3 final confidence tips for exam day.' },
+];
+const ENG_PLANNING = [
+  { day: "Nu → Wo 17/6", tasks: ["Engels: kies onderwerp + zoek 5 bronnen + vocabulaire (blok 1-3)", "Engels: probleemanalyse + hybride oplossing schematisch (blok 4)"], note: "Rustig starten — research kan naast ander studeren" },
+  { day: "Wo 17/6 → Za 20/6", tasks: ["Engels: spreektekst schrijven (blok 5)", "Engels: tekstvrije PowerPoint maken (blok 6)"], note: "Na examen biologie — bouw je presentatie" },
+  { day: "Za 20/6 → Ma 22/6", tasks: ["Engels: inhoud leren + uitspraak oefenen (blok 7-8)", "Engels: interactie/Q&A + volledige try-outs (blok 9-10)"], note: "Veel hardop oefenen! Laatste doorloop avond vóór examen" },
+  { day: "Ma 22/6", tasks: ["🎯 EXAMEN Engels (TED talk)"], note: "Diep ademhalen, opening kennen, rustig tempo" },
+];
+
 const GROUPS = {
   wiskunde:      { name:'Wiskunde',            emoji:'📐', color:'#e8453c' },
   wetenschappen: { name:'Wetenschappen',       emoji:'🔬', color:'#3cb06c' },
@@ -635,22 +1394,22 @@ const SUBJECTS = {
   wiskunde:       { name:'Wiskunde', emoji:'📐', color:'#e8453c', group:'wiskunde', active:true, pct:58.9,
                     exams:[{label:'Deel 1',date:'2026-06-10'},{label:'Deel 2',date:'2026-06-11'}],
                     chapters:WISK_CHAPTERS, planning:WISK_PLANNING },
-  chemie:         { name:'Chemie', emoji:'🧪', color:'#e8943c', group:'wetenschappen', active:false, pct:64.6,
-                    exams:[{label:'Examen',date:'2026-06-15'}], chapters:[], planning:[] },
-  fysica:         { name:'Fysica', emoji:'⚡', color:'#00b0c8', group:'wetenschappen', active:false, pct:81.6,
-                    exams:[{label:'Examen',date:'2026-06-16'}], chapters:[], planning:[] },
-  biologie:       { name:'Biologie', emoji:'🧬', color:'#3cb06c', group:'wetenschappen', active:false, pct:79.3,
-                    exams:[{label:'Examen',date:'2026-06-17'}], chapters:[], planning:[] },
-  aardrijkskunde: { name:'Aardrijkskunde', emoji:'🌍', color:'#6cb04c', group:'wetenschappen', active:false, pct:55.7,
-                    exams:[{label:'Examen',date:'2026-06-19'}], chapters:[], planning:[] },
-  frans:          { name:'Frans', emoji:'🇫🇷', color:'#9c6ce8', group:'talen', active:false, pct:81.9,
-                    exams:[{label:'Examen',date:'2026-06-12'}], chapters:[], planning:[] },
-  engels:         { name:'Engels', emoji:'🇬🇧', color:'#3c8ce8', group:'talen', active:false, pct:67.2,
-                    exams:[{label:'Examen',date:'2026-06-22'}], chapters:[], planning:[] },
-  nederlands:     { name:'Nederlands', emoji:'📖', color:'#4c7ce8', group:'talen', active:false, pct:68.3,
-                    exams:[{label:'Examen',date:'2026-06-23'}], chapters:[], planning:[] },
-  geschiedenis:   { name:'Geschiedenis', emoji:'🏛️', color:'#9c6ce8', group:'talen', active:false, pct:73.3,
-                    exams:[{label:'Examen',date:'2026-06-18'}], chapters:[], planning:[] },
+  chemie:         { name:'Chemie', emoji:'🧪', color:'#e8943c', group:'wetenschappen', active:true, pct:64.6,
+                    exams:[{label:'Examen',date:'2026-06-15'}], chapters:CHEM_CHAPTERS, planning:CHEM_PLANNING },
+  fysica:         { name:'Fysica', emoji:'⚡', color:'#00b0c8', group:'wetenschappen', active:true, pct:81.6,
+                    exams:[{label:'Examen',date:'2026-06-16'}], chapters:FYS_CHAPTERS, planning:FYS_PLANNING },
+  biologie:       { name:'Biologie', emoji:'🧬', color:'#3cb06c', group:'wetenschappen', active:true, pct:79.3,
+                    exams:[{label:'Examen',date:'2026-06-17'}], chapters:BIO_CHAPTERS, planning:BIO_PLANNING },
+  aardrijkskunde: { name:'Aardrijkskunde', emoji:'🌍', color:'#6cb04c', group:'wetenschappen', active:true, pct:55.7,
+                    exams:[{label:'Examen',date:'2026-06-19'}], chapters:AARD_CHAPTERS, planning:AARD_PLANNING },
+  frans:          { name:'Frans', emoji:'🇫🇷', color:'#9c6ce8', group:'talen', active:true, pct:81.9,
+                    exams:[{label:'Examen',date:'2026-06-12'}], chapters:FRANS_CHAPTERS, planning:FRANS_PLANNING },
+  engels:         { name:'Engels', emoji:'🇬🇧', color:'#3c8ce8', group:'talen', active:true, pct:67.2,
+                    exams:[{label:'Examen',date:'2026-06-22'}], chapters:ENG_CHAPTERS, planning:ENG_PLANNING },
+  nederlands:     { name:'Nederlands', emoji:'📖', color:'#4c7ce8', group:'talen', active:true, pct:68.3,
+                    exams:[{label:'Examen',date:'2026-06-23'}], chapters:NED_CHAPTERS, planning:NED_PLANNING },
+  geschiedenis:   { name:'Geschiedenis', emoji:'🏛️', color:'#9c6ce8', group:'talen', active:true, pct:73.3,
+                    exams:[{label:'Examen',date:'2026-06-18'}], chapters:GES_CHAPTERS, planning:GES_PLANNING },
 };
 
 // ========== GAME CONFIG ==========
