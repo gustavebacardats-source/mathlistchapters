@@ -198,6 +198,40 @@ footer { margin-top:3rem; padding:1.5rem 0; border-top:1px solid var(--border); 
   nav button { font-size:0.68rem; padding:0.5rem 0.2rem; }
   .subjects { grid-template-columns:repeat(2,1fr); }
 }
+
+/* Today study overview */
+.today-card { background:linear-gradient(135deg,var(--bg2),var(--bg3)); border:1px solid var(--border); border-radius:14px; padding:1.15rem 1.25rem; margin-bottom:1.25rem; }
+.today-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:0.75rem; }
+.today-title { font-family:var(--serif); font-size:1.3rem; }
+.today-date { font-family:var(--mono); font-size:0.7rem; color:var(--text3); }
+.today-tasks { display:flex; flex-direction:column; gap:0.4rem; }
+.today-task { display:flex; align-items:flex-start; gap:0.6rem; font-size:0.85rem; color:var(--text2); line-height:1.5; padding:0.35rem 0.6rem; background:var(--bg); border-radius:7px; }
+.today-task-emoji { flex-shrink:0; font-size:0.9rem; line-height:1.5; }
+.today-task-text { flex:1; }
+.today-note { font-family:var(--mono); font-size:0.7rem; color:var(--text3); padding:0.2rem 0.6rem; margin-top:0.1rem; }
+.today-empty { text-align:center; padding:1.5rem 1rem; font-size:0.85rem; color:var(--text3); }
+
+/* Print button */
+.header-actions { display:flex; gap:0.5rem; align-items:center; margin-top:0.5rem; }
+.print-btn { background:var(--bg2); border:1px solid var(--border); color:var(--text3); font-family:var(--mono); font-size:0.7rem; padding:5px 12px; border-radius:6px; cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:5px; }
+.print-btn:hover { border-color:var(--text3); color:var(--text); }
+
+/* Print styles */
+@media print {
+  body { background:#fff !important; color:#111 !important; font-size:11pt; }
+  .container { max-width:100%; padding:0.5cm; }
+  .no-print { display:none !important; }
+  .print-page { display:block !important; }
+  .print-page h1 { font-family:var(--serif); font-size:18pt; margin-bottom:0.3cm; border-bottom:2pt solid #111; padding-bottom:0.2cm; }
+  .print-subject { page-break-inside:avoid; margin-bottom:0.5cm; }
+  .print-subject h2 { font-size:13pt; margin:0.3cm 0 0.15cm; color:#333; }
+  .print-subject h3 { font-size:11pt; margin:0.2cm 0 0.1cm; color:#555; }
+  .print-item { padding:0.08cm 0; padding-left:0.5cm; font-size:10pt; line-height:1.5; display:flex; align-items:flex-start; gap:0.3cm; }
+  .print-box { display:inline-block; width:0.35cm; height:0.35cm; border:1.5pt solid #333; border-radius:2px; flex-shrink:0; margin-top:2pt; }
+  .print-section { margin-left:0.3cm; margin-bottom:0.2cm; }
+  .print-label { font-size:9pt; color:#777; text-transform:uppercase; letter-spacing:0.5pt; margin:0.15cm 0 0.05cm; font-weight:600; }
+  .print-meta { font-size:9pt; color:#888; margin-top:0.05cm; }
+}
 </style>
 </head>
 <body>
@@ -207,9 +241,13 @@ footer { margin-top:3rem; padding:1.5rem 0; border-top:1px solid var(--border); 
 
 <!-- HUB VIEW -->
 <div class="view active" id="view-hub">
+  <div id="today"></div>
   <div class="countdown" id="countdown"></div>
   <div id="groups"></div>
 </div>
+
+<!-- PRINT CHECKLIST (hidden, shown only when printing) -->
+<div class="print-page" id="printPage" style="display:none"></div>
 
 <!-- SUBJECT DETAIL VIEW -->
 <div class="view" id="view-subject">
@@ -1390,24 +1428,24 @@ const GROUPS = {
 };
 
 const SUBJECTS = {
-  wiskunde:       { name:'Wiskunde', emoji:'📐', color:'#e8453c', group:'wiskunde', active:true, pct:58.9,
+  wiskunde:       { name:'Wiskunde', emoji:'📐', color:'#e8453c', group:'wiskunde', active:true,
                     exams:[{label:'Deel 1',date:'2026-06-10'},{label:'Deel 2',date:'2026-06-11'}],
                     chapters:WISK_CHAPTERS, planning:WISK_PLANNING },
-  chemie:         { name:'Chemie', emoji:'🧪', color:'#e8943c', group:'wetenschappen', active:true, pct:64.6,
+  chemie:         { name:'Chemie', emoji:'🧪', color:'#e8943c', group:'wetenschappen', active:true,
                     exams:[{label:'Examen',date:'2026-06-15'}], chapters:CHEM_CHAPTERS, planning:CHEM_PLANNING },
-  fysica:         { name:'Fysica', emoji:'⚡', color:'#00b0c8', group:'wetenschappen', active:true, pct:81.6,
+  fysica:         { name:'Fysica', emoji:'⚡', color:'#00b0c8', group:'wetenschappen', active:true,
                     exams:[{label:'Examen',date:'2026-06-16'}], chapters:FYS_CHAPTERS, planning:FYS_PLANNING },
-  biologie:       { name:'Biologie', emoji:'🧬', color:'#3cb06c', group:'wetenschappen', active:true, pct:79.3,
+  biologie:       { name:'Biologie', emoji:'🧬', color:'#3cb06c', group:'wetenschappen', active:true,
                     exams:[{label:'Examen',date:'2026-06-17'}], chapters:BIO_CHAPTERS, planning:BIO_PLANNING },
-  aardrijkskunde: { name:'Aardrijkskunde', emoji:'🌍', color:'#6cb04c', group:'wetenschappen', active:true, pct:55.7,
+  aardrijkskunde: { name:'Aardrijkskunde', emoji:'🌍', color:'#6cb04c', group:'wetenschappen', active:true,
                     exams:[{label:'Examen',date:'2026-06-19'}], chapters:AARD_CHAPTERS, planning:AARD_PLANNING },
-  frans:          { name:'Frans', emoji:'🇫🇷', color:'#9c6ce8', group:'talen', active:true, pct:81.9,
+  frans:          { name:'Frans', emoji:'🇫🇷', color:'#9c6ce8', group:'talen', active:true,
                     exams:[{label:'Examen',date:'2026-06-12'}], chapters:FRANS_CHAPTERS, planning:FRANS_PLANNING },
-  engels:         { name:'Engels', emoji:'🇬🇧', color:'#3c8ce8', group:'talen', active:true, pct:67.2,
+  engels:         { name:'Engels', emoji:'🇬🇧', color:'#3c8ce8', group:'talen', active:true,
                     exams:[{label:'Examen',date:'2026-06-22'}], chapters:ENG_CHAPTERS, planning:ENG_PLANNING },
-  nederlands:     { name:'Nederlands', emoji:'📖', color:'#4c7ce8', group:'talen', active:true, pct:68.3,
+  nederlands:     { name:'Nederlands', emoji:'📖', color:'#4c7ce8', group:'talen', active:true,
                     exams:[{label:'Examen',date:'2026-06-23'}], chapters:NED_CHAPTERS, planning:NED_PLANNING },
-  geschiedenis:   { name:'Geschiedenis', emoji:'🏛️', color:'#9c6ce8', group:'talen', active:true, pct:73.3,
+  geschiedenis:   { name:'Geschiedenis', emoji:'🏛️', color:'#9c6ce8', group:'talen', active:true,
                     exams:[{label:'Examen',date:'2026-06-18'}], chapters:GES_CHAPTERS, planning:GES_PLANNING },
 };
 
@@ -1542,7 +1580,10 @@ function toggleEx(id) {
 function renderHeader() {
   const h = document.getElementById('appHeader');
   if (currentSubject) { h.innerHTML = ''; return; }
-  h.innerHTML = `<h1>Examenhub<span>.</span></h1><p>Gustave · 6AWWI SO-Zenith · examens 10-23 juni 2026</p>`;
+  h.innerHTML = `<h1>Examenhub<span>.</span></h1><p>Gustave · 6AWWI SO-Zenith · examens 10-23 juni 2026</p>
+    <div class="header-actions">
+      <button class="print-btn" onclick="printChecklist()">🖨️ Afvink-checklist printen</button>
+    </div>`;
 }
 
 function renderCountdown() {
@@ -1648,7 +1689,7 @@ function renderDetailHeader() {
   const cPct = pr.cTotal ? Math.round(pr.cDone/pr.cTotal*100) : 0;
   const ePct = pr.eTotal ? Math.round(pr.eDone/pr.eTotal*100) : 0;
   document.getElementById('detailHeader').innerHTML =
-    `<div class="detail-title">${s.emoji} ${s.name}</div><div class="detail-sub">${s.pct}% vorig jaar · ${s.chapters.length} blokken</div>`;
+    `<div class="detail-title">${s.emoji} ${s.name}</div><div class="detail-sub">${s.chapters.length} blokken</div>`;
   document.getElementById('progressFill').style.width = cPct + '%';
   document.getElementById('progressFill').style.background = 'linear-gradient(90deg,'+s.color+',var(--orange))';
   document.getElementById('progressText').textContent = pr.cDone + ' / ' + pr.cTotal + ' succescriteria';
@@ -1836,7 +1877,143 @@ function resetSubject() {
   renderDetail();
 }
 
-function renderHub() { renderHeader(); renderCountdown(); renderGroups(); }
+
+// ========== TODAY OVERVIEW ==========
+function parsePlanDate(dayStr) {
+  // Extract all dd/m dates from a string
+  const matches = [...dayStr.matchAll(/(\d{1,2})\/(\d{1,2})/g)];
+  return matches.map(m => new Date(2026, parseInt(m[2])-1, parseInt(m[1])));
+}
+
+function renderToday() {
+  const container = document.getElementById('today');
+  if (!container) return;
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const dayNames = ['Zo','Ma','Di','Wo','Do','Vr','Za'];
+
+  let todayTasks = [];
+  let nextTasks = [];
+  let nextDate = null;
+
+  Object.entries(SUBJECTS).forEach(([key, s]) => {
+    if (!s.active || !s.planning) return;
+    s.planning.forEach(p => {
+      const dayStr = p.day;
+      const isRange = dayStr.includes('→');
+      const hasNu = dayStr.toLowerCase().includes('nu');
+
+      if (isRange) {
+        const dates = parsePlanDate(dayStr);
+        const startDate = hasNu ? today : (dates[0] || today);
+        const endDate = dates.length >= 2 ? dates[dates.length-1] : (dates[0] || today);
+        if (today >= startDate && today <= endDate) {
+          todayTasks.push({ subject:s, tasks:p.tasks, note:p.note });
+        } else if (startDate > today && (!nextDate || startDate < nextDate)) {
+          nextDate = startDate;
+          nextTasks = [{ subject:s, tasks:p.tasks, note:p.note }];
+        } else if (startDate > today && nextDate && startDate.getTime() === nextDate.getTime()) {
+          nextTasks.push({ subject:s, tasks:p.tasks, note:p.note });
+        }
+      } else {
+        const dates = parsePlanDate(dayStr);
+        if (dates.length && dates[0].getTime() === today.getTime()) {
+          todayTasks.push({ subject:s, tasks:p.tasks, note:p.note });
+        } else if (dates.length && dates[0] > today && (!nextDate || dates[0] < nextDate)) {
+          nextDate = dates[0];
+          nextTasks = [{ subject:s, tasks:p.tasks, note:p.note }];
+        } else if (dates.length && dates[0] > today && nextDate && dates[0].getTime() === nextDate.getTime()) {
+          nextTasks.push({ subject:s, tasks:p.tasks, note:p.note });
+        }
+      }
+    });
+  });
+
+  const items = todayTasks.length > 0 ? todayTasks : nextTasks;
+  const isToday = todayTasks.length > 0;
+
+  if (items.length === 0) { container.innerHTML = ''; return; }
+
+  const label = isToday ? '📋 Vandaag studeren' : '📋 Eerstvolgende studiedag';
+  const dateLabel = !isToday && nextDate ? `${dayNames[nextDate.getDay()]} ${nextDate.getDate()}/${nextDate.getMonth()+1}` : '';
+
+  let html = `<div class="today-card">
+    <div class="today-header"><span class="today-title">${label}</span><span class="today-date">${dateLabel}</span></div>
+    <div class="today-tasks">`;
+  items.forEach(item => {
+    item.tasks.forEach(task => {
+      html += `<div class="today-task"><span class="today-task-emoji">${item.subject.emoji}</span><span class="today-task-text">${task}</span></div>`;
+    });
+    if (item.note) html += `<div class="today-note">💡 ${item.note}</div>`;
+  });
+  html += '</div></div>';
+  container.innerHTML = html;
+}
+
+// ========== PRINTABLE CHECKLIST ==========
+function printChecklist() {
+  const pp = document.getElementById('printPage');
+  let html = '<h1>Examenhub — Afvink-checklist</h1>';
+  html += '<p class="print-meta">Gegenereerd op ' + new Date().toLocaleDateString('nl-BE') + ' — alleen niet-afgevinkte items</p>';
+
+  Object.entries(SUBJECTS).forEach(([key, s]) => {
+    if (!s.active) return;
+    const checked = JSON.parse(localStorage.getItem('hub-checked') || '{}');
+    const exChecked = JSON.parse(localStorage.getItem('hub-ex-checked') || '{}');
+
+    let subHtml = '';
+    let hasUnchecked = false;
+
+    s.chapters.forEach(ch => {
+      let chHtml = '';
+      // Unchecked criteria
+      ch.criteria.forEach((cr, ci) => {
+        const ck = key + '::' + ch.id + '::c' + ci;
+        if (!checked[ck]) {
+          chHtml += `<div class="print-item"><span class="print-box"></span><span>${cr}</span></div>`;
+          hasUnchecked = true;
+        }
+      });
+      // Unchecked exercises
+      let exHtml = '';
+      ['mustDo','shouldDo','extra'].forEach(tier => {
+        const items = ch.exercises[tier] || [];
+        items.forEach((ex, ei) => {
+          const ek = key + '::' + ch.id + '::' + tier + '::e' + ei;
+          if (!exChecked[ek]) {
+            if (!exHtml) exHtml = '';
+            const label = tier === 'mustDo' ? 'Must-do' : tier === 'shouldDo' ? 'Should-do' : 'Extra';
+            exHtml += `<div class="print-item"><span class="print-box"></span><span>[${label}] ${ex}</span></div>`;
+            hasUnchecked = true;
+          }
+        });
+      });
+
+      if (chHtml || exHtml) {
+        subHtml += `<h3>${ch.number}. ${ch.title}</h3><div class="print-section">${chHtml}${exHtml}</div>`;
+      }
+    });
+
+    if (hasUnchecked) {
+      const exam = s.exams[0];
+      const d = Math.ceil((new Date(exam.date) - new Date()) / 86400000);
+      html += `<div class="print-subject"><h2>${s.emoji} ${s.name} — D-${d}</h2>${subHtml}</div>`;
+    }
+  });
+
+  pp.innerHTML = html;
+  pp.style.display = 'block';
+  // Hide non-print elements
+  document.querySelectorAll('.container > *:not(.print-page)').forEach(el => el.classList.add('no-print'));
+  window.print();
+  // Restore after print
+  setTimeout(() => {
+    document.querySelectorAll('.no-print').forEach(el => el.classList.remove('no-print'));
+    pp.style.display = 'none';
+  }, 500);
+}
+
+function renderHub() { renderHeader(); renderToday(); renderCountdown(); renderGroups(); }
 
 // ========== INIT ==========
 renderHub();
