@@ -103,6 +103,8 @@ nav button:hover:not(.active) { color:var(--text2); }
 .phase-1 { background:var(--redBg); color:var(--red); }
 .phase-2 { background:var(--orangeBg); color:var(--orange); }
 .phase-3 { background:var(--blueBg); color:var(--blue); }
+.phase-4 { background:var(--greenBg); color:var(--green); }
+.phase-5 { background:var(--purpleBg); color:var(--purple); }
 .exam-banner { background:linear-gradient(135deg,var(--bg2),var(--redBg)); border:1px solid var(--red); border-radius:var(--radius); padding:0.85rem 1.1rem; margin:1.75rem 0 0.85rem; }
 .exam-banner-title { font-size:0.95rem; font-weight:700; display:flex; align-items:center; gap:0.5rem; }
 .exam-banner-title span { font-family:var(--mono); font-size:0.7rem; font-weight:400; color:var(--text3); background:var(--bg); padding:2px 8px; border-radius:4px; }
@@ -736,6 +738,158 @@ const WISK_CHAPTERS = [
       { name: "Zn vermenigv.", formula: "a ⊗ b = (a · b) mod n" },
     ]
   },
+  // ===== STATISTIEK (examen deel 2) =====
+  { id:'stat-repr', exam:2, phase:4, phaseLabel:'Fase 4 — Statistiek', number:13, title:'Representativiteit & causaliteit', pages:'p.70-77', hours:1.5, color:'#3cb06c',
+    criteria:[
+      'Ik bespreek de representativiteit van een steekproef.',
+      'Ik kies een representatieve steekproef voor een statistisch onderzoek (gestratificeerd, geclusterd, getrapt).',
+      'Ik verklaar waarom er sprake is van causaliteit bij het vergelijken van twee variabelen uit een statistisch onderzoek.',
+      'Ik bepaal de storende veranderlijke indien er samenhang is tussen twee variabelen en verklaar waarom.',
+      'Ik koppel de do\'s & don\'ts van een statistisch onderzoek aan de juiste beschrijving (transparantie, steekproefopzet/-grootte, missing data, uitschieters, cherry picking, observationeel vs. experimenteel, randomisatie, samenhang vs. causaliteit).'
+    ],
+    exercises:{ mustDo:['p.74: 1A, 2A','p.77: 3A','p.57: 4A'], shouldDo:['p.80: 1B t.e.m. 1C','p.81-82: 2B t.e.m. 2G','p.83: 3B t.e.m. 3E'], extra:['OVT meeroefeningen + S-oefeningen','OVT p.64: 4A'] },
+    tip:'Samenhang ≠ causaliteit! Een storende veranderlijke (confounder) kan de schijnbare samenhang verklaren. Representatief = de steekproef is een getrouwe afspiegeling van de populatie.',
+    jarvis:'Geef me 5 situaties met twee samenhangende variabelen. Laat me bepalen of er causaliteit is of een storende veranderlijke, en verklaren waarom.' },
+  { id:'stat-centrum', exam:2, phase:4, number:14, title:'Centrummaten & spreidingsmaten', pages:'p.102-105', hours:1, color:'#3cb06c',
+    criteria:[
+      'Ik bereken het gemiddelde van de waarnemingsgetallen uit een statistisch onderzoek.',
+      'Ik bereken de standaardafwijking van de waarnemingsgetallen uit een statistisch onderzoek.'
+    ],
+    exercises:{ mustDo:['p.105: 1A','p.126: 1B'], shouldDo:[], extra:['OVT p.126: 1A en 1B'] },
+    tip:'Gemiddelde x̄ = som / aantal. Standaardafwijking σ meet de spreiding rond het gemiddelde — gebruik je rekentoestel (1-Var Stats) en check of je σ (populatie) of s (steekproef) nodig hebt.',
+    jarvis:'Geef me een dataset. Laat me het gemiddelde en de standaardafwijking berekenen en controleer mijn antwoord.',
+    formulas:[
+      { name:'Gemiddelde', formula:'x̄ = (Σ xᵢ) / n' },
+      { name:'Standaardafwijking', formula:'σ = √( Σ(xᵢ − x̄)² / n )' }
+    ] },
+  { id:'stat-normaal1', exam:2, phase:4, number:15, title:'Normale verdeling — model & dichtheidsfunctie', pages:'p.106-111, 118', hours:2, color:'#3cb06c',
+    criteria:[
+      'Ik bepaal of het normale model gebruikt kan worden als model voor de populatie via: 68-95-99,7-regel; grafisch (symmetrisch, symmetrieas, klokvormig).',
+      'Ik vorm een theoretisch model voor de populatie indien de steekproef voldoet aan de voorwaarden om normaal verdeeld te zijn.',
+      'Ik schets de dichtheidsfunctie van een normale verdeling met het gemiddelde en de standaardafwijking aangeduid.',
+      'Ik bespreek de horizontale verschuiving van een normale dichtheidsfunctie op basis van het gemiddelde.',
+      'Ik bespreek de horizontale uitrekking of inkrimping t.o.v. de grafiek van een andere normale dichtheidsfunctie.',
+      'Ik bespreek de transformaties op de standaardnormale verdeling om een normale verdeling te bekomen.'
+    ],
+    exercises:{ mustDo:['p.111: 4A','p.126-127: 3B-3C'], shouldDo:['p.128-130: 4B t.e.m. 4E'], extra:['OVT meeroefeningen + S-oefeningen'] },
+    tip:'De dichtheidsfunctie is klokvormig en symmetrisch rond μ. μ verschuift de klok horizontaal; σ rekt ze uit (groter σ = breder/lager) of krimpt ze in. De standaardnormale verdeling heeft μ=0 en σ=1.',
+    jarvis:'Quiz me: ik krijg een dataset en moet bepalen of het normale model geschikt is (68-95-99,7 + grafische kenmerken). Geef feedback.',
+    formulas:[
+      { name:'Standaardnormaal', formula:'μ = 0 · σ = 1' },
+      { name:'Transformatie', formula:'X = σ·Z + μ  (Z = standaardnormaal)' }
+    ] },
+  { id:'stat-normaal2', exam:2, phase:4, number:16, title:'Normale kansverdelingen & 68-95-99,7-regel', pages:'p.112-119', hours:2, color:'#3cb06c',
+    criteria:[
+      'Ik bereken de kans op een gebeurtenis uit de uitkomstenverzameling van normaal verdeelde variabelen.',
+      'Ik bepaal de grenzen van een interval uit de uitkomstenverzameling van normaal verdeelde variabelen.',
+      'Ik bereken de kans op een gebeurtenis met de 68-95-99,7-regel.',
+      'Ik bepaal de grenzen van een interval met de 68-95-99,7-regel.',
+      'Ik pas de 68-95-99,7-regel correct toe.'
+    ],
+    exercises:{ mustDo:['p.115: 5A, 6A','p.119: 7A, 7B, 7C'], shouldDo:['p.131-132: 5C t.e.m. 5G','p.133-134: 6B t.e.m. 6G','p.135-137: 7D t.e.m. 7K'], extra:['OVT meeroefeningen + S-oefeningen'] },
+    tip:'68-95-99,7: binnen ±1σ ligt 68%, binnen ±2σ ligt 95%, binnen ±3σ ligt 99,7%. Voor exacte kansen gebruik je normalcdf(ondergrens, bovengrens, μ, σ) en voor grenzen invNorm op je rekentoestel.',
+    jarvis:'Geef me normale-verdeling-vraagstukken (kans + grenzen). Laat me kiezen tussen 68-95-99,7-regel en normalcdf/invNorm, en controleer.',
+    formulas:[
+      { name:'z-score', formula:'z = (x − μ) / σ' },
+      { name:'68-95-99,7', formula:'±1σ → 68% · ±2σ → 95% · ±3σ → 99,7%' },
+      { name:'Kans (ICT)', formula:'P(a<X<b) = normalcdf(a, b, μ, σ)' }
+    ] },
+  { id:'stat-kansverd', exam:2, phase:4, number:17, title:'Continue & discrete kansverdelingen', pages:'p.144-147', hours:1, color:'#3cb06c',
+    criteria:[
+      'Ik bepaal of een toevalsveranderlijke continu of discreet is.',
+      'Ik bereken de verwachtingswaarde (= gemiddelde) van een discrete toevalsveranderlijke.'
+    ],
+    exercises:{ mustDo:['p.147: 1A, 2A'], shouldDo:['p.152-153: 1B, 1C, 2B, 2C'], extra:['OVT meeroefeningen + S-oefeningen'] },
+    tip:'Discreet = telbare uitkomsten (bv. aantal worpen); continu = elke waarde in een interval (bv. lengte). Verwachtingswaarde = som van (waarde × kans).',
+    jarvis:'Geef me toevalsveranderlijken. Laat me bepalen of ze continu of discreet zijn en de verwachtingswaarde berekenen.',
+    formulas:[
+      { name:'Verwachtingswaarde', formula:'E(X) = Σ xᵢ · P(X = xᵢ)' }
+    ] },
+  { id:'stat-binomiaal', exam:2, phase:4, number:18, title:'Binomiale verdelingen', pages:'p.148-151', hours:1.5, color:'#3cb06c',
+    criteria:[
+      'Ik stel de kansverdeling op van een stochast die binomiaal verdeeld is.',
+      'Ik bereken de kans op een gebeurtenis uit de uitkomstenverzameling van binomiaal verdeelde variabelen.',
+      'Ik bereken de verwachtingswaarde van een binomiaal verdeelde toevalsveranderlijke.',
+      'Ik bereken de standaardafwijking van een binomiaal verdeelde toevalsveranderlijke.',
+      'Ik benader een binomiale verdeling door een normale verdeling indien mogelijk.'
+    ],
+    exercises:{ mustDo:['p.149: 3A','p.151: 4A'], shouldDo:['p.153-154: 3B t.e.m. 3H','p.155: 4B t.e.m. 4C'], extra:['OVT meeroefeningen + S-oefeningen'] },
+    tip:'Binomiaal = n onafhankelijke Bernoulli-pogingen met vaste kans p. Gebruik binompdf(n,p,k) voor P(X=k) en binomcdf voor P(X≤k). Normale benadering mag als np≥5 én n(1−p)≥5.',
+    jarvis:'Geef me binomiale vraagstukken. Laat me P(X=k), E(X) en σ berekenen en bepalen of normale benadering mag.',
+    formulas:[
+      { name:'Binomiale kans', formula:'P(X=k) = C(n,k) · pᵏ · (1−p)ⁿ⁻ᵏ' },
+      { name:'Verwachtingswaarde', formula:'E(X) = n · p' },
+      { name:'Standaardafwijking', formula:'σ = √( n · p · (1−p) )' }
+    ] },
+  { id:'stat-toetsen', exam:2, phase:4, number:19, title:'Toetsen van hypothesen — binomiaaltoets & CLS', pages:'p.166-177', hours:2.5, color:'#3cb06c',
+    criteria:[
+      'Ik formuleer een nulhypothese (H₀) bij het toetsen van hypothesen.',
+      'Ik formuleer een alternatieve hypothese (H₁) bij het toetsen van hypothesen.',
+      'Ik bepaal de toetsingsgrootheid bij het toetsen van hypothesen.',
+      'Ik bepaal de nulverdeling bij het toetsen van hypothesen.',
+      'Ik bepaal of men H₀ mag verwerpen (statistisch significant) op basis van een gegeven significantieniveau.',
+      'Ik bereken de p-waarde bij het toetsen van hypothesen met behulp van ICT.',
+      'Ik leg het verschil uit tussen een eenzijdige en een tweezijdige toets.',
+      'Ik toets een proportie door middel van een binomiaaltoets.',
+      'Ik formuleer de voorwaarden waaraan een steekproef moet voldoen om een binomiaaltoets uit te voeren.',
+      'Ik formuleer de centrale limietstelling voor een gegeven gemiddelde en standaardafwijking.'
+    ],
+    exercises:{ mustDo:['p.173: 5A','p.177: 7A'], shouldDo:['p.183-184: 5B t.e.m. 5E','p.184-185: 7B, 7C'], extra:['OVT meeroefeningen + S-oefeningen'] },
+    tip:'Stappen: 1) H₀ en H₁ formuleren 2) toetsingsgrootheid + significantieniveau α 3) p-waarde berekenen (ICT) 4) p < α → H₀ verwerpen (significant), anders niet. Eenzijdig = richting bekend, tweezijdig = "verschilt van".',
+    jarvis:'Speel mijn examinator voor hypothesetoetsen. Geef me een binomiaaltoets-vraagstuk en begeleid me stap voor stap: H₀, H₁, p-waarde, conclusie.',
+    formulas:[
+      { name:'Beslissingsregel', formula:'p-waarde < α  ⟹  verwerp H₀ (significant)' },
+      { name:'Centrale limietstelling', formula:'X̄ ≈ N(μ, σ/√n) voor grote n' }
+    ] },
+  { id:'stat-betrouw', exam:2, phase:4, number:20, title:'Betrouwbaarheidsintervallen', pages:'p.192-195', hours:1.5, color:'#3cb06c',
+    criteria:[
+      'Ik bespreek de betekenis van een gegeven betrouwbaarheidsniveau.',
+      'Ik bereken zα voor een gegeven significantieniveau α.',
+      'Ik bereken de foutenmarge voor een steekproefgemiddelde.',
+      'Ik bespreek de foutenmarge en/of het betrouwbaarheidsinterval voor een steekproefgemiddelde.',
+      'Ik stel een betrouwbaarheidsinterval op voor een steekproefgemiddelde.'
+    ],
+    exercises:{ mustDo:['p.195: 1A, 2A'], shouldDo:['p.196-198: 1B t.e.m. 1D, 2C t.e.m. 2F'], extra:['OVT meeroefeningen + S-oefeningen'] },
+    tip:'Een 95%-betrouwbaarheidsinterval betekent: bij herhaald steekproeven bevat 95% van de intervallen de echte populatieparameter. Interval = x̄ ± foutenmarge, met foutenmarge = zα · σ/√n.',
+    jarvis:'Geef me een steekproefgemiddelde, σ, n en een betrouwbaarheidsniveau. Laat me zα, de foutenmarge en het interval bepalen en de betekenis uitleggen.',
+    formulas:[
+      { name:'Foutenmarge (gemiddelde)', formula:'E = zα · σ / √n' },
+      { name:'Betrouwbaarheidsinterval', formula:'[ x̄ − E , x̄ + E ]' },
+      { name:'zα bij 95%', formula:'zα ≈ 1,96' }
+    ] },
+  // ===== COMPLEXE GETALLEN — goniometrische vorm (examen deel 2) =====
+  { id:'cplx-gonio', exam:2, phase:5, phaseLabel:'Fase 5 — Complexe getallen', number:21, title:'Goniometrische vorm — omzetten', pages:'p.98-101', hours:1.5, color:'#9c6ce8',
+    criteria:[
+      'Ik stel een complex getal voor in goniometrische vorm.',
+      'Ik zet een complex getal van de cartesische vorm om naar de goniometrische vorm.',
+      'Ik zet een complex getal van de goniometrische vorm om naar de cartesische vorm.'
+    ],
+    exercises:{ mustDo:['p.101: 10A, 10B'], shouldDo:['p.123-124: 10C t.e.m. 10F'], extra:['OVT S-oefeningen + meeroefeningen'] },
+    tip:'Cartesisch z = a + bi ↔ goniometrisch z = r(cos θ + i·sin θ). De modulus r = √(a²+b²) is de afstand tot de oorsprong; het argument θ is de hoek met de positieve reële as (let op het kwadrant!).',
+    jarvis:'Geef me complexe getallen in cartesische vorm. Laat me modulus en argument berekenen en omzetten naar goniometrische vorm (en omgekeerd). Controleer.',
+    formulas:[
+      { name:'Goniometrische vorm', formula:'z = r·(cos θ + i·sin θ)' },
+      { name:'Modulus', formula:'r = |z| = √(a² + b²)' },
+      { name:'Argument', formula:'θ = arg(z), met cos θ = a/r en sin θ = b/r' }
+    ] },
+  { id:'cplx-bew', exam:2, phase:5, number:22, title:'Bewerkingen in goniometrische vorm', pages:'p.102-107', hours:2, color:'#9c6ce8',
+    criteria:[
+      'Ik bereken de tegengestelde van een complex getal in goniometrische vorm.',
+      'Ik bereken de complex toegevoegde van een complex getal in goniometrische vorm.',
+      'Ik bereken het product van complexe getallen in goniometrische vorm.',
+      'Ik bereken het quotiënt van complexe getallen in goniometrische vorm.',
+      'Ik bereken een gehele macht van een complex getal in goniometrische vorm (stelling van De Moivre).',
+      'Ik bereken de n-de machtswortels van een complex getal in goniometrische vorm.'
+    ],
+    exercises:{ mustDo:['p.103: 11A','p.105: 12A','p.107: 13A'], shouldDo:['p.124-125: 11B t.e.m. 11E','p.125-126: 12B t.e.m. 12I','p.127-128: 13B t.e.m. 13J'], extra:['OVT S-oefeningen + meeroefeningen'] },
+    tip:'Vermenigvuldigen = moduli vermenigvuldigen, argumenten optellen. Delen = moduli delen, argumenten aftrekken. De Moivre voor machten: rⁿ en n·θ. Voor n-de wortels krijg je n oplossingen, gelijkmatig verdeeld op een cirkel met straal ⁿ√r.',
+    jarvis:'Geef me complexe getallen in goniometrische vorm. Laat me product, quotiënt, een macht (De Moivre) en de n-de machtswortels berekenen. Controleer.',
+    formulas:[
+      { name:'Product', formula:'z₁·z₂ = r₁r₂·(cos(θ₁+θ₂) + i·sin(θ₁+θ₂))' },
+      { name:'Quotiënt', formula:'z₁/z₂ = (r₁/r₂)·(cos(θ₁−θ₂) + i·sin(θ₁−θ₂))' },
+      { name:'De Moivre (macht)', formula:'zⁿ = rⁿ·(cos(nθ) + i·sin(nθ))' },
+      { name:'n-de machtswortels', formula:'ⁿ√r · (cos((θ+2kπ)/n) + i·sin((θ+2kπ)/n)), k=0…n−1' }
+    ] },
 ];
 const WISK_PLANNING = [
   { day: "Zo 31/5", tasks: ["✓ Stelsels gedaan (blok 1)", "Ruimtemeetkunde: vectorruimten + vectoren + rechten + vlakken — basis voor de toets (blok 10)"], note: "Tennis 11:00. TOETS DINSDAG!" },
@@ -746,9 +900,9 @@ const WISK_PLANNING = [
   { day: "Vr 5/6", tasks: ["Wiskunde: bepaalde integraal afwerken (blok 6)", "Wiskunde: omwentelingslichamen (blok 7)", "Wiskunde: booglengte (blok 8)"], note: "5u" },
   { day: "Za 6/6", tasks: ["Wiskunde: inverse matrices (blok 3)", "Wiskunde: determinanten (blok 4)"], note: "5u" },
   { day: "Zo 7/6", tasks: ["Wiskunde: kanstheorie volledig — Laplace t.e.m. Bayes (blok 9)"], note: "Tennis 11:00. 6u studiedag" },
-  { day: "Ma 8/6", tasks: ["Wiskunde: logica (blok 11)", "Wiskunde: algebraïsche structuren (blok 12)", "REVIEW: ruimtemeetkunde rest"], note: "5u" },
-  { day: "Di 9/6", tasks: ["FINALE REVIEW: alle formules + moeilijkste oefeningen opnieuw"], note: "LAATSTE dag voor examen!" },
-  { day: "Wo 10/6", tasks: ["🎯 EXAMEN Wiskunde deel 1"], note: "" },
+  { day: "Ma 8/6", tasks: ["Wiskunde: logica (blok 11)", "Wiskunde: algebraïsche structuren (blok 12)", "Statistiek: representativiteit, causaliteit + centrummaten (blok 13-14)"], note: "5u — start deel 2-stof" },
+  { day: "Di 9/6", tasks: ["FINALE REVIEW deel 1: alle formules + moeilijkste oefeningen opnieuw", "Statistiek: normale verdelingen (blok 15-16)"], note: "Examen deel 1 MORGEN!" },
+  { day: "Wo 10/6", tasks: ["🎯 EXAMEN Wiskunde deel 1", "'s Avonds: statistiek kansverdelingen + binomiaal + hypothesetoetsen + betrouwbaarheid (blok 17-20)", "Complexe getallen goniometrisch — omzetten + bewerkingen (blok 21-22)"], note: "Examen deel 2 morgen — focus op nieuwe stof" },
   { day: "Do 11/6", tasks: ["🎯 EXAMEN Wiskunde deel 2"], note: "" },
 ];
 
@@ -2257,7 +2411,7 @@ function renderChapters() {
       currentExam = ch.exam;
       const examInfo = currentExam === 1
         ? { d:'wo 10/6', desc:'Lineaire algebra · Analyse · Kanstheorie' }
-        : { d:'do 11/6', desc:'Ruimtemeetkunde · Logica · Algebraïsche structuren' };
+        : { d:'do 11/6', desc:'Ruimtemeetkunde · Logica · Algebraïsche structuren · Statistiek · Complexe getallen' };
       html += `<div class="exam-banner">
         <div class="exam-banner-title">🎯 Examen Deel ${currentExam} <span>${examInfo.d}</span></div>
         <div class="exam-banner-desc">${examInfo.desc}</div>
