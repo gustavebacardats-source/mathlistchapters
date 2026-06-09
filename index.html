@@ -157,8 +157,9 @@ nav button:hover:not(.active) { color:var(--text2); }
 .day-card .day-date { font-family:var(--mono); font-size:0.7rem; color:var(--text3); }
 .day-tasks { font-size:0.85rem; color:var(--text2); line-height:1.8; }
 
-.reset-btn { background:var(--bg3); border:1px solid var(--border); color:var(--text3); font-family:var(--mono); font-size:0.7rem; padding:6px 14px; border-radius:6px; cursor:pointer; float:right; transition:all 0.2s; }
+.reset-btn { background:var(--bg3); border:1px solid var(--border); color:var(--text3); font-family:var(--mono); font-size:0.7rem; padding:6px 14px; border-radius:6px; cursor:pointer; transition:all 0.2s; }
 .reset-btn:hover { border-color:var(--red); color:var(--red); }
+.reset-row { display:flex; justify-content:flex-end; margin-bottom:0.75rem; }
 
 .game-intro { font-size:0.85rem; color:var(--text2); margin-bottom:1.5rem; line-height:1.6; }
 .level-card { background:linear-gradient(135deg,var(--bg2),var(--bg3)); border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem; margin-bottom:1rem; text-align:center; }
@@ -232,6 +233,91 @@ footer { margin-top:3rem; padding:1.5rem 0; border-top:1px solid var(--border); 
   .print-label { font-size:9pt; color:#777; text-transform:uppercase; letter-spacing:0.5pt; margin:0.15cm 0 0.05cm; font-weight:600; }
   .print-meta { font-size:9pt; color:#888; margin-top:0.05cm; }
 }
+
+/* Flashcards */
+.fc-intro { font-size:0.85rem; color:var(--text2); margin-bottom:1.25rem; line-height:1.6; }
+.fc-decks { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:0.75rem; }
+.fc-deck { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:1.1rem 1.2rem; cursor:pointer; transition:all 0.2s; }
+.fc-deck:hover { border-color:var(--purple); transform:translateY(-2px); }
+.fc-deck.combined { background:linear-gradient(135deg,var(--bg2),var(--purpleBg)); border-color:var(--purple)55; }
+.fc-deck-top { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.35rem; }
+.fc-deck-emoji { font-size:1.3rem; line-height:1; }
+.fc-deck-title { font-size:0.95rem; font-weight:700; }
+.fc-deck-sub { font-family:var(--mono); font-size:0.65rem; color:var(--text3); margin-bottom:0.75rem; line-height:1.4; }
+.fc-deck-bar { background:var(--bg); border-radius:10px; height:6px; overflow:hidden; }
+.fc-deck-fill { height:100%; border-radius:10px; background:linear-gradient(90deg,var(--purple),var(--blue)); transition:width 0.5s; }
+.fc-deck-meta { font-family:var(--mono); font-size:0.62rem; color:var(--text3); margin-top:4px; }
+
+.fc-study-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; gap:0.5rem; flex-wrap:wrap; }
+.fc-study-title { font-size:1rem; font-weight:700; display:flex; align-items:center; gap:0.5rem; }
+.fc-study-actions { display:flex; gap:0.4rem; }
+.fc-mini-btn { background:var(--bg2); border:1px solid var(--border); color:var(--text2); font-family:var(--mono); font-size:0.68rem; padding:5px 11px; border-radius:6px; cursor:pointer; transition:all 0.2s; }
+.fc-mini-btn:hover { border-color:var(--text3); color:var(--text); }
+.fc-progress { font-family:var(--mono); font-size:0.7rem; color:var(--text3); margin-bottom:0.6rem; display:flex; justify-content:space-between; }
+.fc-progress-bar { background:var(--bg3); border-radius:10px; height:6px; overflow:hidden; margin-bottom:1.25rem; }
+.fc-progress-fill { height:100%; border-radius:10px; background:linear-gradient(90deg,var(--green),var(--blue)); transition:width 0.4s; }
+
+.fc-card { background:linear-gradient(135deg,var(--bg2),var(--bg3)); border:1px solid var(--border); border-radius:14px; min-height:200px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem 1.5rem; cursor:pointer; text-align:center; position:relative; transition:border-color 0.2s; user-select:none; }
+.fc-card:hover { border-color:var(--purple)88; }
+.fc-card.is-known { border-color:var(--green)55; }
+.fc-card-side { font-family:var(--mono); font-size:0.62rem; text-transform:uppercase; letter-spacing:1.5px; color:var(--text3); position:absolute; top:0.85rem; left:50%; transform:translateX(-50%); }
+.fc-card-known-badge { position:absolute; top:0.7rem; right:0.9rem; font-size:0.85rem; }
+.fc-card-q { font-family:var(--serif); font-size:1.7rem; line-height:1.3; }
+.fc-card-a { font-size:1.15rem; color:var(--green); line-height:1.5; font-weight:500; }
+.fc-card.long { min-height:auto; padding:1.5rem 1.4rem; align-items:flex-start; }
+.fc-card.long .fc-card-q { font-family:var(--sans); font-size:0.92rem; line-height:1.55; text-align:left; font-weight:400; margin-top:0.6rem; }
+.fc-card.long .fc-card-a { font-size:0.92rem; line-height:1.6; text-align:left; margin-top:0.6rem; }
+.fc-card.long .fc-card-q b, .fc-card.long .fc-card-a b { color:var(--text); font-weight:700; }
+.fc-card.long .fc-card-a b { color:var(--green); }
+
+.fc-card-hint { font-family:var(--mono); font-size:0.6rem; color:var(--text3); margin-top:1.25rem; }
+
+.fc-controls { display:flex; gap:0.5rem; margin-top:1rem; }
+.fc-grade-btn { flex:1; padding:0.85rem; border:1px solid var(--border); border-radius:var(--radius); font-family:var(--sans); font-size:0.82rem; font-weight:600; cursor:pointer; transition:all 0.2s; background:var(--bg2); }
+.fc-grade-btn.no { color:var(--orange); border-color:var(--orange)44; }
+.fc-grade-btn.no:hover { background:var(--orangeBg); border-color:var(--orange); }
+.fc-grade-btn.yes { color:var(--green); border-color:var(--green)44; }
+.fc-grade-btn.yes:hover { background:var(--greenBg); border-color:var(--green); }
+.fc-nav { display:flex; gap:0.5rem; margin-top:0.75rem; justify-content:space-between; align-items:center; }
+.fc-nav-btn { background:var(--bg2); border:1px solid var(--border); color:var(--text2); font-family:var(--mono); font-size:0.72rem; padding:7px 16px; border-radius:7px; cursor:pointer; transition:all 0.2s; }
+.fc-nav-btn:hover:not(:disabled) { border-color:var(--text3); color:var(--text); }
+.fc-nav-btn:disabled { opacity:0.35; cursor:default; }
+.fc-nav-pos { font-family:var(--mono); font-size:0.72rem; color:var(--text3); }
+.fc-done { text-align:center; padding:2.5rem 1rem; }
+.fc-done .big { font-size:2.5rem; margin-bottom:0.5rem; }
+.fc-done-title { font-family:var(--serif); font-size:1.6rem; margin-bottom:0.4rem; }
+.fc-done-sub { font-size:0.85rem; color:var(--text2); margin-bottom:1.25rem; }
+
+/* Multiple-choice quiz */
+.qz-intro { background:linear-gradient(135deg,var(--bg2),var(--blueBg)); border:1px solid var(--border); border-radius:14px; padding:1.5rem; text-align:center; margin-bottom:1rem; }
+.qz-intro h3 { font-family:var(--serif); font-size:1.6rem; font-weight:400; margin-bottom:0.4rem; }
+.qz-intro p { font-size:0.85rem; color:var(--text2); margin-bottom:1.1rem; line-height:1.6; }
+.qz-start-btn { background:var(--blue); border:none; color:#fff; font-family:var(--sans); font-size:0.9rem; font-weight:600; padding:0.7rem 2rem; border-radius:8px; cursor:pointer; transition:all 0.2s; }
+.qz-start-btn:hover { background:#2c7cd8; transform:translateY(-1px); }
+.qz-progress { font-family:var(--mono); font-size:0.7rem; color:var(--text3); margin-bottom:0.5rem; display:flex; justify-content:space-between; }
+.qz-progress-bar { background:var(--bg3); border-radius:10px; height:6px; overflow:hidden; margin-bottom:1.25rem; }
+.qz-progress-fill { height:100%; border-radius:10px; background:linear-gradient(90deg,var(--blue),var(--purple)); transition:width 0.4s; }
+.qz-src { display:inline-block; font-family:var(--mono); font-size:0.6rem; text-transform:uppercase; letter-spacing:1px; color:var(--text3); background:var(--bg3); padding:2px 8px; border-radius:4px; margin-bottom:0.6rem; }
+.qz-question { font-size:1.05rem; line-height:1.5; margin-bottom:1.1rem; font-weight:500; }
+.qz-options { display:flex; flex-direction:column; gap:0.5rem; }
+.qz-option { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:0.85rem 1.1rem; font-size:0.88rem; cursor:pointer; transition:all 0.15s; text-align:left; color:var(--text); display:flex; align-items:center; gap:0.7rem; }
+.qz-option:hover:not(:disabled) { border-color:var(--blue); }
+.qz-option:disabled { cursor:default; }
+.qz-option .qz-letter { font-family:var(--mono); font-size:0.75rem; color:var(--text3); flex-shrink:0; width:18px; }
+.qz-option.correct { border-color:var(--green); background:var(--greenBg); color:var(--green); }
+.qz-option.wrong { border-color:var(--red); background:var(--redBg); color:var(--red); }
+.qz-option.correct .qz-letter, .qz-option.wrong .qz-letter { color:inherit; }
+.qz-explain { margin-top:1rem; padding:0.75rem 1rem; border-left:3px solid var(--blue); background:var(--blueBg); border-radius:0 7px 7px 0; font-size:0.82rem; color:var(--text2); line-height:1.5; }
+.qz-explain.ok { border-color:var(--green); background:var(--greenBg); }
+.qz-explain.no { border-color:var(--orange); background:var(--orangeBg); }
+.qz-next { margin-top:1rem; width:100%; background:var(--bg2); border:1px solid var(--border); color:var(--text); font-family:var(--sans); font-size:0.88rem; font-weight:600; padding:0.8rem; border-radius:var(--radius); cursor:pointer; transition:all 0.2s; }
+.qz-next:hover { border-color:var(--text3); }
+.qz-result { text-align:center; padding:2.5rem 1rem; }
+.qz-result .big { font-size:3rem; margin-bottom:0.5rem; }
+.qz-result-score { font-family:var(--serif); font-size:2.5rem; margin-bottom:0.3rem; }
+.qz-result-msg { font-size:0.95rem; color:var(--text2); margin-bottom:1.5rem; }
+.qz-result-btn { background:var(--blue); border:none; color:#fff; font-family:var(--sans); font-size:0.88rem; font-weight:600; padding:0.7rem 1.8rem; border-radius:8px; cursor:pointer; transition:all 0.2s; }
+.qz-result-btn:hover { background:#2c7cd8; }
 </style>
 </head>
 <body>
@@ -263,11 +349,15 @@ footer { margin-top:3rem; padding:1.5rem 0; border-top:1px solid var(--border); 
     <button class="active" data-tab="volgorde" onclick="showSection('volgorde')">Leervolgorde</button>
     <button data-tab="game" onclick="showSection('game')">🎮 Game</button>
     <button data-tab="formules" onclick="showSection('formules')">Formules</button>
+    <button data-tab="flashcards" id="tab-flashcards" onclick="showSection('flashcards')" style="display:none">🃏 Flashcards</button>
+    <button data-tab="quiz" id="tab-quiz" onclick="showSection('quiz')" style="display:none">📝 Quiz</button>
     <button data-tab="planning" onclick="showSection('planning')">Planning</button>
   </nav>
   <div class="section active" id="sec-volgorde"></div>
   <div class="section" id="sec-game"></div>
   <div class="section" id="sec-formules"></div>
+  <div class="section" id="sec-flashcards"></div>
+  <div class="section" id="sec-quiz"></div>
   <div class="section" id="sec-planning"></div>
 </div>
 
@@ -1421,6 +1511,194 @@ const ENG_PLANNING = [
   { day: "Ma 22/6", tasks: ["🎯 EXAMEN Engels (TED talk)"], note: "Diep ademhalen, opening kennen, rustig tempo" },
 ];
 
+// ===== FRANS FLASHCARDS (examen juni 2026) =====
+// Per kaart: q = voorkant (vraag), a = achterkant (antwoord), t = type ('voc' of 'gram')
+// Decks volgen exact de examenvragen Q1-Q21. Geen extra leerstof buiten het examen.
+const FRANS_FLASHCARDS = [
+  // ===== THEMA 1: LES MYSTÈRES DU MONDE (Q1-8) =====
+  { id:'fc-mysteres', title:'Les mystères du monde', emoji:'🔍', sub:'Q1-8 · woordenschat, voegwoorden, subjonctif', cards:[
+    // Q1 — werkwoorden (tekst aanvullen + vervoegen)
+    { q:'prouver', a:'bewijzen', t:'voc' },
+    { q:'expliquer', a:'uitleggen / verklaren', t:'voc' },
+    { q:'résoudre', a:'oplossen (un mystère, un problème)', t:'voc' },
+    { q:"se mettre d'accord (sur)", a:'het eens worden (over)', t:'voc' },
+    { q:'en croire ses yeux', a:'zijn ogen geloven', t:'voc' },
+    { q:'confirmer', a:'bevestigen', t:'voc' },
+    { q:'avancer', a:'naar voren brengen (un argument) / vooruitgaan', t:'voc' },
+    // Q2 — context aanvullen
+    { q:'un évènement qui ne se passe qu\'une fois par an', a:'un évènement annuel (jaarlijks)', t:'voc' },
+    { q:'travailler sur un bateau → adorer ...', a:'la vie maritime / la vie en mer', t:'voc' },
+    { q:'qch qu\'on trouve vraiment intéressant et mystérieux', a:'intrigant / fascinant', t:'voc' },
+    // Q3-5 — zinsvormingswoorden
+    { q:"d'ailleurs", a:'trouwens / overigens', t:'voc' },
+    { q:'mystérieux', a:'mysterieus / geheimzinnig', t:'voc' },
+    { q:'un extraterrestre', a:'een buitenaards wezen', t:'voc' },
+    { q:'une preuve', a:'een bewijs', t:'voc' },
+    { q:'la terre', a:'de aarde', t:'voc' },
+    { q:'principalement', a:'voornamelijk / hoofdzakelijk', t:'voc' },
+    { q:'une trace', a:'een spoor', t:'voc' },
+    { q:'inexplicable', a:'onverklaarbaar', t:'voc' },
+    // Q6 — voegwoorden (elk één keer gebruiken)
+    { q:'afin que (+ ?)', a:'opdat / zodat — DOEL · + subjonctif', t:'gram' },
+    { q:'bien que (+ ?)', a:'hoewel — TEGENSTELLING · + subjonctif', t:'gram' },
+    { q:'comme', a:'aangezien (oorzaak, begin v.d. zin) / zoals', t:'gram' },
+    { q:'dès que', a:'zodra — TIJD · + indicatif', t:'gram' },
+    { q:'de sorte que', a:'zodat — GEVOLG · + indicatif', t:'gram' },
+    { q:'en attendant que (+ ?)', a:'totdat / in afwachting dat — TIJD · + subjonctif', t:'gram' },
+    { q:'étant donné que', a:'gezien / aangezien — OORZAAK', t:'gram' },
+    { q:'même si', a:'zelfs als — TEGENSTELLING · + indicatif', t:'gram' },
+    { q:'puisque', a:'aangezien / vermits — OORZAAK', t:'gram' },
+    { q:'quand', a:'wanneer / toen — TIJD', t:'gram' },
+    // Subjonctif présent (getest in Q1: "il voulait que quelqu'un confirme")
+    { q:'Subjonctif présent — formation?', a:'stam van "ils" (présent) + -e/-es/-e/-ions/-iez/-ent · ils finissent → que je finisse', t:'gram' },
+    { q:'Subjonctif — onregelmatig: être, avoir, aller, faire, pouvoir, savoir', a:'sois · aie · aille · fasse · puisse · sache', t:'gram' },
+    { q:'Subjonctif présent — wanneer gebruiken?', a:'na wil/wens (vouloir que), gevoel, twijfel + na afin que, bien que, en attendant que, pour que, avant que', t:'gram' },
+    // Q7-8 — légende schrijven (vaardigheid)
+    { q:'Q7-8: een legende schrijven — eisen?', a:'minimaal 6 zinnen, creatief, correcte basisgrammatica + woordenschat van deze periode, weinig spelfouten', t:'gram' },
+  ]},
+
+  // ===== THEMA 2: LES MERVEILLES DU MONDE (Q9-14) =====
+  { id:'fc-merveilles', title:'Les merveilles du monde', emoji:'🏛️', sub:'Q9-14 · woordenschat, synoniemen, conditionnel passé', cards:[
+    // Q9 — afgeleide woorden
+    { q:'merveilleux (adj) → zelfstandig naamwoord?', a:'une merveille (een wonder)', t:'gram' },
+    { q:'un bâtiment (n) → werkwoord?', a:'bâtir (bouwen)', t:'gram' },
+    { q:'une disparition (n) → werkwoord?', a:'disparaître (verdwijnen)', t:'gram' },
+    { q:'construire (ww) → zelfstandig naamwoord?', a:'une construction', t:'gram' },
+    // Q10 — woordenschat NL→FR
+    { q:'vernietigen', a:'détruire', t:'voc' },
+    { q:'bloeiend', a:'florissant', t:'voc' },
+    { q:'een standbeeld', a:'une statue', t:'voc' },
+    { q:'teruggaan naar (een tijdperk)', a:'remonter à', t:'voc' },
+    { q:'een verval', a:'un déclin', t:'voc' },
+    { q:'een archeoloog', a:'un(e) archéologue', t:'voc' },
+    { q:'een werf', a:'un chantier', t:'voc' },
+    { q:'heilig', a:'sacré', t:'voc' },
+    // Q11 — beeld beschrijven
+    { q:'de adem benemen', a:'couper le souffle', t:'voc' },
+    { q:'de grootte', a:'la grandeur / la taille', t:'voc' },
+    { q:'reusachtig', a:'gigantesque / immense', t:'voc' },
+    { q:'een afmeting', a:'une dimension', t:'voc' },
+    // Q12 — synoniemen
+    { q:'Synoniem voor "une autre période"?', a:'une autre époque', t:'voc' },
+    { q:'Synoniem voor "mettre l\'accent sur"?', a:'souligner / insister sur', t:'voc' },
+    // Q13-14 — conditionnel du passé (spijt)
+    { q:'Conditionnel passé — formation?', a:'avoir/être au CONDITIONNEL PRÉSENT + participe passé · j\'aurais fait · je serais allé(e)', t:'gram' },
+    { q:'Conditionnel passé — wanneer gebruiken?', a:'spijt uitdrukken over het verleden / een niet-gerealiseerde hypothese', t:'gram' },
+    { q:'"ik had moeten..." (spijt)', a:'j\'aurais dû + infinitif', t:'gram' },
+    { q:'"ik had graag gewild..." (spijt)', a:'j\'aurais aimé / j\'aurais voulu + infinitif', t:'gram' },
+    { q:'Spijt: ik had de tickets eerder moeten kopen', a:'J\'aurais dû acheter les tickets plus tôt', t:'gram' },
+  ]},
+
+  // ===== THEMA 3: LES LÉGENDES (Q15-16) =====
+  { id:'fc-legendes', title:'Les légendes', emoji:'📜', sub:'Q15-16 · woordenschat + participe présent', cards:[
+    // Q15 — vertaling NL→FR
+    { q:'schriftelijk', a:'par écrit', t:'voc' },
+    { q:'mondeling', a:'oralement / par voie orale', t:'voc' },
+    { q:'spiritueel', a:'spirituel', t:'voc' },
+    { q:'echt (waargebeurd)', a:'réel / vrai', t:'voc' },
+    { q:'landelijk', a:'rural', t:'voc' },
+    { q:'moreel', a:'moral', t:'voc' },
+    { q:'een deugd', a:'une vertu', t:'voc' },
+    { q:'een verspreiding', a:'une diffusion / une propagation', t:'voc' },
+    // Q16 — participe présent
+    { q:'Participe présent — formation?', a:'stam van "nous" (présent) + -ant · nous parlons → parlant · nous finissons → finissant', t:'gram' },
+    { q:'Participe présent — onregelmatig: être, avoir, savoir', a:'étant · ayant · sachant', t:'gram' },
+    { q:'Participe présent — wanneer gebruiken?', a:'vervangt "qui + werkwoord"; drukt gelijktijdigheid of oorzaak uit', t:'gram' },
+    { q:'"Les jeunes qui servent de source d\'inspiration" → met participe présent?', a:'Les jeunes servant de source d\'inspiration', t:'gram' },
+  ]},
+
+  // ===== THEMA 4: APRÈS ZÉNITH, LES ÉTUDES SUPÉRIEURES? (Q17-21) =====
+  { id:'fc-etudes', title:'Après Zénith', emoji:'🎓', sub:'Q17-21 · plus-que-parfait + werkwoorden/prepositions', cards:[
+    // Q17-18 — plus-que-parfait
+    { q:'Plus-que-parfait — formation?', a:'avoir/être à l\'IMPARFAIT + participe passé · j\'avais fait · elles étaient venues', t:'gram' },
+    { q:'Plus-que-parfait — wanneer gebruiken?', a:'een handeling die plaatsvond VÓÓR een andere handeling in het verleden', t:'gram' },
+    { q:'Plus-que-parfait met "être" — accord?', a:'participe passé komt overeen met het onderwerp · elles étaient venues', t:'gram' },
+    { q:'"après que mon frère ... (réussir)" → pqp?', a:'après que mon frère avait réussi', t:'gram' },
+    // Q19-21 — werkwoorden + voorzetsels + zinsbouw
+    { q:'falloir — hoe gebruiken?', a:'onpersoonlijk: il faut / il faudrait + infinitif OF + que + subjonctif', t:'gram' },
+    { q:'encourager qqn ... + infinitif?', a:'encourager qqn À + inf (iemand aanmoedigen om te)', t:'gram' },
+    { q:"s'intéresser ... qch?", a:"s'intéresser À qch (geïnteresseerd zijn in)", t:'gram' },
+    { q:'intéresser qqn', a:'iemand interesseren (l\'intéresser)', t:'voc' },
+    { q:'préférer + ?', a:'préférer + infinitif (verkiezen te)', t:'gram' },
+    { q:'louer un kot', a:'een kot huren', t:'voc' },
+    { q:'faire la navette', a:'pendelen (heen en weer reizen)', t:'voc' },
+    { q:'une (haute) école / une formation', a:'een hogeschool / een opleiding', t:'voc' },
+  ]},
+  // ===== EXAMENVRAGEN LETTERLIJK (exacte vragen uit het examendocument) =====
+  { id:'fc-examen', title:'Examenvragen (exact)', emoji:'📋', sub:'De letterlijke examenvragen \u2014 antwoord op de achterkant', cards:[
+    { q:"<b>Q1 /7</b> \u2014 Vul in (juiste tijd + accord). Werkwoorden: prouver, expliquer, r\u00e9soudre, se mettre d'accord sur, en croire ses yeux, confirmer, avancer.<br><br>\u00ab Personne ne pouvait <b>(1)</b> comment cela \u00e9tait possible... ils n'<b>(2)</b> rien de logique. Il voulait que quelqu'un <b>(3)</b> que le vol avait eu lieu. \u2014 Nous ne pouvons pas <b>(4)</b> ! Les policiers <b>(5)</b> un plan et ils <b>(6)</b> le myst\u00e8re. \u00c0 la fin, un t\u00e9moin <b>(7)</b> l'identit\u00e9 du voleur. \u00bb", a:"1 expliquer \u00b7 2 ont (rien) avanc\u00e9 \u00b7 3 confirme <i>(subj.)</i> \u00b7 4 en croire nos yeux \u00b7 5 se sont mis d'accord sur \u00b7 6 ont r\u00e9solu \u00b7 7 a prouv\u00e9", t:'exam' },
+    { q:"<b>Q2 /3</b> \u2014 Vul logisch aan:<br>1 \u00ab ...une fois par ann\u00e9e ; c'est un \u00e9v\u00e8nement ___ \u00bb<br>2 \u00ab ...il travaille sur un bateau ; il adore la vie ___ \u00bb<br>3 \u00ab ...elle le trouve vraiment ___ \u00bb", a:"1 annuel \u00b7 2 maritime (en mer) \u00b7 3 intrigant / fascinant / myst\u00e9rieux", t:'exam' },
+    { q:"<b>Q3 /2</b> \u2014 Maak een logische zin (min. 8 woorden) met:<br><i>d'ailleurs \u2013 expliquer \u2013 myst\u00e9rieux</i>", a:"Bv.: \u00ab D'ailleurs, le scientifique ne peut pas expliquer ce ph\u00e9nom\u00e8ne vraiment myst\u00e9rieux. \u00bb", t:'exam' },
+    { q:"<b>Q4 /2</b> \u2014 Maak een logische zin (min. 8 woorden) met:<br><i>un extraterrestre \u2013 une preuve \u2013 la terre</i>", a:"Bv.: \u00ab Certaines personnes pensent qu'un extraterrestre a laiss\u00e9 une preuve de sa visite sur la terre. \u00bb", t:'exam' },
+    { q:"<b>Q5 /2</b> \u2014 Maak een logische zin (min. 8 woorden) met:<br><i>principalement \u2013 une trace \u2013 inexplicable</i>", a:"Bv.: \u00ab Les chercheurs ont principalement trouv\u00e9 une trace inexplicable pr\u00e8s du site myst\u00e9rieux. \u00bb", t:'exam' },
+    { q:"<b>Q6 /10</b> \u2014 Vul de juiste voegwoorden in (elk \u00e9\u00e9n keer): afin que, bien que, comme, d\u00e8s que, de sorte que, en attendant que, \u00e9tant donn\u00e9 que, m\u00eame si, puisque, quand. (Les menhirs de Carnac)", a:"Grammaticaal bepaald:<br>\u2022 Oorzaak (indicatif): <b>Comme / Puisque / \u00c9tant donn\u00e9 que</b> in de oorzaakszinnen<br>\u2022 <b>Quand</b> on visite... \u00b7 <b>D\u00e8s que</b> l'on s'approche...<br>\u2022 <b>Bien que</b> les chercheurs <i>aient</i> propos\u00e9 (subj., tegenstelling)<br>\u2022 <b>Afin que</b> les g\u00e9n\u00e9rations <i>puissent</i> (subj., doel)<br>\u2022 <b>De sorte que</b> les menhirs ne <i>soient</i> pas endommag\u00e9s (subj.)<br>\u2022 <b>En attendant que</b> de nouvelles d\u00e9couvertes <i>soient</i> faites (subj.)<br>\u2022 <b>M\u00eame si</b> nous ne savons pas tout (toegeving)", t:'exam' },
+    { q:"<b>Q7 /14</b> \u2014 Schrijf in 6 zinnen een creatieve legende over het mysterie van de menhirs van Carnac (vlog-samenvatting).", a:"Beoordeling (Q8): min. 6 zinnen \u00b7 weinig grammaticafouten van deze periode \u00b7 correcte woordenschat/taalhandelingen \u00b7 weinig spelfouten.<br>Tip: gebruik pass\u00e9 compos\u00e9/imparfait, de nieuwe voegwoorden en woordenschat van de myst\u00e8res.", t:'exam' },
+    { q:"<b>Q9 /4</b> \u2014 Vul aan met een afgeleid woord (let op accord):<br>1 (merveilleux) \u00ab ...est vraiment ___ \u00bb<br>2 (un b\u00e2timent) \u00ab on va ___ un parking \u00bb<br>3 (une disparition) \u00ab ces arbres vont ___ \u00bb<br>4 (construire) \u00ab une ___ gigantesque \u00bb", a:"1 merveilleuse \u00b7 2 b\u00e2tir \u00b7 3 dispara\u00eetre \u00b7 4 construction", t:'exam' },
+    { q:"<b>Q10 /8</b> \u2014 Vul in (accord, PC). Woorden: vernietigen, bloeiend, een standbeeld, teruggaan naar, een verval, een archeoloog, een werf, heilig.<br>\u00ab Comme ___\u00b9, on travaille sur un ___\u00b2 ... des lieux ___\u00b3 ... des ___\u2074 ... riches et ___\u2075 ... ___\u2076 une \u00e9poque ... reconstruire ___\u2077 ... des guerres ___\u2078 beaucoup de tr\u00e9sors. \u00bb", a:"1 arch\u00e9ologue \u00b7 2 chantier \u00b7 3 sacr\u00e9s \u00b7 4 statues \u00b7 5 florissantes \u00b7 6 remonter \u00e0 \u00b7 7 le d\u00e9clin \u00b7 8 ont d\u00e9truit", t:'exam' },
+    { q:"<b>Q11 /10</b> \u2014 Beschrijf het beeld (min. 5 zinnen) met:<br><i>une statue \u2013 couper le souffle \u2013 la grandeur \u2013 gigantesque \u2013 une dimension</i>", a:"Bv.: \u00ab Sur l'image, on voit une statue impressionnante. Elle est vraiment gigantesque et ses dimensions sont incroyables. Sa grandeur coupe le souffle aux visiteurs. La statue repr\u00e9sente un dieu ancien. Cette merveille attire des touristes du monde entier. \u00bb", t:'exam' },
+    { q:"<b>Q12 /2</b> \u2014 Vervang door een synoniem:<br>1 \u00ab ...qui date d'une autre <u>p\u00e9riode</u> \u00bb<br>2 \u00ab Le guide <u>met l'accent sur</u> l'importance... \u00bb", a:"1 une autre \u00e9poque \u00b7 2 souligne / insiste sur", t:'exam' },
+    { q:"<b>Q13 /2</b> \u2014 Druk spijt uit (conditionnel pass\u00e9): je wou de menhirs met een gids bezoeken op 14 juli, maar alle tickets zijn al verkocht.", a:"Bv.: \u00ab J'aurais d\u00fb r\u00e9server les tickets plus t\u00f4t. \u00bb / \u00ab J'aurais aim\u00e9 visiter les menhirs avec un guide. \u00bb", t:'exam' },
+    { q:"<b>Q14 /2</b> \u2014 Druk spijt uit (conditionnel pass\u00e9): je hebt de conditionnel pass\u00e9 niet gestudeerd en nu vraagt de leerkracht je die te gebruiken.", a:"Bv.: \u00ab J'aurais d\u00fb \u00e9tudier l'emploi du conditionnel pass\u00e9 avant l'examen. \u00bb", t:'exam' },
+    { q:"<b>Q15 /8</b> \u2014 Vertaal en vul in (accord). Woorden: schriftelijk, mondeling, spiritueel, echt, landelijk, moreel, een deugd, een verspreiding.<br>\u00ab ...environnement ___\u00b9 ... transmises ___\u00b2 ... \u00e9l\u00e9ments ___\u00b3 ... arriv\u00e9s ___\u2074 ... une le\u00e7on ___\u2075 ... sur les ___\u2076 ... ___\u2077 de l\u00e9gendes ... les transmettre ___\u2078 \u00bb", a:"1 rural \u00b7 2 oralement \u00b7 3 spirituels \u00b7 4 vraiment (r\u00e9ellement) \u00b7 5 morale \u00b7 6 vertus \u00b7 7 La diffusion \u00b7 8 par \u00e9crit", t:'exam' },
+    { q:"<b>Q16 /14</b> \u2014 Herschrijf met participe pr\u00e9sent: \u00ab L'auteur qui \u00e9crit chaque mois... Les personnages qui vivent des aventures... Comme les personnages en sortent sains et saufs... Quand l'auteur cr\u00e9e un personnage... Les jeunes qui servent de source d'inspiration... \u00bb", a:"qui \u00e9crit \u2192 <b>\u00e9crivant</b> \u00b7 qui vivent \u2192 <b>vivant</b> \u00b7 Comme ils en sortent \u2192 <b>Sortant</b> sains et saufs \u00b7 Quand l'auteur cr\u00e9e \u2192 <b>Cr\u00e9ant</b> un personnage \u00b7 qui servent \u2192 <b>servant</b>", t:'exam' },
+    { q:"<b>Q17 /2</b> \u2014 Vul aan met plus-que-parfait: \u00ab Mes parents \u00e9taient tr\u00e8s contents apr\u00e8s que mon fr\u00e8re ___ (r\u00e9ussir)... \u00bb", a:"Bv.: \u00ab ...apr\u00e8s que mon fr\u00e8re <b>avait r\u00e9ussi</b> son examen. \u00bb", t:'exam' },
+    { q:"<b>Q18 /2</b> \u2014 Vul aan met plus-que-parfait: \u00ab Elles ont fait leur choix d'\u00e9tudes quand elles ___ (voir)... \u00bb", a:"Bv.: \u00ab ...quand elles <b>avaient vu</b> toutes les options. \u00bb", t:'exam' },
+    { q:"<b>Q19 /2</b> \u2014 Vorm een zin (accord): (falloir \u2013 IP) / d\u00e9cision / il / prendre / une / avant / carri\u00e8re / de / une / commencer / professionnelle / .", a:"\u00ab Il <b>faut</b> prendre une d\u00e9cision avant de commencer une carri\u00e8re professionnelle. \u00bb", t:'exam' },
+    { q:"<b>Q20 /2</b> \u2014 Vorm een zin: ses parents l' (encourager \u2013 IP) \u00e0 continuer ses \u00e9tudes en haute \u00e9cole o\u00f9 il (pouvoir \u2013 FS) suivre une formation qui l' (int\u00e9resser \u2013 IP).", a:"\u00ab Ses parents l'<b>encouragent</b> \u00e0 continuer ses \u00e9tudes en haute \u00e9cole o\u00f9 il <b>pourra</b> suivre une formation qui l'<b>int\u00e9resse</b>. \u00bb", t:'exam' },
+    { q:"<b>Q21 /2</b> \u2014 Vorm een zin: certains \u00e9tudiants (louer \u2013 IP) un kot, mais d'autres (pr\u00e9f\u00e9rer \u2013 IP) faire la navette.", a:"\u00ab Certains \u00e9tudiants <b>louent</b> un kot, mais d'autres <b>pr\u00e9f\u00e8rent</b> faire la navette. \u00bb", t:'exam' },
+  ]},
+];
+
+// ===== FRANS MEERKEUZEQUIZ (uitsluitend vragen uit het examendocument juni 2026) =====
+// Per vraag: q = vraag, options = keuzes, a = juiste antwoord (tekst), explain = uitleg, src = examenvraag
+const FRANS_QUIZ = [
+  // Q1 — werkwoorden in de tekst (mystères)
+  { q:'« Il voulait absolument que quelqu\'un ___ que le vol avait eu lieu. » (confirmer)', options:['confirme','confirmer','confirmait','a confirmé'], a:'confirme', explain:'Na « vouloir que » volgt de subjonctif présent → confirme.', src:'Q1' },
+  { q:'« Personne ne pouvait ___ comment cela était possible. »', options:['expliquer','prouver','avancer','résoudre'], a:'expliquer', explain:'expliquer = uitleggen; past bij « comment cela était possible ».', src:'Q1' },
+  { q:'« Nous ne pouvons pas ___ ! Le tableau a disparu comme par magie ! »', options:['en croire nos yeux','prouver','nous mettre d\'accord','confirmer'], a:'en croire nos yeux', explain:'en croire ses yeux = zijn ogen geloven.', src:'Q1' },
+  { q:'« Les policiers ont ___ le mystère après plusieurs semaines d\'enquête. »', options:['résolu','prouvé','avancé','expliqué'], a:'résolu', explain:'résoudre un mystère = een mysterie oplossen; PC → ont résolu.', src:'Q1' },
+  // Q2 — context logisch aanvullen
+  { q:'« Cela ne se passe qu\'une fois par année ; c\'est un évènement ___. »', options:['annuel','maritime','quotidien','mensuel'], a:'annuel', explain:'une fois par an → annuel (jaarlijks).', src:'Q2' },
+  { q:'« Mon oncle travaille sur un bateau ; il adore la vie ___. »', options:['maritime','rurale','annuelle','urbaine'], a:'maritime', explain:'op zee/een boot → la vie maritime.', src:'Q2' },
+  // Q6 — voegwoorden (Carnac)
+  { q:'« ___ ces structures datent de la période néolithique, elles sont très anciennes. »', options:['Comme','Bien que','Dès que','Afin que'], a:'Comme', explain:'Oorzaak aan het begin van de zin → Comme (aangezien).', src:'Q6' },
+  { q:'« ___ les chercheurs aient proposé plusieurs théories, aucune explication définitive n\'a été trouvée. »', options:['Bien que','Puisque','Dès que','Comme'], a:'Bien que', explain:'« aient » = subjonctif → tegenstelling met subjonctif = Bien que (hoewel).', src:'Q6' },
+  { q:'« ___ les générations futures puissent continuer à étudier ces monuments, il est crucial de les préserver. »', options:['Afin que','Parce que','Même si','Quand'], a:'Afin que', explain:'Doel + subjonctif (« puissent ») → Afin que (opdat).', src:'Q6' },
+  { q:'« ___ on visite Carnac, on peut voir des alignements impressionnants de menhirs. »', options:['Quand','Bien que','Afin que','De sorte que'], a:'Quand', explain:'Tijd + indicatif → Quand (wanneer).', src:'Q6' },
+  { q:'« ___ l\'on s\'approche des menhirs, on est frappé par leur taille et leur nombre. »', options:['Dès que','Bien que','Afin que','Même si'], a:'Dès que', explain:'Zodra je dichterbij komt → Dès que (tijd).', src:'Q6' },
+  { q:'« ___ nous ne savons pas tout sur ces pierres, elles continuent d\'inspirer l\'imagination. »', options:['Même si','Afin que','En attendant que','Dès que'], a:'Même si', explain:'Toegeving + indicatif → Même si (zelfs als).', src:'Q6' },
+  // Q9 — afgeleide woorden (merveilles)
+  { q:'« (merveilleux) Cette nouvelle voiture de Mercedes est vraiment ___. »', options:['merveilleuse','merveilleux','merveille','merveilleusement'], a:'merveilleuse', explain:'Vrouwelijk enkelvoud (la voiture) → merveilleuse.', src:'Q9' },
+  { q:'« (un bâtiment) Comme on va ___ un parking couvert... »', options:['bâtir','bâtiment','bâti','bâtisseur'], a:'bâtir', explain:'Na « va » volgt een infinitief → bâtir (bouwen).', src:'Q9' },
+  { q:'« (une disparition) tous ces arbres vont malheureusement ___. »', options:['disparaître','disparition','disparu','apparaître'], a:'disparaître', explain:'Na « vont » volgt een infinitief → disparaître (verdwijnen).', src:'Q9' },
+  { q:'« (construire) Le Tribunal de Grande Instance à Paris est une ___ gigantesque. »', options:['construction','construire','construit','constructeur'], a:'construction', explain:'« une ___ » vraagt een zelfstandig naamwoord → une construction.', src:'Q9' },
+  // Q10 — woordenschat (merveilles)
+  { q:'« Des guerres entre ces peuples du passé ont ___ beaucoup de trésors. » (vernietigen)', options:['détruit','détruisent','détruire','détruits'], a:'détruit', explain:'Passé composé van détruire → ont détruit.', src:'Q10' },
+  { q:'« Comme ___, on travaille parfois sur un chantier dans un pays exotique. » (een archeoloog)', options:['archéologue','architecte','chantier','statue'], a:'archéologue', explain:'een archeoloog = un(e) archéologue.', src:'Q10' },
+  { q:'« On découvre des lieux ___ et alors on doit tout traiter avec prudence. » (heilig)', options:['sacrés','sacré','sacrée','secrets'], a:'sacrés', explain:'heilig = sacré; mannelijk meervoud (des lieux) → sacrés.', src:'Q10' },
+  // Q11 — beeld beschrijven
+  { q:'Wat betekent « de adem benemen » (beeldbeschrijving)?', options:['couper le souffle','prendre l\'air','perdre la tête','tenir le coup'], a:'couper le souffle', explain:'de adem benemen = couper le souffle.', src:'Q11' },
+  { q:'Welk woord betekent « reusachtig »?', options:['gigantesque','minuscule','ancien','sacré'], a:'gigantesque', explain:'reusachtig = gigantesque / immense.', src:'Q11' },
+  // Q12 — synoniemen
+  { q:'Vervang door een synoniem: « un monument qui date d\'une autre période ».', options:['une autre époque','une autre région','une autre preuve','une autre trace'], a:'une autre époque', explain:'période ↔ époque (tijdperk).', src:'Q12' },
+  { q:'Synoniem voor « mettre l\'accent sur » ?', options:['souligner','supprimer','ignorer','confirmer'], a:'souligner', explain:'mettre l\'accent sur ↔ souligner / insister sur (benadrukken).', src:'Q12' },
+  // Q13-14 — conditionnel du passé (spijt)
+  { q:'Druk spijt uit: « Je n\'ai pas pu visiter Carnac. J\'___ réserver les tickets plus tôt. » (devoir)', options:['aurais dû','ai dû','devrais','avais dû'], a:'aurais dû', explain:'Spijt over het verleden → conditionnel passé: j\'aurais dû + infinitief.', src:'Q13-14' },
+  // Q15 — légendes vocabulaire
+  { q:'« Ces histoires ont été transmises ___. » (mondeling)', options:['oralement','par écrit','spirituellement','moralement'], a:'oralement', explain:'mondeling = oralement / par voie orale.', src:'Q15' },
+  { q:'« Beaucoup de légendes sont nées dans un environnement ___. » (landelijk)', options:['rural','spirituel','moral','réel'], a:'rural', explain:'landelijk = rural.', src:'Q15' },
+  // Q16 — participe présent
+  { q:'Herschrijf met participe présent: « L\'auteur, qui écrit chaque mois une histoire... » → « L\'auteur, ___ chaque mois... »', options:['écrivant','écrivent','écrit','écrire'], a:'écrivant', explain:'qui écrit → écrivant (nous écrivons → écrivant).', src:'Q16' },
+  { q:'« Les jeunes qui servent de source d\'inspiration » → « Les jeunes ___ de source d\'inspiration »', options:['servant','servent','servi','servir'], a:'servant', explain:'qui servent → servant (nous servons → servant).', src:'Q16' },
+  // Q17-18 — plus-que-parfait
+  { q:'« Mes parents étaient très contents après que mon frère ___ (réussir). »', options:['avait réussi','a réussi','réussissait','aurait réussi'], a:'avait réussi', explain:'Handeling vóór een andere in het verleden → plus-que-parfait: avait réussi.', src:'Q17' },
+  { q:'« Elles ont fait leur choix d\'études quand elles ___ (voir)... »', options:['avaient vu','ont vu','voyaient','avaient vues'], a:'avaient vu', explain:'Plus-que-parfait: avaient vu (geen accord, lijdend voorwerp komt niet ervoor).', src:'Q18' },
+  // Q19-21 — werkwoorden, voorzetsels, zinsbouw
+  { q:'« (falloir) Il ___ prendre une décision avant de commencer une carrière professionnelle. »', options:['faut','faudra','fallait','faille'], a:'faut', explain:'falloir is onpersoonlijk: il faut + infinitief.', src:'Q19' },
+  { q:'« Ses parents l\'encouragent ___ continuer ses études. »', options:['à','de','pour','en'], a:'à', explain:'encourager qqn À + infinitief.', src:'Q20' },
+  { q:'« Certains étudiants ___ un kot, mais d\'autres préfèrent faire la navette. » (louer)', options:['louent','loue','louer','ont loué'], a:'louent', explain:'Présent, 3e pers. meervoud (certains étudiants) → louent.', src:'Q21' },
+];
+
 const GROUPS = {
   wiskunde:      { name:'Wiskunde',            emoji:'📐', color:'#e8453c' },
   wetenschappen: { name:'Wetenschappen',       emoji:'🔬', color:'#3cb06c' },
@@ -1440,7 +1718,7 @@ const SUBJECTS = {
   aardrijkskunde: { name:'Aardrijkskunde', emoji:'🌍', color:'#6cb04c', group:'wetenschappen', active:true,
                     exams:[{label:'Examen',date:'2026-06-19'}], chapters:AARD_CHAPTERS, planning:AARD_PLANNING },
   frans:          { name:'Frans', emoji:'🇫🇷', color:'#9c6ce8', group:'talen', active:true,
-                    exams:[{label:'Examen',date:'2026-06-12'}], chapters:FRANS_CHAPTERS, planning:FRANS_PLANNING },
+                    exams:[{label:'Examen',date:'2026-06-12'}], chapters:FRANS_CHAPTERS, planning:FRANS_PLANNING, flashcards:FRANS_FLASHCARDS, quiz:FRANS_QUIZ },
   engels:         { name:'Engels', emoji:'🇬🇧', color:'#3c8ce8', group:'talen', active:true,
                     exams:[{label:'Examen',date:'2026-06-22'}], chapters:ENG_CHAPTERS, planning:ENG_PLANNING },
   nederlands:     { name:'Nederlands', emoji:'📖', color:'#4c7ce8', group:'talen', active:true,
@@ -1658,11 +1936,15 @@ function renderGroups() {
 // ========== SUBJECT DETAIL ==========
 function openSubject(key) {
   currentSubject = key;
+  fcDeck = null;
+  qzActive = false;
   document.getElementById('view-hub').classList.remove('active');
   document.getElementById('view-subject').classList.add('active');
-  // reset to first tab
-  document.querySelectorAll('#detailNav button').forEach((b,i) => b.classList.toggle('active', i===0));
-  document.querySelectorAll('#view-subject .section').forEach((s,i) => s.classList.toggle('active', i===0));
+  // toggle flashcard tab based on availability
+  document.getElementById('tab-flashcards').style.display = SUBJECTS[key].flashcards ? '' : 'none';
+  document.getElementById('tab-quiz').style.display = SUBJECTS[key].quiz ? '' : 'none';
+  // reset to first tab (Leervolgorde)
+  showSection('volgorde');
   renderHeader();
   renderDetail();
   window.scrollTo(0,0);
@@ -1721,6 +2003,238 @@ function renderHud() {
     </div></div>`;
 }
 
+
+// ========== FLASHCARDS ==========
+let fcDeck = null, fcOrder = [], fcPos = 0, fcFlipped = false;
+
+function getFcKnown() { try { return JSON.parse(localStorage.getItem('hub-fc-known') || '{}'); } catch(e) { return {}; } }
+function saveFcKnown(k) { localStorage.setItem('hub-fc-known', JSON.stringify(k)); }
+
+function getAllDecks() {
+  const themeDecks = SUBJECTS[currentSubject].flashcards || [];
+  const vocCards = [], gramCards = [];
+  themeDecks.forEach(d => d.cards.forEach(c => {
+    if (c.t === 'voc') vocCards.push(c);
+    else if (c.t === 'gram') gramCards.push(c);
+  }));
+  const allCards = [];
+  themeDecks.forEach(d => d.cards.forEach(c => { if (c.t === 'voc' || c.t === 'gram') allCards.push(c); }));
+  return [
+    ...themeDecks,
+    { id:'fc-voc-all', title:'Alle vocabulaire', emoji:'📚', sub:'Alle woordenschat samen', cards:vocCards },
+    { id:'fc-gram-all', title:'Alle grammatica', emoji:'📐', sub:'Alle grammaticaregels samen', cards:gramCards },
+    { id:'fc-all', title:'Alles door elkaar', emoji:'🎲', sub:'Volledige examenstof — voc + grammatica gemengd', cards:allCards },
+  ];
+}
+
+function renderFlashcards() {
+  const s = SUBJECTS[currentSubject];
+  const container = document.getElementById('sec-flashcards');
+  if (!s.flashcards) { container.innerHTML = ''; return; }
+  if (fcDeck) { renderFcStudy(); return; }
+  const decks = getAllDecks();
+  const known = getFcKnown();
+  let html = '<div class="fc-intro">Klik op een deck om te oefenen. Draai elke kaart om, beoordeel jezelf eerlijk, en de hub onthoudt wat je al kent. De laatste twee decks bundelen alle woordenschat en grammatica samen.</div>';
+  html += '<div class="fc-decks">';
+  decks.forEach(d => {
+    const total = d.cards.length;
+    const knownCount = d.cards.filter(c => known[c.q]).length;
+    const pct = total ? Math.round(knownCount/total*100) : 0;
+    const isCombined = d.id.endsWith('-all');
+    html += `<div class="fc-deck${isCombined?' combined':''}" onclick="openDeck('${d.id}')">
+      <div class="fc-deck-top"><span class="fc-deck-emoji">${d.emoji}</span><span class="fc-deck-title">${d.title}</span></div>
+      <div class="fc-deck-sub">${d.sub}</div>
+      <div class="fc-deck-bar"><div class="fc-deck-fill" style="width:${pct}%"></div></div>
+      <div class="fc-deck-meta">${knownCount}/${total} gekend</div>
+    </div>`;
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function openDeck(id) {
+  const decks = getAllDecks();
+  fcDeck = decks.find(d => d.id === id);
+  if (!fcDeck) return;
+  fcOrder = fcDeck.cards.map((_, i) => i);
+  fcPos = 0; fcFlipped = false;
+  if (id === 'fc-all') {
+    for (let i = fcOrder.length - 1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [fcOrder[i],fcOrder[j]]=[fcOrder[j],fcOrder[i]]; }
+  }
+  renderFcStudy();
+}
+
+function fcBackToDecks() { fcDeck = null; renderFlashcards(); }
+function fcShuffle() {
+  for (let i = fcOrder.length - 1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [fcOrder[i],fcOrder[j]]=[fcOrder[j],fcOrder[i]]; }
+  fcPos = 0; fcFlipped = false; renderFcStudy();
+}
+function fcFlip() { fcFlipped = !fcFlipped; renderFcStudy(); }
+function fcNext() { if (fcPos < fcOrder.length-1) { fcPos++; fcFlipped = false; renderFcStudy(); } }
+function fcPrev() { if (fcPos > 0) { fcPos--; fcFlipped = false; renderFcStudy(); } }
+function fcGrade(isKnown) {
+  const card = fcDeck.cards[fcOrder[fcPos]];
+  const known = getFcKnown();
+  if (isKnown) known[card.q] = true; else delete known[card.q];
+  saveFcKnown(known);
+  if (fcPos < fcOrder.length-1) { fcPos++; fcFlipped = false; renderFcStudy(); }
+  else renderFcStudy();
+}
+function fcResetDeck() {
+  if (!confirm('Voortgang van dit deck resetten?')) return;
+  const known = getFcKnown();
+  fcDeck.cards.forEach(c => delete known[c.q]);
+  saveFcKnown(known);
+  fcPos = 0; fcFlipped = false; renderFcStudy();
+}
+
+function renderFcStudy() {
+  const container = document.getElementById('sec-flashcards');
+  const known = getFcKnown();
+  const total = fcDeck.cards.length;
+  const knownCount = fcDeck.cards.filter(c => known[c.q]).length;
+  const pct = total ? Math.round(knownCount/total*100) : 0;
+  const card = fcDeck.cards[fcOrder[fcPos]];
+  const cardKnown = !!known[card.q];
+
+  let html = `<div class="fc-study-head">
+    <div class="fc-study-title">${fcDeck.emoji} ${fcDeck.title}</div>
+    <div class="fc-study-actions">
+      <button class="fc-mini-btn" onclick="fcShuffle()">🔀 Shuffle</button>
+      <button class="fc-mini-btn" onclick="fcResetDeck()">↺ Reset</button>
+      <button class="fc-mini-btn" onclick="fcBackToDecks()">← Decks</button>
+    </div>
+  </div>
+  <div class="fc-progress"><span>${knownCount}/${total} gekend</span><span>${pct}%</span></div>
+  <div class="fc-progress-bar"><div class="fc-progress-fill" style="width:${pct}%"></div></div>`;
+
+  const longCls = card.t === 'exam' ? ' long' : '';
+  if (!fcFlipped) {
+    html += `<div class="fc-card${longCls}${cardKnown?' is-known':''}" onclick="fcFlip()">
+      <div class="fc-card-side">Vraag</div>
+      ${cardKnown?'<div class="fc-card-known-badge">✅</div>':''}
+      <div class="fc-card-q">${card.q}</div>
+      <div class="fc-card-hint">tik om om te draaien</div>
+    </div>`;
+  } else {
+    html += `<div class="fc-card${longCls}${cardKnown?' is-known':''}" onclick="fcFlip()">
+      <div class="fc-card-side">Antwoord</div>
+      ${cardKnown?'<div class="fc-card-known-badge">✅</div>':''}
+      <div class="fc-card-a">${card.a}</div>
+      <div class="fc-card-hint">tik om terug te draaien</div>
+    </div>
+    <div class="fc-controls">
+      <button class="fc-grade-btn no" onclick="fcGrade(false)">↻ Nog oefenen</button>
+      <button class="fc-grade-btn yes" onclick="fcGrade(true)">✓ Ken ik</button>
+    </div>`;
+  }
+
+  html += `<div class="fc-nav">
+    <button class="fc-nav-btn" onclick="fcPrev()" ${fcPos===0?'disabled':''}>← Vorige</button>
+    <span class="fc-nav-pos">${fcPos+1} / ${total}</span>
+    <button class="fc-nav-btn" onclick="fcNext()" ${fcPos===total-1?'disabled':''}>Volgende →</button>
+  </div>`;
+
+  container.innerHTML = html;
+}
+
+
+// ========== MEERKEUZEQUIZ ==========
+let qzActive = false, qzOrder = [], qzPos = 0, qzScore = 0, qzAnswered = false, qzOpts = [];
+
+function renderQuiz() {
+  const s = SUBJECTS[currentSubject];
+  const container = document.getElementById('sec-quiz');
+  if (!s.quiz) { container.innerHTML = ''; return; }
+  if (qzActive) { renderQzQuestion(); return; }
+  container.innerHTML = `<div class="qz-intro">
+    <h3>📝 Examenquiz Frans</h3>
+    <p>${s.quiz.length} meerkeuzevragen, allemaal rechtstreeks uit het schriftelijke examen. Vragen en antwoorden worden geschud.</p>
+    <button class="qz-start-btn" onclick="qzStart()">Start de quiz</button>
+  </div>`;
+}
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length-1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+function qzStart() {
+  const s = SUBJECTS[currentSubject];
+  qzActive = true;
+  qzOrder = shuffle(s.quiz.map((_, i) => i));
+  qzPos = 0; qzScore = 0; qzAnswered = false;
+  prepQzOptions();
+  renderQzQuestion();
+}
+function prepQzOptions() {
+  const q = SUBJECTS[currentSubject].quiz[qzOrder[qzPos]];
+  qzOpts = shuffle(q.options);
+}
+function qzAnswer(choice) {
+  if (qzAnswered) return;
+  qzAnswered = true;
+  const q = SUBJECTS[currentSubject].quiz[qzOrder[qzPos]];
+  if (choice === q.a) qzScore++;
+  renderQzQuestion(choice);
+}
+function qzNext() {
+  if (qzPos < qzOrder.length-1) { qzPos++; qzAnswered = false; prepQzOptions(); renderQzQuestion(); }
+  else renderQzResult();
+}
+function qzRestart() { qzActive = false; renderQuiz(); }
+
+function renderQzQuestion(choice) {
+  const container = document.getElementById('sec-quiz');
+  const s = SUBJECTS[currentSubject];
+  const q = s.quiz[qzOrder[qzPos]];
+  const total = qzOrder.length;
+  const pct = Math.round(qzPos / total * 100);
+  const letters = ['A','B','C','D','E'];
+
+  let html = `<div class="qz-progress"><span>Vraag ${qzPos+1} / ${total}</span><span>Score: ${qzScore}</span></div>
+    <div class="qz-progress-bar"><div class="qz-progress-fill" style="width:${pct}%"></div></div>
+    <div class="qz-src">Examen ${q.src}</div>
+    <div class="qz-question">${q.q}</div>
+    <div class="qz-options">`;
+  qzOpts.forEach((opt, i) => {
+    let cls = '';
+    if (qzAnswered) {
+      if (opt === q.a) cls = ' correct';
+      else if (opt === choice) cls = ' wrong';
+    }
+    html += `<button class="qz-option${cls}" ${qzAnswered?'disabled':''} onclick="qzAnswer('${opt.replace(/'/g,"\\'")}')">
+      <span class="qz-letter">${letters[i]}</span><span>${opt}</span></button>`;
+  });
+  html += '</div>';
+
+  if (qzAnswered) {
+    const correct = choice === q.a;
+    html += `<div class="qz-explain ${correct?'ok':'no'}">${correct?'✓ Juist! ':'✗ '}${q.explain}</div>
+      <button class="qz-next" onclick="qzNext()">${qzPos < total-1 ? 'Volgende vraag →' : 'Bekijk resultaat →'}</button>`;
+  }
+  container.innerHTML = html;
+}
+
+function renderQzResult() {
+  const container = document.getElementById('sec-quiz');
+  const total = qzOrder.length;
+  const pct = Math.round(qzScore / total * 100);
+  let emoji, msg;
+  if (pct >= 85) { emoji = '🏆'; msg = 'Uitstekend! Je beheerst de examenstof.'; }
+  else if (pct >= 70) { emoji = '👏'; msg = 'Goed bezig! Nog een paar puntjes bijschaven.'; }
+  else if (pct >= 50) { emoji = '💪'; msg = 'Op weg — herhaal de flashcards en probeer opnieuw.'; }
+  else { emoji = '📚'; msg = 'Nog wat werk. Oefen de flashcards en kom terug.'; }
+  container.innerHTML = `<div class="qz-result">
+    <div class="big">${emoji}</div>
+    <div class="qz-result-score">${qzScore}/${total}</div>
+    <div class="qz-result-msg">${pct}% · ${msg}</div>
+    <button class="qz-result-btn" onclick="qzStart()">Opnieuw proberen</button>
+  </div>`;
+  qzActive = false;
+}
+
 function renderDetail() {
   renderDetailHeader();
   renderHud();
@@ -1728,13 +2242,15 @@ function renderDetail() {
   renderGame();
   renderFormulas();
   renderPlanning();
+  renderFlashcards();
+  renderQuiz();
 }
 
 function renderChapters() {
   const s = SUBJECTS[currentSubject];
   const container = document.getElementById('sec-volgorde');
   if (!s.chapters.length) { container.innerHTML = emptyState('Nog geen leerstof toegevoegd voor dit vak.'); return; }
-  let html = '<button class="reset-btn" onclick="resetSubject()">↺ Reset voortgang</button>';
+  let html = '<div class="reset-row"><button class="reset-btn" onclick="resetSubject()">↺ Reset voortgang</button></div>';
   let currentPhase = 0, currentExam = 0;
   s.chapters.forEach(ch => {
     if (ch.exam && ch.exam !== currentExam) {
